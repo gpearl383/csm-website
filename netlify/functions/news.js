@@ -18,15 +18,38 @@ function extractTag(xml, tag) {
 }
 
 function extractLink(itemXml) {
-  // Try <link> tag (can be tricky in RSS)
   const guidMatch = itemXml.match(/<guid[^>]*isPermaLink="true"[^>]*>([^<]+)<\/guid>/i);
   if (guidMatch) return guidMatch[1].trim();
   const linkMatch = itemXml.match(/<link>([^<]+)<\/link>/i);
   if (linkMatch) return linkMatch[1].trim();
-  // Atom style
   const atomMatch = itemXml.match(/<link[^>]+href="([^"]+)"/i);
   if (atomMatch) return atomMatch[1].trim();
   return '';
+}
+
+function extractImage(itemXml) {
+  // 1. media:content url="..." (most common in professional feeds)
+  const mediaContent = itemXml.match(/<media:content[^>]+url="([^"]+)"/i);
+  if (mediaContent && /\.(jpg|jpeg|png|webp)/i.test(mediaContent[1])) return mediaContent[1];
+
+  // 2. media:thumbnail url="..."
+  const mediaThumbnail = itemXml.match(/<media:thumbnail[^>]+url="([^"]+)"/i);
+  if (mediaThumbnail) return mediaThumbnail[1];
+
+  // 3. enclosure url="..." type="image/..."
+  const enclosure = itemXml.match(/<enclosure[^>]+type="image\/[^"]*"[^>]+url="([^"]+)"/i)
+    || itemXml.match(/<enclosure[^>]+url="([^"]+)"[^>]+type="image\/[^"]*"/i);
+  if (enclosure) return enclosure[1];
+
+  // 4. First <img> tag inside content:encoded or description CDATA
+  const contentMatch = itemXml.match(/<content:encoded[^>]*><!?\[CDATA\[([\s\S]*?)\]\]>/i)
+    || itemXml.match(/<description[^>]*><!?\[CDATA\[([\s\S]*?)\]\]>/i);
+  if (contentMatch) {
+    const imgMatch = contentMatch[1].match(/<img[^>]+src="(https?:\/\/[^"]+\.(jpg|jpeg|png|webp)[^"]*)"/i);
+    if (imgMatch) return imgMatch[1];
+  }
+
+  return null;
 }
 
 function parseFeed(xml, label) {
@@ -39,8 +62,9 @@ function parseFeed(xml, label) {
     const link = extractLink(item);
     const description = extractTag(item, 'description').substring(0, 300);
     const pubDate = extractTag(item, 'pubDate') || extractTag(item, 'published') || extractTag(item, 'dc:date');
+    const image = extractImage(item);
     if (title && link) {
-      items.push({ title, link, description, pubDate, source: label });
+      items.push({ title, link, description, pubDate, source: label, image });
     }
   }
   return items;
