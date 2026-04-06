@@ -1848,13 +1848,12 @@ function stripHtml(html) {
 
 function renderFeatured(article) {
   const desc = (stripHtml(article.description || '')||'').substring(0, 220) + '...';
+  const imgHtml = article.image
+    ? `<img src="${article.image}" alt="${article.title}" style="width:100%;height:100%;object-fit:cover" onerror="this.parentElement.innerHTML='<div class=news-featured-img-ph style=\\'background:linear-gradient(135deg,var(--blue-bg),var(--bg3));\\'><i data-lucide=\\'newspaper\\' style=\\'width:52px;height:52px;stroke:var(--blue);stroke-width:1.25;opacity:.5\\'></i></div>';lucide.createIcons()">`
+    : `<div class="news-featured-img-ph" style="background:linear-gradient(135deg,var(--blue-bg),var(--bg3))"><i data-lucide="newspaper" style="width:52px;height:52px;stroke:var(--blue);stroke-width:1.25;opacity:.5"></i></div>`;
   document.getElementById('news-featured').innerHTML = `
     <a href="${article.link}" target="_blank" rel="noopener" class="news-featured-card" style="display:grid;grid-template-columns:1fr 1fr">
-      <div class="news-featured-img">
-        <div class="news-featured-img-ph" style="background:linear-gradient(135deg,var(--blue-bg),var(--bg3))">
-          <i data-lucide="newspaper" style="width:52px;height:52px;stroke:var(--blue);stroke-width:1.25;opacity:.5"></i>
-        </div>
-      </div>
+      <div class="news-featured-img">${imgHtml}</div>
       <div class="news-featured-body">
         <span class="news-src-tag">${article.source} · Featured</span>
         <h2>${article.title}</h2>
@@ -1869,18 +1868,16 @@ function renderCards(articles) {
   const grid = document.getElementById('news-cards');
   articles.forEach(a => {
     const desc = (stripHtml(a.description || '')||'').substring(0, 140) + '...';
+    const imgHtml = a.image
+      ? `<img src="${a.image}" alt="${a.title}" style="width:100%;height:100%;object-fit:cover;transition:transform .3s ease" onerror="this.parentElement.innerHTML='<div class=news-card-img-ph style=\\'background:linear-gradient(135deg,var(--bg2),var(--bg3));\\'><i data-lucide=\\'file-text\\' style=\\'width:36px;height:36px;stroke:var(--soft);stroke-width:1.5\\'></i></div>';lucide.createIcons()">`
+      : `<div class="news-card-img-ph" style="background:linear-gradient(135deg,var(--bg2),var(--bg3))"><i data-lucide="file-text" style="width:36px;height:36px;stroke:var(--soft);stroke-width:1.5"></i></div>`;
     const card = document.createElement('a');
     card.href = a.link;
     card.target = '_blank';
     card.rel = 'noopener';
     card.className = 'news-card';
     card.innerHTML = `
-      <div class="news-card-img">
-        <div class="news-card-img-ph" style="background:linear-gradient(135deg,var(--bg2),var(--bg3))">
-          <i data-lucide="file-text" style="width:36px;height:36px;stroke:var(--soft);stroke-width:1.5"></i>
-        </div>
-        <span class="news-pill">${a.source}</span>
-      </div>
+      <div class="news-card-img">${imgHtml}<span class="news-pill">${a.source}</span></div>
       <div class="news-card-body">
         <h4>${a.title}</h4>
         <p>${desc}</p>
