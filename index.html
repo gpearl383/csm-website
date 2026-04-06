@@ -17,8 +17,8 @@
   --blue:#0077B6;
   --blue-l:#00A3E0;
   --blue-bg:rgba(0,119,182,0.07);
-  --teal:#007A5E;
-  --teal-bg:rgba(0,122,94,0.07);
+  --teal:#5B2D8E;
+  --teal-bg:rgba(91,45,142,0.07);
   --amber:#9B6800;
   --amber-bg:rgba(155,104,0,0.08);
   --text:#0D1F33;
@@ -47,11 +47,11 @@ h4{font-size:17px}
 nav{position:fixed;top:0;left:0;right:0;z-index:900;height:62px;display:flex;align-items:center;background:rgba(255,255,255,.93);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);box-shadow:0 1px 0 rgba(15,35,60,.05)}
 .nav-wrap{max-width:1180px;margin:0 auto;padding:0 40px;width:100%;display:flex;align-items:center}
 .logo{display:flex;align-items:center;gap:9px;cursor:pointer;flex-shrink:0}
-.logo-marks{display:flex;gap:2px}
-.lsq{width:8px;height:8px;border-radius:2px}
-.lsq-b{background:var(--blue)}
-.lsq-t{background:var(--teal)}
-.logo-name{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--text)}
+.logo-mark{display:flex;align-items:center;gap:0;flex-shrink:0}
+.lm-c{font-size:26px;font-weight:800;color:var(--blue);font-family:'Syne',sans-serif;line-height:1;letter-spacing:-.01em}
+.lm-s{font-size:26px;font-weight:800;color:var(--blue);font-family:'Syne',sans-serif;line-height:1;letter-spacing:-.01em}
+.lm-m{font-size:26px;font-weight:800;color:var(--blue);font-family:'Syne',sans-serif;line-height:1;letter-spacing:-.01em}
+.logo-name{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--text)}
 .nav-links{display:flex;align-items:center;gap:2px;margin-left:32px;flex:1}
 .ni{position:relative}
 .nl{font-family:'Syne',sans-serif;font-size:13px;font-weight:600;color:var(--mid);padding:8px 13px;border-radius:6px;transition:color .18s,background .18s;display:flex;align-items:center;gap:4px;cursor:pointer;white-space:nowrap}
@@ -535,8 +535,8 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 0 2
 <nav>
   <div class="nav-wrap">
     <div class="logo" onclick="go('home')">
-      <div class="logo-marks"><div class="lsq lsq-b"></div><div class="lsq lsq-t"></div></div>
-      <span class="logo-name">CSM Integrated Solutions</span>
+      <div class="logo-mark"><span class="lm-c">C</span><span class="lm-s">S</span><span class="lm-m">M</span></div>
+      <span class="logo-name">Integrated Solutions</span>
     </div>
     <div class="nav-links">
       <div class="ni">
@@ -685,52 +685,12 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 0 2
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start">
-        <div>
-          <div class="shl" style="margin-bottom:32px"><span class="eyebrow">How it works</span><h2>From AI-curious to AI-operational in 90 days.</h2><p>Four stages. Clear deliverables at each step. You'll see ROI before the engagement ends.</p></div>
-          <div style="background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:22px">
-            <p style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin-bottom:14px">Typical Timeline</p>
-            <div style="display:flex;flex-direction:column;gap:9px">
-              <div style="display:flex;align-items:center;gap:11px;font-size:13px;color:var(--mid)"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--blue);width:56px;flex-shrink:0">Wk 1–2</span>AI Readiness Assessment completed</div>
-              <div style="display:flex;align-items:center;gap:11px;font-size:13px;color:var(--mid)"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--blue);width:56px;flex-shrink:0">Wk 2–3</span>AI roadmap &amp; use case priorities set</div>
-              <div style="display:flex;align-items:center;gap:11px;font-size:13px;color:var(--mid)"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--teal);width:56px;flex-shrink:0">Wk 3–5</span>Governance framework established</div>
-              <div style="display:flex;align-items:center;gap:11px;font-size:13px;color:var(--mid)"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--teal);width:56px;flex-shrink:0">Wk 5–12</span>First AI use case live in production</div>
-              <div style="display:flex;align-items:center;gap:11px;font-size:13px;color:var(--mid)"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--amber);width:56px;flex-shrink:0">Mo 4+</span>Ongoing AI managed services</div>
-            </div>
-          </div>
-        </div>
-        <div class="proc">
-          <div class="proc-step"><div class="pn">1</div><div class="pc"><h4>Assess</h4><p>Structured evaluation of data, processes, governance, and team. Scored output with prioritized opportunities and gap analysis.</p><div class="ptags"><span class="ptag">2 weeks</span><span class="ptag">Self-serve or consulting</span></div></div></div>
-          <div class="proc-step"><div class="pn">2</div><div class="pc"><h4>Strategize</h4><p>AI roadmap, use case backlog, governance framework, and pilot selection. A plan you can actually execute.</p><div class="ptags"><span class="ptag">1 week</span><span class="ptag">Leadership workshop</span></div></div></div>
-          <div class="proc-step"><div class="pn">3</div><div class="pc"><h4>Deploy</h4><p>Hands-on implementation of your top 1–3 use cases. We manage build, integration, testing, and launch.</p><div class="ptags"><span class="ptag">4–8 weeks</span><span class="ptag">Full implementation</span></div></div></div>
-          <div class="proc-step"><div class="pn">4</div><div class="pc"><h4>Optimize</h4><p>Monthly managed services — monitoring, tuning, cost control, and expansion. Your AI program gets better every month.</p><div class="ptags"><span class="ptag">Ongoing</span><span class="ptag">Subscription</span></div></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <div class="stats-row">
     <div class="sb"><div class="sb-n">40+</div><div class="sb-l">Hours saved per client monthly</div></div>
     <div class="sb"><div class="sb-n t">Any Size</div><div class="sb-l">We scale with you</div></div>
     <div class="sb"><div class="sb-n a">$1M–$100M</div><div class="sb-l">Target revenue range</div></div>
     <div class="sb"><div class="sb-n">90</div><div class="sb-l">Days to first live AI win</div></div>
   </div>
-
-  <section class="section section-alt">
-    <div class="container">
-      <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:44px;flex-wrap:wrap;gap:16px">
-        <div><span class="eyebrow" style="display:block;margin-bottom:10px">AI Insights</span><h2 style="margin-bottom:0">Straight talk on AI for business leaders.</h2></div>
-        <button class="btn-outline" onclick="go('resources')">View All →</button>
-      </div>
-      <div class="ic-grid">
-        <div class="ic"><div class="ic-thumb"><i data-lucide="cpu"></i><span class="ic-tag">AI Strategy</span></div><div class="ic-body"><h4>Why Your SMB Needs an AI Policy Before an AI Tool</h4><p>Shadow AI is already in your organization. Here's how to get ahead of it.</p><div class="ic-meta">5 min · March 2025</div></div></div>
-        <div class="ic"><div class="ic-thumb" style="background:var(--bg3)"><i data-lucide="settings"></i><span class="ic-tag" style="background:var(--teal-bg);color:var(--teal)">Automation</span></div><div class="ic-body"><h4>5 Processes Every SMB Should Automate With AI in 2025</h4><p>The highest-ROI, lowest-effort automations for small business operations.</p><div class="ic-meta">8 min · February 2025</div></div></div>
-        <div class="ic"><div class="ic-thumb" style="background:var(--bg3)"><i data-lucide="briefcase"></i><span class="ic-tag" style="background:var(--amber-bg);color:var(--amber)">Strategy</span></div><div class="ic-body"><h4>The Fractional CIO: Why Growing SMBs Need One Now</h4><p>IT decisions without strategic leadership cost growing companies 20–30% in wasted spend.</p><div class="ic-meta">6 min · January 2025</div></div></div>
-      </div>
-    </div>
-  </section>
 
   <div class="cta-block">
     <h2>Ready to become an AI-enabled business?</h2>
@@ -746,7 +706,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 0 2
     <div class="container">
       <div class="ft-grid">
         <div class="ft-brand">
-          <div class="logo" style="cursor:default"><div class="logo-marks"><div class="lsq lsq-b"></div><div class="lsq lsq-t"></div></div><span class="logo-name">CSM Integrated Solutions</span></div>
+          <div class="logo" style="cursor:default"><div class="logo-mark"><span class="lm-c">C</span><span class="lm-s">S</span><span class="lm-m">M</span></div><span class="logo-name">Integrated Solutions</span></div>
           <p>AI enablement, fractional CIO, and IT strategy. Making enterprise-grade AI accessible to every business.</p>
         </div>
         <div class="ft-col"><h5>Services</h5><ul>
@@ -784,6 +744,30 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 0 2
     <h1>Not a generic IT shop. Not a strategy-only firm.</h1>
     <p>We fill the gap nobody fills well — senior AI strategy combined with hands-on execution, calibrated for SMB budgets and timelines.</p>
   </div></div></div>
+  <section class="section section-alt"><div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start">
+      <div>
+        <div class="shl" style="margin-bottom:32px"><span class="eyebrow">How it works</span><h2>From AI-curious to AI-operational in 90 days.</h2><p>Four stages. Clear deliverables at each step. You'll see ROI before the engagement ends.</p></div>
+        <div style="background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:22px">
+          <p style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin-bottom:14px">Typical Timeline</p>
+          <div style="display:flex;flex-direction:column;gap:9px">
+            <div style="display:flex;align-items:center;gap:11px;font-size:13px;color:var(--mid)"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--blue);width:56px;flex-shrink:0">Wk 1–2</span>AI Readiness Assessment completed</div>
+            <div style="display:flex;align-items:center;gap:11px;font-size:13px;color:var(--mid)"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--blue);width:56px;flex-shrink:0">Wk 2–3</span>AI roadmap &amp; use case priorities set</div>
+            <div style="display:flex;align-items:center;gap:11px;font-size:13px;color:var(--mid)"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--teal);width:56px;flex-shrink:0">Wk 3–5</span>Governance framework established</div>
+            <div style="display:flex;align-items:center;gap:11px;font-size:13px;color:var(--mid)"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--teal);width:56px;flex-shrink:0">Wk 5–12</span>First AI use case live in production</div>
+            <div style="display:flex;align-items:center;gap:11px;font-size:13px;color:var(--mid)"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--amber);width:56px;flex-shrink:0">Mo 4+</span>Ongoing AI managed services</div>
+          </div>
+        </div>
+      </div>
+      <div class="proc">
+        <div class="proc-step"><div class="pn">1</div><div class="pc"><h4>Assess</h4><p>Structured evaluation of data, processes, governance, and team. Scored output with prioritized opportunities and gap analysis.</p><div class="ptags"><span class="ptag">2 weeks</span><span class="ptag">Self-serve or consulting</span></div></div></div>
+        <div class="proc-step"><div class="pn">2</div><div class="pc"><h4>Strategize</h4><p>AI roadmap, use case backlog, governance framework, and pilot selection. A plan you can actually execute.</p><div class="ptags"><span class="ptag">1 week</span><span class="ptag">Leadership workshop</span></div></div></div>
+        <div class="proc-step"><div class="pn">3</div><div class="pc"><h4>Deploy</h4><p>Hands-on implementation of your top 1–3 use cases. We manage build, integration, testing, and launch.</p><div class="ptags"><span class="ptag">4–8 weeks</span><span class="ptag">Full implementation</span></div></div></div>
+        <div class="proc-step"><div class="pn">4</div><div class="pc"><h4>Optimize</h4><p>Monthly managed services — monitoring, tuning, cost control, and expansion. Your AI program gets better every month.</p><div class="ptags"><span class="ptag">Ongoing</span><span class="ptag">Subscription</span></div></div></div>
+      </div>
+    </div>
+  </div></section>
+
   <section class="section"><div class="container">
     <div class="sh"><span class="eyebrow">Differentiators</span><h2>CSM vs. your other options</h2></div>
     <div style="overflow-x:auto"><table class="dt">
@@ -909,14 +893,14 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 0 2
   <section class="section"><div class="container">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start" class="split-g">
       <div class="split-vis" style="background:var(--bg2);border:1px solid var(--border2);border-radius:20px;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden">
-        <div style="font-family:'Syne',sans-serif;font-size:72px;font-weight:800;color:rgba(15,35,60,.1)">GP</div>
+        <div style="font-family:'Syne',sans-serif;font-size:72px;font-weight:800;color:rgba(15,35,60,.1)"><i data-lucide="user" style="width:80px;height:80px;stroke:rgba(15,35,60,.12);stroke-width:1.25"></i></div>
         <div style="position:absolute;bottom:22px;left:50%;transform:translateX(-50%);background:var(--blue);border-radius:40px;padding:8px 20px;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:#fff;white-space:nowrap">Founder &amp; Principal Advisor</div>
       </div>
       <div>
-        <span class="eyebrow" style="display:block;margin-bottom:12px">Geoffrey Pearlman</span>
+        <span class="eyebrow" style="display:block;margin-bottom:12px">Our Founder</span>
         <h2 style="margin-bottom:18px">20+ years of enterprise IT. Now working for you.</h2>
-        <p style="font-size:15px;color:var(--mid);line-height:1.8;margin-bottom:14px">As a Director at a leading global technology consulting firm, Geoffrey specialized in technology strategy and led complex IT engagements for Fortune 500 clients across private equity, life sciences, financial services, consumer products, manufacturing, and professional services — advising C-suites on digital transformation, AI enablement, IT strategy, and cost optimization.</p>
-        <p style="font-size:15px;color:var(--mid);line-height:1.8;margin-bottom:26px">He founded CSM Integrated Solutions to bring that same caliber of thinking to the companies that need it most — growing mid-market businesses that deserve enterprise-grade strategy without the enterprise overhead, the big-firm politics, or the price tag that comes with it.</p>
+        <p style="font-size:15px;color:var(--mid);line-height:1.8;margin-bottom:14px">Our founder spent over two decades as a Director at a leading global technology consulting firm, specializing in technology strategy and leading complex IT engagements for Fortune 500 clients across private equity, life sciences, financial services, consumer products, manufacturing, and professional services — advising C-suites on digital transformation, AI enablement, IT strategy, and cost optimization.</p>
+        <p style="font-size:15px;color:var(--mid);line-height:1.8;margin-bottom:26px">CSM Integrated Solutions was founded to bring that same caliber of thinking to the companies that need it most — growing mid-market businesses that deserve enterprise-grade strategy without the enterprise overhead, the big-firm politics, or the price tag that comes with it.</p>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:26px">
           <div style="padding:13px;background:var(--bg2);border:1px solid var(--border);border-radius:9px"><strong style="font-family:'Syne',sans-serif;font-size:13px;color:var(--text);display:block;margin-bottom:3px">Digital Transformation</strong><span style="font-size:12px;color:var(--mid)">Implementing advanced technical solutions to improve workflow and efficiency</span></div>
           <div style="padding:13px;background:var(--bg2);border:1px solid var(--border);border-radius:9px"><strong style="font-family:'Syne',sans-serif;font-size:13px;color:var(--text);display:block;margin-bottom:3px">AI Enablement</strong><span style="font-size:12px;color:var(--mid)">Translating business processes into practical, deployable AI solutions</span></div>
@@ -1019,7 +1003,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 0 2
     <div class="oc"><h4><i data-lucide="trending-down"></i> IT Cost Optimization</h4><p>Vendor renegotiation, license right-sizing, and cloud cost management. Most clients recover 15–25% of IT budget in year one.</p></div>
     <div class="oc"><h4><i data-lucide="shopping-cart"></i> Vendor &amp; Tool Selection</h4><p>Vendor-neutral guidance on every technology decision — from AI tools to ERPs. We're on your side, not the vendor's.</p></div>
     <div class="oc"><h4><i data-lucide="presentation"></i> Board &amp; Executive Reporting</h4><p>Technology briefings for your board and investors — translating complex IT decisions into business language that drives good decisions.</p></div>
-    <div class="oc"><h4><i data-lucide="handshake"></i> Trusted CEO/CFO Advisor</h4><p>On-call access to Geoffrey for technology questions, vendor situations, security incidents — without the $400/hr invoice.</p></div>
+    <div class="oc"><h4><i data-lucide="handshake"></i> Trusted CEO/CFO Advisor</h4><p>On-call access to your advisor for technology questions, vendor situations, security incidents — without the $400/hr invoice.</p></div>
   </div></div></section>
   <div class="cta-block"><h2>Your business deserves a CIO.</h2><p>Not a $500K/year executive — a trusted advisor with 15 years of enterprise experience, charging SMB rates.</p><div class="cta-btns"><button class="btn-primary" onclick="go('contact')">Book a Discovery Call →</button><button class="btn-cta-o" onclick="go('pricing')">View Pricing</button></div></div>
 </div>
@@ -1545,7 +1529,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 0 2
     </div>
     <div class="fcard">
       <h3>Send a message</h3>
-      <p class="fcard-sub">Geoffrey responds personally within one business day.</p>
+      <p class="fcard-sub">We respond personally within one business day.</p>
       <div class="frow">
         <div class="fg"><label class="fl">First Name</label><input class="fi" id="cf-fn" type="text" placeholder="Alex"></div>
         <div class="fg"><label class="fl">Last Name</label><input class="fi" id="cf-ln" type="text" placeholder="Smith"></div>
@@ -1562,7 +1546,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 0 2
       </div>
       <div class="fg"><label class="fl">Tell us more</label><textarea class="fta" id="cf-msg" placeholder="What are you trying to accomplish? What's your biggest technology challenge?"></textarea></div>
       <button class="fsub" onclick="submitContact()">Send Message →</button>
-      <div class="f-ok" id="cf-ok">✓ Message sent! Geoffrey will respond within one business day.</div>
+      <div class="f-ok" id="cf-ok">✓ Message sent! We'll respond within one business day.</div>
       <p style="font-size:11px;color:var(--soft);margin-top:9px">🔒 Your info is never shared or sold.</p>
     </div>
   </div></div></section>
@@ -1648,7 +1632,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 0 2
         <div class="ri-list" id="ri-list"></div>
         <div class="res-cta-box">
           <strong>Want a deeper analysis?</strong>
-          <p>Geoffrey offers a free 30-minute AI Strategy session — no pitch, just clarity on your best first move.</p>
+          <p>We offer a free 30-minute AI Strategy session — no pitch, just clarity on your best first move.</p>
           <button style="padding:10px 20px;border:none;border-radius:7px;background:var(--blue);color:#fff;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;cursor:pointer" onclick="window.open('https://calendly.com/YOUR_LINK','_blank')">Book a Free Strategy Call →</button>
         </div>
       </div>
