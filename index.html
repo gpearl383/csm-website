@@ -853,8 +853,8 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 0 2
 <div id="resources" class="page">
   <div class="ph"><div class="container"><div class="ph-inner">
     <span class="eyebrow">News &amp; Insights</span>
-    <h1>The latest in AI — curated daily.</h1>
-    <p>Live news from the most trusted sources covering cutting-edge AI technology, research, and business impact. Updated automatically.</p>
+    <h1>The latest in AI — updated daily.</h1>
+    <p>Current AI news fetched fresh on every visit — covering breakthrough research, enterprise adoption, and the tools shaping how businesses operate.</p>
   </div></div></div>
 
   <section class="section"><div class="container">
@@ -862,10 +862,11 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 0 2
     <!-- Source badges -->
     <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:40px">
       <span style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin-right:4px">Sources:</span>
-      <span class="news-src-badge" id="src-techcrunch">TechCrunch AI</span>
-      <span class="news-src-badge" id="src-venturebeat">VentureBeat</span>
-      <span class="news-src-badge" id="src-mit">MIT Tech Review</span>
-      <span class="news-src-badge" id="src-verge">The Verge</span>
+      <span class="news-src-badge">TechCrunch</span>
+      <span class="news-src-badge">VentureBeat</span>
+      <span class="news-src-badge">MIT Tech Review</span>
+      <span class="news-src-badge">The Verge</span>
+      <span class="news-src-badge">Reuters</span>
       <span style="margin-left:auto;font-size:12px;color:var(--soft);font-family:'Syne',sans-serif" id="news-updated"></span>
     </div>
 
@@ -1829,61 +1830,13 @@ function submitQuote(){
 }
 
 // ── NEWS FEED ──
-const NEWS_SOURCES = [
-  { name:'MIT Tech Review', url:'https://www.technologyreview.com/feed/', label:'MIT Tech Review' },
-  { name:'VentureBeat AI', url:'https://venturebeat.com/category/ai/feed/', label:'VentureBeat' },
-  { name:'TechCrunch AI', url:'https://techcrunch.com/category/artificial-intelligence/feed/', label:'TechCrunch' },
-  { name:'The Verge AI', url:'https://www.theverge.com/rss/ai-artificial-intelligence/index.xml', label:'The Verge' },
-  { name:'Ars Technica AI', url:'https://feeds.arstechnica.com/arstechnica/technology-lab', label:'Ars Technica' }
-];
 let allArticles = [], displayedCount = 0;
 const PAGE_SIZE = 6;
-
-// Static fallback articles — shown when live feeds are unavailable
-const STATIC_ARTICLES = [
-  { title:"OpenAI Rolls Out GPT-4o With Real-Time Voice and Vision Capabilities", description:"OpenAI's latest model update brings multimodal capabilities including real-time voice conversations and image understanding to all ChatGPT users, marking a significant step toward more natural human-AI interaction.", link:"https://openai.com/research", pubDate:"2025-03-15", source:"AI News", _static:true },
-  { title:"Anthropic Raises $2.75 Billion to Advance Claude AI Safety Research", description:"The AI safety company secured significant new funding to accelerate research into interpretability, alignment, and the deployment of safe and beneficial AI systems for enterprise customers.", link:"https://anthropic.com", pubDate:"2025-03-10", source:"TechCrunch", _static:true },
-  { title:"Microsoft Copilot for M365 Now Reaches 1 Million Business Users", description:"Microsoft's AI productivity suite embedded in Word, Excel, and Teams has crossed a major adoption milestone, with enterprises reporting significant time savings on document creation and meeting summaries.", link:"https://microsoft.com/copilot", pubDate:"2025-03-08", source:"VentureBeat", _static:true },
-  { title:"AI Agents Are Moving From Demos to Production: What Businesses Need to Know", description:"Enterprise adoption of autonomous AI agents accelerated in Q1 2025, with companies deploying agents for customer service, financial reporting, and supply chain optimization at scale.", link:"https://venturebeat.com/ai", pubDate:"2025-03-05", source:"VentureBeat", _static:true },
-  { title:"Google Gemini 1.5 Pro Now Supports 1 Million Token Context Window", description:"Google's latest Gemini update dramatically expands context length, enabling businesses to analyze entire codebases, lengthy contracts, and hours of meeting transcripts in a single prompt.", link:"https://deepmind.google", pubDate:"2025-03-01", source:"MIT Tech Review", _static:true },
-  { title:"How Small Businesses Are Using AI to Compete With Enterprise Rivals", description:"A new wave of SMB-focused AI tools is leveling the playing field, with mid-market companies reporting productivity gains of 30-40% after deploying targeted automation in finance, sales, and operations.", link:"https://techcrunch.com/artificial-intelligence", pubDate:"2025-02-25", source:"TechCrunch", _static:true },
-  { title:"The Real ROI of AI: Why Implementation Strategy Matters More Than Tool Selection", description:"New research shows that companies achieving the highest AI returns share one thing in common — a structured deployment approach with clear use case prioritization, governance, and change management.", link:"https://hbr.org", pubDate:"2025-02-20", source:"MIT Tech Review", _static:true },
-  { title:"AI Governance Frameworks Are Now a Board-Level Priority for Mid-Market Companies", description:"With regulators scrutinizing AI use across industries, mid-market executives are prioritizing AI policy, acceptable use guidelines, and model risk management as core governance responsibilities.", link:"https://www.theverge.com/ai-artificial-intelligence", pubDate:"2025-02-15", source:"The Verge", _static:true },
-  { title:"Zapier and Make Report 200% Growth in AI-Powered Workflow Automations", description:"No-code automation platforms are seeing explosive growth as businesses move beyond simple task automation toward sophisticated multi-step AI workflows that replace manual knowledge work.", link:"https://zapier.com", pubDate:"2025-02-10", source:"VentureBeat", _static:true },
-  { title:"Why Your MSP Can't Be Your AI Strategy Partner — and What to Do Instead", description:"Traditional managed service providers are struggling to evolve into AI advisory roles, leaving a gap that specialized AI consultants and fractional CIOs are stepping in to fill for growing businesses.", link:"https://techcrunch.com/artificial-intelligence", pubDate:"2025-02-05", source:"TechCrunch", _static:true }
-];
-
-async function tryFetch(url) {
-  // Try rss2json
-  try {
-    const r = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}&count=12`);
-    if(r.ok) { const d = await r.json(); if(d.status==='ok' && d.items?.length) return d.items; }
-  } catch(e) {}
-  // Try allorigins proxy
-  try {
-    const r = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
-    if(r.ok) {
-      const d = await r.json();
-      if(d.contents) {
-        const parser = new DOMParser();
-        const xml = parser.parseFromString(d.contents, 'text/xml');
-        const items = [...xml.querySelectorAll('item')].slice(0,12).map(i => ({
-          title: i.querySelector('title')?.textContent || '',
-          link: i.querySelector('link')?.textContent || '',
-          description: i.querySelector('description')?.textContent || '',
-          pubDate: i.querySelector('pubDate')?.textContent || '',
-          thumbnail: i.querySelector('enclosure')?.getAttribute('url') || ''
-        }));
-        if(items.length) return items;
-      }
-    }
-  } catch(e) {}
-  return [];
-}
 
 function formatDate(dateStr) {
   if(!dateStr) return '';
   const d = new Date(dateStr);
+  if(isNaN(d)) return dateStr;
   return d.toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
 }
 
@@ -1893,20 +1846,14 @@ function stripHtml(html) {
   return tmp.textContent || tmp.innerText || '';
 }
 
-function getImg(item) {
-  if(item.thumbnail && item.thumbnail.startsWith('http')) return item.thumbnail;
-  if(item.enclosure && item.enclosure.link) return item.enclosure.link;
-  const match = item.content && item.content.match(/<img[^>]+src="([^">]+)"/);
-  return match ? match[1] : null;
-}
-
 function renderFeatured(article) {
-  const img = getImg(article);
-  const desc = stripHtml(article.description || '').substring(0, 200) + '...';
+  const desc = stripHtml(article.description || '').substring(0, 220) + '...';
   document.getElementById('news-featured').innerHTML = `
     <a href="${article.link}" target="_blank" rel="noopener" class="news-featured-card" style="display:grid;grid-template-columns:1fr 1fr">
       <div class="news-featured-img">
-        ${img ? `<img src="${img}" alt="" onerror="this.parentElement.innerHTML='<div class=news-featured-img-ph><i data-lucide=\\'newspaper\\' style=\\'width:48px;height:48px;stroke:var(--soft);stroke-width:1.25\\'></i></div>';lucide.createIcons()">` : '<div class="news-featured-img-ph"><i data-lucide="newspaper" style="width:48px;height:48px;stroke:var(--soft);stroke-width:1.25"></i></div>'}
+        <div class="news-featured-img-ph" style="background:linear-gradient(135deg,var(--blue-bg),var(--bg3))">
+          <i data-lucide="newspaper" style="width:52px;height:52px;stroke:var(--blue);stroke-width:1.25;opacity:.5"></i>
+        </div>
       </div>
       <div class="news-featured-body">
         <span class="news-src-tag">${article.source} · Featured</span>
@@ -1921,7 +1868,6 @@ function renderFeatured(article) {
 function renderCards(articles) {
   const grid = document.getElementById('news-cards');
   articles.forEach(a => {
-    const img = getImg(a);
     const desc = stripHtml(a.description || '').substring(0, 140) + '...';
     const card = document.createElement('a');
     card.href = a.link;
@@ -1930,7 +1876,9 @@ function renderCards(articles) {
     card.className = 'news-card';
     card.innerHTML = `
       <div class="news-card-img">
-        ${img ? `<img src="${img}" alt="" onerror="this.parentElement.innerHTML='<div class=news-card-img-ph><i data-lucide=\\'file-text\\' style=\\'width:36px;height:36px;stroke:var(--soft);stroke-width:1.5\\'></i></div>';lucide.createIcons()">` : '<div class="news-card-img-ph"><i data-lucide="file-text" style="width:36px;height:36px;stroke:var(--soft);stroke-width:1.5"></i></div>'}
+        <div class="news-card-img-ph" style="background:linear-gradient(135deg,var(--bg2),var(--bg3))">
+          <i data-lucide="file-text" style="width:36px;height:36px;stroke:var(--soft);stroke-width:1.5"></i>
+        </div>
         <span class="news-pill">${a.source}</span>
       </div>
       <div class="news-card-body">
@@ -1959,43 +1907,59 @@ async function loadNews() {
   document.getElementById('news-cards').innerHTML = '';
   document.getElementById('news-featured').innerHTML = '';
 
-  let combined = [];
+  const today = new Date().toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
+
   try {
-    const results = await Promise.allSettled(NEWS_SOURCES.map(async s => {
-      const items = await tryFetch(s.url);
-      return items.map(i => ({ ...i, source: s.label }));
-    }));
-    results.forEach(r => { if(r.status === 'fulfilled') combined.push(...r.value); });
-  } catch(e) {}
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        tools: [{ type: 'web_search_20250305', name: 'web_search' }],
+        system: `You are a news curator for a B2B AI consulting firm. Today is ${today}. Search for the most recent AI news from the past 14 days. Return ONLY a JSON array of exactly 10 news articles — no other text, no markdown, no backticks. Each object must have: title (string), description (string, 2-3 sentences), link (string, real URL), pubDate (string, ISO date like "2026-04-01"), source (string, publication name). Only include articles from the past 14 days. Prioritize: enterprise AI adoption, new model releases, AI for business, AI regulation/governance, SMB technology trends.`,
+        messages: [{ role: 'user', content: `Find the 10 most recent AI news articles from the past 2 weeks as of ${today}. Return only a JSON array.` }]
+      })
+    });
 
-  // Fall back to static articles if live fetch yields nothing
-  if(combined.length === 0) {
-    combined = STATIC_ARTICLES;
-    document.getElementById('news-updated').textContent = 'Curated articles';
-  } else {
-    combined.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+    const data = await response.json();
+    const textContent = (data.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
+
+    // Parse JSON from response
+    const jsonMatch = textContent.match(/\[[\s\S]*\]/);
+    if(!jsonMatch) throw new Error('No JSON array in response');
+
+    const articles = JSON.parse(jsonMatch[0]);
+    if(!Array.isArray(articles) || articles.length === 0) throw new Error('Empty articles array');
+
+    // Filter to last 14 days just in case
+    const cutoff = new Date();
+    cutoff.setDate(cutoff.getDate() - 14);
+    allArticles = articles.filter(a => {
+      const d = new Date(a.pubDate);
+      return isNaN(d) || d >= cutoff;
+    });
+
+    // If filter wiped everything, keep them all (dates may vary in format)
+    if(allArticles.length === 0) allArticles = articles;
+
+    document.getElementById('news-loading').style.display = 'none';
+    document.getElementById('news-grid').style.display = 'block';
     document.getElementById('news-updated').textContent = 'Updated ' + new Date().toLocaleTimeString('en-US', {hour:'numeric',minute:'2-digit'});
-  }
 
-  // Deduplicate
-  const seen = new Set();
-  allArticles = combined.filter(a => {
-    const key = (a.title||'').toLowerCase().substring(0, 40);
-    if(seen.has(key)) return false;
-    seen.add(key);
-    return true;
-  });
+    renderFeatured(allArticles[0]);
+    renderCards(allArticles.slice(1, PAGE_SIZE + 1));
+    displayedCount = PAGE_SIZE + 1;
 
-  document.getElementById('news-loading').style.display = 'none';
-  document.getElementById('news-grid').style.display = 'block';
+    if(allArticles.length > displayedCount) {
+      document.getElementById('news-load-more').style.display = 'inline-block';
+    }
 
-  renderFeatured(allArticles[0]);
-  const firstBatch = allArticles.slice(1, PAGE_SIZE + 1);
-  renderCards(firstBatch);
-  displayedCount = PAGE_SIZE + 1;
-
-  if(allArticles.length > displayedCount) {
-    document.getElementById('news-load-more').style.display = 'inline-block';
+  } catch(e) {
+    console.error('News load error:', e);
+    document.getElementById('news-loading').style.display = 'none';
+    document.getElementById('news-error').style.display = 'block';
+    lucide.createIcons();
   }
 }
 
