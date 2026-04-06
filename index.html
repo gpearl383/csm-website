@@ -1847,7 +1847,7 @@ function stripHtml(html) {
 }
 
 function renderFeatured(article) {
-  const desc = stripHtml(article.description || '').substring(0, 220) + '...';
+  const desc = (stripHtml(article.description || '')||'').substring(0, 220) + '...';
   document.getElementById('news-featured').innerHTML = `
     <a href="${article.link}" target="_blank" rel="noopener" class="news-featured-card" style="display:grid;grid-template-columns:1fr 1fr">
       <div class="news-featured-img">
@@ -1868,7 +1868,7 @@ function renderFeatured(article) {
 function renderCards(articles) {
   const grid = document.getElementById('news-cards');
   articles.forEach(a => {
-    const desc = stripHtml(a.description || '').substring(0, 140) + '...';
+    const desc = (stripHtml(a.description || '')||'').substring(0, 140) + '...';
     const card = document.createElement('a');
     card.href = a.link;
     card.target = '_blank';
@@ -1907,41 +1907,13 @@ async function loadNews() {
   document.getElementById('news-cards').innerHTML = '';
   document.getElementById('news-featured').innerHTML = '';
 
-  const today = new Date().toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
-
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        tools: [{ type: 'web_search_20250305', name: 'web_search' }],
-        system: `You are a news curator for a B2B AI consulting firm. Today is ${today}. Search for the most recent AI news from the past 14 days. Return ONLY a JSON array of exactly 10 news articles — no other text, no markdown, no backticks. Each object must have: title (string), description (string, 2-3 sentences), link (string, real URL), pubDate (string, ISO date like "2026-04-01"), source (string, publication name). Only include articles from the past 14 days. Prioritize: enterprise AI adoption, new model releases, AI for business, AI regulation/governance, SMB technology trends.`,
-        messages: [{ role: 'user', content: `Find the 10 most recent AI news articles from the past 2 weeks as of ${today}. Return only a JSON array.` }]
-      })
-    });
+    const res = await fetch('/.netlify/functions/news');
+    if(!res.ok) throw new Error('Function returned ' + res.status);
+    const data = await res.json();
+    if(!data.articles || data.articles.length === 0) throw new Error('No articles returned');
 
-    const data = await response.json();
-    const textContent = (data.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
-
-    // Parse JSON from response
-    const jsonMatch = textContent.match(/\[[\s\S]*\]/);
-    if(!jsonMatch) throw new Error('No JSON array in response');
-
-    const articles = JSON.parse(jsonMatch[0]);
-    if(!Array.isArray(articles) || articles.length === 0) throw new Error('Empty articles array');
-
-    // Filter to last 14 days just in case
-    const cutoff = new Date();
-    cutoff.setDate(cutoff.getDate() - 14);
-    allArticles = articles.filter(a => {
-      const d = new Date(a.pubDate);
-      return isNaN(d) || d >= cutoff;
-    });
-
-    // If filter wiped everything, keep them all (dates may vary in format)
-    if(allArticles.length === 0) allArticles = articles;
+    allArticles = data.articles;
 
     document.getElementById('news-loading').style.display = 'none';
     document.getElementById('news-grid').style.display = 'block';
@@ -1954,7 +1926,6 @@ async function loadNews() {
     if(allArticles.length > displayedCount) {
       document.getElementById('news-load-more').style.display = 'inline-block';
     }
-
   } catch(e) {
     console.error('News load error:', e);
     document.getElementById('news-loading').style.display = 'none';
