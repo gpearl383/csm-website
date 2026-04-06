@@ -1,5 +1,4 @@
-// Netlify Serverless Function — fetches AI news RSS feeds server-side
-// No CORS issues since this runs on Netlify's edge, not the browser
+// Netlify Serverless Function — fetches AI news RSS + og:images server-side
 
 const FEEDS = [
   { url: 'https://techcrunch.com/category/artificial-intelligence/feed/', label: 'TechCrunch' },
@@ -10,7 +9,6 @@ const FEEDS = [
 ];
 
 function extractTag(xml, tag) {
-  // Handle CDATA
   const cdataMatch = xml.match(new RegExp(`<${tag}[^>]*><!\\[CDATA\\[([\\s\\S]*?)\\]\\]></${tag}>`, 'i'));
   if (cdataMatch) return cdataMatch[1].trim();
   const match = xml.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)</${tag}>`, 'i'));
@@ -27,28 +25,20 @@ function extractLink(itemXml) {
   return '';
 }
 
-function extractImage(itemXml) {
-  // 1. media:content url="..." (most common in professional feeds)
-  const mediaContent = itemXml.match(/<media:content[^>]+url="([^"]+)"/i);
-  if (mediaContent && /\.(jpg|jpeg|png|webp)/i.test(mediaContent[1])) return mediaContent[1];
-
-  // 2. media:thumbnail url="..."
-  const mediaThumbnail = itemXml.match(/<media:thumbnail[^>]+url="([^"]+)"/i);
-  if (mediaThumbnail) return mediaThumbnail[1];
-
-  // 3. enclosure url="..." type="image/..."
-  const enclosure = itemXml.match(/<enclosure[^>]+type="image\/[^"]*"[^>]+url="([^"]+)"/i)
+function extractRssImage(itemXml) {
+  const mc = itemXml.match(/<media:content[^>]+url="([^"]+)"/i);
+  if (mc && /\.(jpg|jpeg|png|webp)/i.test(mc[1])) return mc[1];
+  const mt = itemXml.match(/<media:thumbnail[^>]+url="([^"]+)"/i);
+  if (mt) return mt[1];
+  const enc = itemXml.match(/<enclosure[^>]+type="image\/[^"]*"[^>]+url="([^"]+)"/i)
     || itemXml.match(/<enclosure[^>]+url="([^"]+)"[^>]+type="image\/[^"]*"/i);
-  if (enclosure) return enclosure[1];
-
-  // 4. First <img> tag inside content:encoded or description CDATA
-  const contentMatch = itemXml.match(/<content:encoded[^>]*><!?\[CDATA\[([\s\S]*?)\]\]>/i)
+  if (enc) return enc[1];
+  const cdata = itemXml.match(/<content:encoded[^>]*><!?\[CDATA\[([\s\S]*?)\]\]>/i)
     || itemXml.match(/<description[^>]*><!?\[CDATA\[([\s\S]*?)\]\]>/i);
-  if (contentMatch) {
-    const imgMatch = contentMatch[1].match(/<img[^>]+src="(https?:\/\/[^"]+\.(jpg|jpeg|png|webp)[^"]*)"/i);
-    if (imgMatch) return imgMatch[1];
+  if (cdata) {
+    const img = cdata[1].match(/<img[^>]+src="(https?:\/\/[^"]+\.(jpg|jpeg|png|webp)[^"]*)"/i);
+    if (img) return img[1];
   }
-
   return null;
 }
 
@@ -62,7 +52,7 @@ function parseFeed(xml, label) {
     const link = extractLink(item);
     const description = extractTag(item, 'description').substring(0, 300);
     const pubDate = extractTag(item, 'pubDate') || extractTag(item, 'published') || extractTag(item, 'dc:date');
-    const image = extractImage(item);
+    const image = extractRssImage(item);
     if (title && link) {
       items.push({ title, link, description, pubDate, source: label, image });
     }
@@ -85,12 +75,42 @@ async function fetchFeed(feed) {
   }
 }
 
+async function fetchOgImage(url) {
+  try {
+    const res = await fetch(url, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (compatible; CSMBot/1.0)',
+        'Accept': 'text/html',
+      },
+      signal: AbortSignal.timeout(4000),
+    });
+    if (!res.ok) return null;
+    const reader = res.body.getReader();
+    let html = '';
+    while (html.length < 8000) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      html += new TextDecoder().decode(value);
+    }
+    reader.cancel();
+    const ogMatch = html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i)
+      || html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i);
+    if (ogMatch && ogMatch[1].startsWith('http')) return ogMatch[1];
+    const twMatch = html.match(/<meta[^>]+name=["']twitter:image["'][^>]+content=["']([^"']+)["']/i)
+      || html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+name=["']twitter:image["']/i);
+    if (twMatch && twMatch[1].startsWith('http')) return twMatch[1];
+    return null;
+  } catch (e) {
+    return null;
+  }
+}
+
 export default async function handler(req, context) {
   const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET',
     'Content-Type': 'application/json',
-    'Cache-Control': 'public, max-age=900', // cache 15 min
+    'Cache-Control': 'public, max-age=900',
   };
 
   if (req.method === 'OPTIONS') {
@@ -102,28 +122,31 @@ export default async function handler(req, context) {
     let articles = [];
     results.forEach(r => { if (r.status === 'fulfilled') articles.push(...r.value); });
 
-    // Filter to last 30 days
     const cutoff = new Date();
     cutoff.setDate(cutoff.getDate() - 30);
-    const recent = articles.filter(a => {
+    articles = articles.filter(a => {
       if (!a.pubDate) return true;
       const d = new Date(a.pubDate);
       return isNaN(d) || d >= cutoff;
     });
-
-    // Sort newest first
-    recent.sort((a, b) => new Date(b.pubDate || 0) - new Date(a.pubDate || 0));
-
-    // Deduplicate by title
+    articles.sort((a, b) => new Date(b.pubDate || 0) - new Date(a.pubDate || 0));
     const seen = new Set();
-    const deduped = recent.filter(a => {
+    articles = articles.filter(a => {
       const key = a.title.toLowerCase().substring(0, 50);
       if (seen.has(key)) return false;
       seen.add(key);
       return true;
-    });
+    }).slice(0, 20);
 
-    return new Response(JSON.stringify({ articles: deduped.slice(0, 20), fetched: new Date().toISOString() }), {
+    // Fetch og:image for articles missing images (first 12 only, concurrently)
+    const imageJobs = articles.slice(0, 12).map(async (article, i) => {
+      if (article.image) return;
+      const img = await fetchOgImage(article.link);
+      if (img) articles[i].image = img;
+    });
+    await Promise.allSettled(imageJobs);
+
+    return new Response(JSON.stringify({ articles, fetched: new Date().toISOString() }), {
       headers: corsHeaders,
     });
   } catch (e) {
