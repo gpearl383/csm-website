@@ -74,7 +74,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:900;height:62px;display:flex;ali
 .hero{min-height:100vh;display:flex;align-items:center;padding-top:62px;position:relative;overflow:hidden;background:var(--bg)}
 .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,119,182,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,119,182,.05) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 70% 70% at 60% 40%,#000 10%,transparent 70%)}
 .hero-glow{position:absolute;top:5%;right:5%;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(0,119,182,.07) 0%,transparent 70%);pointer-events:none}
-.hero-inner{display:grid;grid-template-columns:1.05fr .95fr;gap:72px;align-items:center;position:relative;z-index:1;padding:80px 0 100px}
+.hero-inner{display:grid;grid-template-columns:1.05fr .95fr;gap:72px;align-items:start;position:relative;z-index:1;padding:80px 0 100px}
 .hero-badge{display:inline-flex;align-items:center;gap:7px;padding:5px 13px;border-radius:20px;border:1px solid rgba(0,119,182,.25);background:var(--blue-bg);margin-bottom:22px}
 .hero-badge-dot{width:5px;height:5px;border-radius:50%;background:var(--teal);animation:blink 2s ease infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
@@ -94,7 +94,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:900;height:62px;display:flex;ali
 .hp-l{font-size:12px;color:var(--soft);margin-top:3px}
 
 /* Hero panel */
-.hero-panel{background:var(--card);border:1px solid var(--border2);border-radius:16px;overflow:hidden;box-shadow:0 4px 28px rgba(15,35,60,.09)}
+.hero-panel{background:var(--card);border:1px solid var(--border2);border-radius:16px;overflow:hidden;box-shadow:0 4px 28px rgba(15,35,60,.09);margin-top:35px}
 .hp-top{height:3px;background:linear-gradient(90deg,var(--blue),var(--teal))}
 .hp-tabs{display:flex;border-bottom:1px solid var(--border)}
 .hptab{flex:1;padding:13px;text-align:center;font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--soft);cursor:pointer;transition:color .18s,background .18s;border:none;background:transparent}
