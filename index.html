@@ -164,7 +164,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:900;height:62px;display:flex;ali
 .ptag{font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;border:1px solid var(--border2);color:var(--mid);font-family:'Syne',sans-serif}
 
 /* ─── STATS ROW ─── */
-.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stats-row{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--border);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .sb{background:var(--bg2);padding:30px;text-align:center}
 .sb-n{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:var(--blue);line-height:1;margin-bottom:5px}
 .sb-n.t{color:var(--teal)}
@@ -379,7 +379,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 0 2
   .vp-grid,.og,.cg{grid-template-columns:1fr}
   .pg,.rm-grid,.fn-grid{grid-template-columns:1fr 1fr}
   .ft-grid{grid-template-columns:1fr 1fr;gap:28px}
-  .stats-row{grid-template-columns:1fr 1fr}
+  .stats-row{grid-template-columns:repeat(3,1fr)}
   .ic-grid{grid-template-columns:1fr 1fr}
   .dt{display:block;overflow-x:auto}
 }
@@ -606,12 +606,6 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 0 2
             <button class="btn-primary" onclick="openModal()">Take the Free AI Assessment →</button>
             <button class="btn-outline" onclick="go('contact')">Book a Strategy Call</button>
           </div>
-          <div class="hero-proof">
-            <div class="hp"><div class="hp-n">20+</div><div class="hp-l">Years enterprise IT</div></div>
-            <div class="hp"><div class="hp-n">300+</div><div class="hp-l">Clients served</div></div>
-            <div class="hp"><div class="hp-n">90 days</div><div class="hp-l">Assessment to live AI</div></div>
-            <div class="hp"><div class="hp-n">One Partner</div><div class="hp-l">Strategy through execution</div></div>
-          </div>
         </div>
         <div class="hero-panel">
           <div class="hp-top"></div>
@@ -640,21 +634,16 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 0 2
     </div>
   </section>
 
-  <div class="trust">
-    <div class="container">
-      <div class="trust-row">
-        <span class="trust-lbl">Expertise in</span>
-        <div class="trust-items">
-          <span class="trust-item">⬡ AI Enablement</span>
-          <span class="trust-item">⬡ Digital Transformation</span>
-          <span class="trust-item">⬡ Fractional CIO / CTO</span>
-          <span class="trust-item">⬡ IT Assessments</span>
-          <span class="trust-item">⬡ Cost Takeout / Optimization</span>
-          <span class="trust-item">⬡ Microsoft 365 / Azure Cloud Platforms</span>
-        </div>
-      </div>
-    </div>
+  <div class="stats-row">
+    <div class="sb"><div class="sb-n">20+</div><div class="sb-l">Years enterprise IT</div></div>
+    <div class="sb"><div class="sb-n" style="color:#141439">300+</div><div class="sb-l">Clients served</div></div>
+    <div class="sb"><div class="sb-n t">40+</div><div class="sb-l">Hours saved per client monthly</div></div>
+    <div class="sb"><div class="sb-n" style="color:#6B3FA0">Any Size</div><div class="sb-l">We scale with you</div></div>
+    <div class="sb"><div class="sb-n a">$1M–$100M</div><div class="sb-l">Target revenue range</div></div>
+    <div class="sb"><div class="sb-n">90 days</div><div class="sb-l">Assessment to live AI</div></div>
   </div>
+
+
 
   <section class="section">
     <div class="container">
@@ -686,12 +675,6 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 0 2
     </div>
   </section>
 
-  <div class="stats-row">
-    <div class="sb"><div class="sb-n">40+</div><div class="sb-l">Hours saved per client monthly</div></div>
-    <div class="sb"><div class="sb-n t">Any Size</div><div class="sb-l">We scale with you</div></div>
-    <div class="sb"><div class="sb-n a">$1M–$100M</div><div class="sb-l">Target revenue range</div></div>
-    <div class="sb"><div class="sb-n">90</div><div class="sb-l">Days to first live AI win</div></div>
-  </div>
 
   <div class="cta-block">
     <h2>Ready to become an AI-enabled business?</h2>
