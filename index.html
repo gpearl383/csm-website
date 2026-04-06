@@ -1,0 +1,1876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>CSM Integrated Solutions — AI Enablement for SMBs</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#FFFFFF;
+  --bg2:#F4F8FB;
+  --bg3:#E8EFF5;
+  --card:#FFFFFF;
+  --border:rgba(15,35,60,0.1);
+  --border2:rgba(15,35,60,0.18);
+  --blue:#0077B6;
+  --blue-l:#00A3E0;
+  --blue-bg:rgba(0,119,182,0.07);
+  --teal:#007A5E;
+  --teal-bg:rgba(0,122,94,0.07);
+  --amber:#9B6800;
+  --amber-bg:rgba(155,104,0,0.08);
+  --text:#0D1F33;
+  --mid:#4A6070;
+  --soft:#8096A8;
+  --spring:cubic-bezier(.34,1.56,.64,1);
+  --smooth:cubic-bezier(.25,.46,.45,.94);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+a{text-decoration:none;color:inherit;cursor:pointer}
+button{cursor:pointer;font-family:'DM Sans',sans-serif}
+h1,h2,h3,h4{font-family:'Syne',sans-serif;font-weight:700;line-height:1.12;letter-spacing:-.02em}
+h1{font-size:clamp(34px,5vw,60px)}
+h2{font-size:clamp(26px,3.5vw,44px)}
+h3{font-size:clamp(19px,2.5vw,28px)}
+h4{font-size:17px}
+.eyebrow{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--blue)}
+.container{max-width:1180px;margin:0 auto;padding:0 40px}
+.section{padding:96px 0}
+.section-alt{background:var(--bg2)}
+.page{display:none}
+.page.active{display:block}
+
+/* ─── NAV ─── */
+nav{position:fixed;top:0;left:0;right:0;z-index:900;height:62px;display:flex;align-items:center;background:rgba(255,255,255,.93);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);box-shadow:0 1px 0 rgba(15,35,60,.05)}
+.nav-wrap{max-width:1180px;margin:0 auto;padding:0 40px;width:100%;display:flex;align-items:center}
+.logo{display:flex;align-items:center;gap:9px;cursor:pointer;flex-shrink:0}
+.logo-marks{display:flex;gap:2px}
+.lsq{width:8px;height:8px;border-radius:2px}
+.lsq-b{background:var(--blue)}
+.lsq-t{background:var(--teal)}
+.logo-name{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--text)}
+.nav-links{display:flex;align-items:center;gap:2px;margin-left:32px;flex:1}
+.ni{position:relative}
+.nl{font-family:'Syne',sans-serif;font-size:13px;font-weight:600;color:var(--mid);padding:8px 13px;border-radius:6px;transition:color .18s,background .18s;display:flex;align-items:center;gap:4px;cursor:pointer;white-space:nowrap}
+.nl:hover{color:var(--text);background:var(--bg2)}
+.nv{font-size:8px;opacity:.5;transition:transform .18s}
+.ni:hover .nv{transform:rotate(180deg)}
+.ndrop{display:none;position:absolute;top:calc(100%+6px);left:0;background:#fff;border:1px solid var(--border2);border-radius:12px;padding:8px;min-width:264px;box-shadow:0 12px 40px rgba(15,35,60,.12);z-index:99}
+.ni:hover .ndrop{display:block;animation:dd .15s var(--smooth)}
+@keyframes dd{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+.ndi{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;color:var(--mid);font-size:13px;font-weight:500;transition:background .15s,color .15s;cursor:pointer}
+.ndi:hover{background:var(--blue-bg);color:var(--blue)}
+.ndi-ico{width:28px;height:28px;border-radius:6px;background:var(--blue-bg);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.nav-r{display:flex;align-items:center;gap:10px;margin-left:auto}
+.btn-ghost{font-family:'Syne',sans-serif;font-size:13px;font-weight:600;color:var(--mid);padding:8px 16px;border-radius:7px;border:1px solid var(--border2);background:transparent;transition:color .18s,border-color .18s}
+.btn-ghost:hover{color:var(--text);border-color:var(--border2)}
+.btn-cta{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#fff;padding:9px 20px;border-radius:7px;border:none;background:var(--blue);transition:background .18s,transform .15s var(--spring)}
+.btn-cta:hover{background:var(--blue-l);transform:scale(1.03)}
+
+/* ─── HERO ─── */
+.hero{min-height:100vh;display:flex;align-items:center;padding-top:62px;position:relative;overflow:hidden;background:var(--bg)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,119,182,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,119,182,.05) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 70% 70% at 60% 40%,#000 10%,transparent 70%)}
+.hero-glow{position:absolute;top:5%;right:5%;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(0,119,182,.07) 0%,transparent 70%);pointer-events:none}
+.hero-inner{display:grid;grid-template-columns:1.05fr .95fr;gap:72px;align-items:center;position:relative;z-index:1;padding:80px 0 100px}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;padding:5px 13px;border-radius:20px;border:1px solid rgba(0,119,182,.25);background:var(--blue-bg);margin-bottom:22px}
+.hero-badge-dot{width:5px;height:5px;border-radius:50%;background:var(--teal);animation:blink 2s ease infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+.hero-badge-txt{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+.hero h1{margin-bottom:18px;color:var(--text)}
+.hero h1 span{color:var(--blue)}
+.hero-sub{font-size:17px;color:var(--mid);line-height:1.78;margin-bottom:34px;max-width:510px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:48px}
+.btn-primary{display:inline-flex;align-items:center;gap:7px;padding:14px 26px;border-radius:8px;border:none;background:var(--blue);color:#fff;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;transition:background .18s,transform .15s var(--spring),box-shadow .18s;box-shadow:0 2px 18px rgba(0,119,182,.25)}
+.btn-primary:hover{background:var(--blue-l);transform:translateY(-2px);box-shadow:0 6px 28px rgba(0,119,182,.3)}
+.btn-outline{display:inline-flex;align-items:center;gap:7px;padding:14px 26px;border-radius:8px;border:1.5px solid var(--border2);background:transparent;color:var(--text);font-family:'Syne',sans-serif;font-size:14px;font-weight:600;transition:border-color .18s,background .18s}
+.btn-outline:hover{border-color:var(--blue);background:var(--blue-bg)}
+.hero-proof{display:flex;gap:0;padding-top:28px;border-top:1px solid var(--border)}
+.hp{padding-right:32px;margin-right:32px;border-right:1px solid var(--border)}
+.hp:last-child{border-right:none;padding-right:0;margin-right:0}
+.hp-n{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--text);line-height:1}
+.hp-l{font-size:12px;color:var(--soft);margin-top:3px}
+
+/* Hero panel */
+.hero-panel{background:var(--card);border:1px solid var(--border2);border-radius:16px;overflow:hidden;box-shadow:0 4px 28px rgba(15,35,60,.09)}
+.hp-top{height:3px;background:linear-gradient(90deg,var(--blue),var(--teal))}
+.hp-tabs{display:flex;border-bottom:1px solid var(--border)}
+.hptab{flex:1;padding:13px;text-align:center;font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--soft);cursor:pointer;transition:color .18s,background .18s;border:none;background:transparent}
+.hptab.on{color:var(--blue);background:var(--blue-bg)}
+.hp-body{padding:22px}
+.pr{display:flex;align-items:center;gap:11px;margin-bottom:11px;padding:11px;border-radius:8px;background:var(--bg2)}
+.pr-ico{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.ico-b{background:var(--blue-bg)}
+.ico-t{background:var(--teal-bg)}
+.ico-a{background:var(--amber-bg)}
+.pr-lbl{font-size:12px;font-weight:600;color:var(--text);line-height:1.3}
+.pr-sub{font-size:11px;color:var(--soft)}
+.pr-val{margin-left:auto;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--blue)}
+.hp-btn{width:100%;margin-top:6px;padding:11px;border:none;border-radius:8px;background:var(--blue);color:#fff;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:background .18s}
+.hp-btn:hover{background:var(--blue-l)}
+
+/* ─── TRUST BAND ─── */
+.trust{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:18px 0}
+.trust-row{display:flex;align-items:center;gap:40px;flex-wrap:wrap}
+.trust-lbl{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--soft);flex-shrink:0}
+.trust-items{display:flex;align-items:center;gap:32px;flex-wrap:wrap}
+.trust-item{font-family:'Syne',sans-serif;font-size:12px;font-weight:600;color:var(--soft);display:flex;align-items:center;gap:5px}
+
+/* ─── SECTION HEADERS ─── */
+.sh{text-align:center;margin-bottom:60px}
+.sh .eyebrow{display:block;margin-bottom:12px}
+.sh h2{margin-bottom:14px}
+.sh p{font-size:16px;color:var(--mid);max-width:580px;margin:0 auto;line-height:1.75}
+.shl .eyebrow{display:block;margin-bottom:12px}
+.shl h2{margin-bottom:12px}
+.shl p{font-size:15px;color:var(--mid);max-width:540px;line-height:1.7}
+
+/* ─── SERVICES GRID ─── */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 2px 16px rgba(15,35,60,.06)}
+.sc{background:var(--bg);padding:30px;cursor:pointer;position:relative;transition:background .18s}
+.sc:hover{background:var(--bg2)}
+.sc.feat{background:rgba(0,119,182,.04);border-left:2px solid var(--blue)}
+.sc-num{display:none}
+.sc-ico{width:42px;height:42px;border-radius:10px;background:var(--blue-bg);display:flex;align-items:center;justify-content:center;margin-bottom:14px}.sc-ico svg{width:20px;height:20px;stroke:var(--blue);stroke-width:1.75}
+.sc.ico-tl .sc-ico{background:var(--teal-bg)}.sc.ico-tl .sc-ico svg{stroke:var(--teal)}
+.sc.ico-am .sc-ico{background:var(--amber-bg)}.sc.ico-am .sc-ico svg{stroke:var(--amber)}
+.sc h4{color:var(--text);margin-bottom:7px}
+.sc p{font-size:13px;color:var(--mid);line-height:1.6}
+.sc-link{display:inline-flex;align-items:center;gap:4px;font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:var(--blue);margin-top:14px;letter-spacing:.04em;text-transform:uppercase;transition:gap .18s}
+.sc:hover .sc-link{gap:8px}
+
+/* ─── VALUE PROPS ─── */
+.vp-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.vpc{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:30px;position:relative;overflow:hidden;transition:border-color .18s,transform .18s var(--spring);box-shadow:0 2px 10px rgba(15,35,60,.05)}
+.vpc:hover{border-color:var(--border2);transform:translateY(-2px)}
+.vpc-bar{position:absolute;top:0;left:0;width:56px;height:2px;background:var(--blue)}
+.vpc.t .vpc-bar{background:var(--teal)}
+.vpc.a .vpc-bar{background:var(--amber)}
+.vpc-ico{width:44px;height:44px;border-radius:10px;background:var(--blue-bg);display:flex;align-items:center;justify-content:center;margin-bottom:16px}.vpc-ico svg{width:22px;height:22px;stroke:var(--blue);stroke-width:1.75}.vpc.t .vpc-ico{background:var(--teal-bg)}.vpc.t .vpc-ico svg{stroke:var(--teal)}.vpc.a .vpc-ico{background:var(--amber-bg)}.vpc.a .vpc-ico svg{stroke:var(--amber)}
+.vpc h3{font-size:18px;margin-bottom:8px}
+.vpc p{font-size:14px;color:var(--mid);line-height:1.7}
+
+/* ─── PROCESS ─── */
+.proc{display:flex;flex-direction:column;position:relative}
+.proc::before{content:'';position:absolute;left:22px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--blue),var(--teal),transparent)}
+.proc-step{display:grid;grid-template-columns:54px 1fr;gap:28px;padding:28px 0;border-bottom:1px solid var(--border);align-items:start}
+.proc-step:last-child{border-bottom:none}
+.pn{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--blue);background:var(--bg);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--blue);position:relative;z-index:1;flex-shrink:0}
+.pc h4{font-size:17px;color:var(--text);margin-bottom:7px}
+.pc p{font-size:13px;color:var(--mid);line-height:1.7;margin-bottom:10px}
+.ptags{display:flex;gap:7px;flex-wrap:wrap}
+.ptag{font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;border:1px solid var(--border2);color:var(--mid);font-family:'Syne',sans-serif}
+
+/* ─── STATS ROW ─── */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.sb{background:var(--bg2);padding:30px;text-align:center}
+.sb-n{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:var(--blue);line-height:1;margin-bottom:5px}
+.sb-n.t{color:var(--teal)}
+.sb-n.a{color:var(--amber)}
+.sb-l{font-size:13px;color:var(--mid)}
+
+/* ─── PRICING ─── */
+.pg{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.pc-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:30px;position:relative;transition:border-color .18s,transform .18s var(--spring);box-shadow:0 2px 10px rgba(15,35,60,.05)}
+.pc-card:hover{transform:translateY(-4px)}
+.pc-card.feat{border-color:var(--blue);background:rgba(0,119,182,.03)}
+.pc-card.feat::before{content:'Most Popular';position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;font-family:'Syne',sans-serif;font-size:10px;font-weight:700;padding:3px 12px;border-radius:20px;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+.pt{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:6px}
+.pname{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--text);margin-bottom:4px}
+.p-amt{margin-bottom:18px}
+.p-num{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:var(--text)}
+.p-per{font-size:13px;color:var(--soft)}
+.p-desc{font-size:13px;color:var(--mid);line-height:1.6;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--border)}
+.pf-list{display:flex;flex-direction:column;gap:9px;margin-bottom:24px}
+.pf{display:flex;align-items:flex-start;gap:7px;font-size:13px;color:var(--mid)}
+.pf-ck{color:var(--teal);font-size:11px;margin-top:2px;flex-shrink:0}
+.pc-btn{width:100%;padding:11px;border:none;border-radius:8px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:background .18s,transform .15s var(--spring)}
+.pc-btn-p{background:var(--blue);color:#fff}
+.pc-btn-p:hover{background:var(--blue-l);transform:scale(1.02)}
+.pc-btn-o{background:transparent;border:1.5px solid var(--border2);color:var(--text)}
+.pc-btn-o:hover{border-color:var(--blue);color:var(--blue)}
+
+/* ─── DIFF TABLE ─── */
+.dt{width:100%;border-collapse:collapse;border-radius:12px;overflow:hidden}
+.dt th{background:var(--bg3);padding:13px 18px;font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);text-align:left;border-bottom:1px solid var(--border)}
+.dt th.hl{color:var(--blue)}
+.dt td{padding:13px 18px;font-size:13px;color:var(--mid);border-bottom:1px solid var(--border);vertical-align:top}
+.dt td.hl{color:var(--text);font-weight:500;background:rgba(0,119,182,.03)}
+.dt td.rl{color:var(--text);font-weight:600;font-size:13px}
+.dt tr:last-child td{border-bottom:none}
+.ck-y{color:var(--teal);font-size:14px}
+.ck-n{color:var(--soft);font-size:14px}
+
+/* ─── ROADMAP ─── */
+.rm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.rm{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:26px;box-shadow:0 2px 10px rgba(15,35,60,.05)}
+.rm-tag{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:7px;display:inline-block;padding:3px 9px;border-radius:20px}
+.rm1 .rm-tag{background:var(--blue-bg);color:var(--blue)}
+.rm2 .rm-tag{background:var(--teal-bg);color:var(--teal)}
+.rm3 .rm-tag{background:var(--amber-bg);color:var(--amber)}
+.rm-title{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--text);margin-bottom:3px}
+.rm-time{font-size:12px;color:var(--soft);margin-bottom:18px}
+.rm-items{display:flex;flex-direction:column;gap:9px}
+.rmi{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--mid);line-height:1.5}
+.rmd{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:7px}
+.rm1 .rmd{background:var(--blue)}
+.rm2 .rmd{background:var(--teal)}
+.rm3 .rmd{background:var(--amber)}
+
+/* ─── FUNNEL ─── */
+.fn-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 2px 10px rgba(15,35,60,.05)}
+.fn{background:var(--bg);padding:26px 20px;text-align:center;transition:background .18s}
+.fn:hover{background:var(--bg2)}
+.fn-ico{font-size:26px;margin-bottom:11px}
+.fn h4{font-family:'Syne',sans-serif;font-size:15px;color:var(--text);margin-bottom:7px}
+.fn p{font-size:12px;color:var(--mid);line-height:1.6}
+
+/* ─── INSIGHT CARDS ─── */
+.ic-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.ic{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;cursor:pointer;transition:border-color .18s,transform .18s var(--spring);box-shadow:0 2px 10px rgba(15,35,60,.05)}
+.ic:hover{border-color:var(--border2);transform:translateY(-3px)}
+.ic-thumb{height:150px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:34px;position:relative}
+.ic-tag{position:absolute;top:10px;left:10px;font-family:'Syne',sans-serif;font-size:9px;font-weight:700;padding:3px 7px;border-radius:4px;letter-spacing:.07em;text-transform:uppercase;background:var(--blue-bg);color:var(--blue)}
+.ic-body{padding:18px}
+.ic-body h4{font-size:14px;color:var(--text);margin-bottom:7px;line-height:1.4}
+.ic-body p{font-size:12px;color:var(--mid);line-height:1.6;margin-bottom:12px}
+.ic-meta{font-size:11px;color:var(--soft);font-family:'Syne',sans-serif}
+
+/* ─── CTA BLOCK ─── */
+.cta-block{background:var(--text);padding:96px 0;text-align:center;position:relative;overflow:hidden}
+.cta-block::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(0,119,182,.25) 0%,transparent 70%)}
+.cta-block h2{color:#fff;margin-bottom:14px;position:relative;z-index:1}
+.cta-block p{font-size:16px;color:rgba(255,255,255,.58);max-width:500px;margin:0 auto 32px;line-height:1.75;position:relative;z-index:1}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+.cta-note{font-size:12px;color:rgba(255,255,255,.3);margin-top:14px;position:relative;z-index:1}
+.btn-cta-o{display:inline-flex;align-items:center;gap:7px;padding:14px 26px;border-radius:8px;border:1.5px solid rgba(255,255,255,.25);background:transparent;color:rgba(255,255,255,.85);font-family:'Syne',sans-serif;font-size:14px;font-weight:600;transition:border-color .18s,color .18s}
+.btn-cta-o:hover{border-color:rgba(255,255,255,.5);color:#fff}
+
+/* ─── FOOTER ─── */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 0 28px}
+.ft-grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:44px;margin-bottom:44px}
+.ft-brand p{font-size:13px;color:var(--mid);line-height:1.75;margin:14px 0 18px;max-width:250px}
+.ft-col h5{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin-bottom:14px}
+.ft-col ul{list-style:none}
+.ft-col ul li{margin-bottom:9px}
+.ft-col ul li a{font-size:13px;color:var(--mid);transition:color .18s;cursor:pointer}
+.ft-col ul li a:hover{color:var(--blue)}
+.ft-bot{border-top:1px solid var(--border);padding-top:22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.ft-bot p,.ft-bot a{font-size:12px;color:var(--soft)}
+.ft-bot a{cursor:pointer;transition:color .18s}
+.ft-bot a:hover{color:var(--mid)}
+.ft-links{display:flex;gap:18px}
+
+/* ─── PAGE HERO ─── */
+.ph{padding:136px 0 72px;background:var(--bg2);position:relative;overflow:hidden}
+.ph::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 60% at 70% 50%,rgba(0,119,182,.05) 0%,transparent 70%)}
+.ph-inner{position:relative;z-index:1;max-width:680px}
+.ph .eyebrow{display:block;margin-bottom:12px}
+.ph h1{margin-bottom:18px;font-size:clamp(30px,4vw,50px)}
+.ph p{font-size:16px;color:var(--mid);line-height:1.75;margin-bottom:28px}
+.bc{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--soft);margin-bottom:18px;font-family:'Syne',sans-serif;font-weight:600}
+
+/* ─── OFFERING CARDS ─── */
+.og{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.oc{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px;transition:border-color .18s,transform .18s var(--spring);box-shadow:0 2px 8px rgba(15,35,60,.05)}
+.oc:hover{border-color:var(--border2);transform:translateY(-2px)}
+.oc h4{font-size:15px;color:var(--text);margin-bottom:7px;display:flex;align-items:center;gap:7px}
+.oc p{font-size:13px;color:var(--mid);line-height:1.65}
+
+/* ─── DELIVERABLES ─── */
+.dl{display:flex;flex-direction:column;gap:11px}
+.dli{display:flex;align-items:flex-start;gap:12px;padding:14px;background:var(--card);border:1px solid var(--border);border-radius:10px;box-shadow:0 1px 6px rgba(15,35,60,.04)}
+.dli-ico{font-size:16px;width:26px;text-align:center;flex-shrink:0}
+.dli h5{font-family:'Syne',sans-serif;font-size:14px;color:var(--text);margin-bottom:3px}
+.dli p{font-size:12px;color:var(--mid);line-height:1.55}
+
+/* ─── CONTACT ─── */
+.cg{display:grid;grid-template-columns:1fr 1.3fr;gap:60px;align-items:start}
+.cm{display:flex;align-items:center;gap:12px;padding:15px;background:var(--card);border:1px solid var(--border);border-radius:11px;margin-bottom:11px;box-shadow:0 1px 6px rgba(15,35,60,.04)}
+.cm-ico{width:38px;height:38px;border-radius:9px;background:var(--blue-bg);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.cm-t{font-size:11px;color:var(--soft)}
+.cm-v{font-size:14px;font-weight:600;color:var(--text);font-family:'Syne',sans-serif}
+.fcard{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:34px;box-shadow:0 4px 20px rgba(15,35,60,.07)}
+.fcard h3{font-size:21px;color:var(--text);margin-bottom:5px}
+.fcard-sub{font-size:13px;color:var(--mid);margin-bottom:24px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fg{margin-bottom:15px}
+.fl{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);margin-bottom:5px;display:block}
+.fi,.fsel,.fta{width:100%;padding:10px 13px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);outline:none;transition:border-color .18s,box-shadow .18s}
+.fi:focus,.fsel:focus,.fta:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,119,182,.1)}
+.fi::placeholder,.fta::placeholder{color:var(--soft)}
+.fsel option{background:#fff}
+.fta{min-height:88px;resize:vertical}
+.fsub{width:100%;padding:12px;border:none;border-radius:8px;background:var(--blue);color:#fff;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;transition:background .18s,transform .15s var(--spring)}
+.fsub:hover{background:var(--blue-l);transform:scale(1.01)}
+.f-ok{background:var(--teal-bg);border:1px solid rgba(0,122,94,.2);border-radius:8px;padding:12px;text-align:center;font-size:14px;color:var(--teal);display:none;margin-top:10px}
+
+/* ─── ASSESSMENT MODAL ─── */
+.overlay{position:fixed;inset:0;z-index:1000;background:rgba(15,30,50,.5);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:16px}
+.overlay.open{display:flex;animation:ov .22s ease}
+@keyframes ov{from{opacity:0}to{opacity:1}}
+.modal{background:#fff;border:1px solid var(--border2);border-radius:20px;width:100%;max-width:560px;max-height:92vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 70px rgba(15,30,50,.18);transform:translateY(18px);animation:mi .32s var(--spring) forwards}
+@keyframes mi{to{transform:translateY(0)}}
+.mh{background:var(--bg2);padding:22px 26px;flex-shrink:0;border-bottom:1px solid var(--border);position:relative}
+.mh h3{font-family:'Syne',sans-serif;font-size:19px;color:var(--text);margin-bottom:3px}
+.mh p{font-size:13px;color:var(--mid)}
+.m-x{position:absolute;top:18px;right:18px;background:var(--bg3);border:none;border-radius:50%;width:28px;height:28px;color:var(--mid);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .18s}
+.m-x:hover{background:var(--border2)}
+.mprog{height:2px;background:var(--bg3);flex-shrink:0}
+.mpf{height:100%;background:linear-gradient(90deg,var(--blue),var(--teal));transition:width .35s var(--smooth)}
+.mb{padding:22px 26px;overflow-y:auto;flex:1}
+.ms{display:none}
+.ms.on{display:block;animation:si .2s ease}
+@keyframes si{from{opacity:0;transform:translateX(7px)}to{opacity:1;transform:translateX(0)}}
+.mq{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--text);margin-bottom:6px}
+.mhint{font-size:13px;color:var(--mid);margin-bottom:18px}
+.mopts{display:flex;flex-direction:column;gap:7px}
+.mopt{display:flex;align-items:center;gap:11px;border:1px solid var(--border);border-radius:9px;padding:11px 13px;cursor:pointer;font-size:13px;color:var(--text);transition:border-color .18s,background .18s}
+.mopt:hover{border-color:var(--border2);background:var(--bg2)}
+.mopt.on{border-color:var(--blue);background:var(--blue-bg);color:var(--blue);font-weight:500}
+.mrad{width:15px;height:15px;border-radius:50%;border:1.5px solid var(--border2);flex-shrink:0;transition:border-color .18s,background .18s;display:flex;align-items:center;justify-content:center}
+.mopt.on .mrad{border-color:var(--blue);background:var(--blue)}
+.mopt.on .mrad::after{content:'';width:5px;height:5px;border-radius:50%;background:#fff}
+.mfl{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);margin-bottom:5px;display:block}
+.mfi{width:100%;padding:10px 13px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);outline:none;transition:border-color .18s;margin-bottom:11px}
+.mfi:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,119,182,.1)}
+.mfi::placeholder{color:var(--soft)}
+.mfoot{padding:14px 26px 20px;border-top:1px solid var(--border);display:flex;gap:9px;flex-shrink:0;background:#fff}
+.m-next{flex:1;padding:11px;border:none;border-radius:8px;background:var(--blue);color:#fff;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:background .18s}
+.m-next:hover:not(:disabled){background:var(--blue-l)}
+.m-next:disabled{opacity:.32;cursor:not-allowed}
+.m-back{padding:11px 13px;border:1px solid var(--border);border-radius:8px;background:transparent;color:var(--mid);font-family:'Syne',sans-serif;font-size:13px;cursor:pointer;transition:border-color .18s}
+.m-back:hover{border-color:var(--border2);color:var(--text)}
+.res-top{text-align:center;padding:14px 0 18px}
+.res-n{font-family:'Syne',sans-serif;font-size:56px;font-weight:800;line-height:1}
+.res-n.sc-black{color:#1a1a1a}
+.res-n.sc-red{color:#CC2222}
+.res-n.sc-yellow{color:#B87800}
+.res-n.sc-green{color:#1a7a3a}
+.res-tier{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-top:6px;margin-bottom:6px;padding:4px 14px;border-radius:20px;display:inline-block}
+.res-tier.sc-black{background:#1a1a1a;color:#fff}
+.res-tier.sc-red{background:#fff0f0;color:#CC2222;border:1px solid rgba(204,34,34,.2)}
+.res-tier.sc-yellow{background:#fffbf0;color:#B87800;border:1px solid rgba(184,120,0,.2)}
+.res-tier.sc-green{background:#f0fff5;color:#1a7a3a;border:1px solid rgba(26,122,58,.2)}
+.res-desc{font-size:14px;color:var(--mid);line-height:1.7;max-width:400px;margin:0 auto}
+.res-scale{display:flex;gap:6px;justify-content:center;margin:14px 0 4px;flex-wrap:wrap}
+.rs-pip{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:600;font-family:'Syne',sans-serif;padding:3px 9px;border-radius:20px}
+.rs-pip.active{outline:2px solid currentColor;outline-offset:1px}
+.rs-pip-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.rs-pip.p-black{color:#1a1a1a;background:#f0f0f0}.rs-pip.p-black .rs-pip-dot{background:#1a1a1a}
+.rs-pip.p-red{color:#CC2222;background:#fff0f0}.rs-pip.p-red .rs-pip-dot{background:#CC2222}
+.rs-pip.p-yellow{color:#B87800;background:#fffbf0}.rs-pip.p-yellow .rs-pip-dot{background:#B87800}
+.rs-pip.p-green{color:#1a7a3a;background:#f0fff5}.rs-pip.p-green .rs-pip-dot{background:#1a7a3a}
+.ri-list{display:flex;flex-direction:column;gap:9px;margin-top:18px}
+.ri{padding:11px 13px;background:var(--bg2);border:1px solid var(--border);border-radius:9px;font-size:13px;color:var(--mid);display:flex;align-items:flex-start;gap:9px}
+.ri-ico{flex-shrink:0;font-size:14px;margin-top:1px}
+.ri strong{color:var(--text);font-weight:600;display:block;margin-bottom:2px}
+.res-cta-box{margin-top:18px;background:var(--text);border-radius:12px;padding:16px;text-align:center}
+.res-cta-box p{font-size:12px;color:rgba(255,255,255,.55);line-height:1.6;margin-bottom:10px}
+.res-cta-box strong{color:#fff;display:block;font-family:'Syne',sans-serif;font-size:14px;margin-bottom:6px}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:960px){
+  .hero-inner,.split-g{grid-template-columns:1fr;gap:44px}
+  .hero-panel,.split-vis{display:none}
+  .svc-grid{grid-template-columns:1fr 1fr}
+  .vp-grid,.og,.cg{grid-template-columns:1fr}
+  .pg,.rm-grid,.fn-grid{grid-template-columns:1fr 1fr}
+  .ft-grid{grid-template-columns:1fr 1fr;gap:28px}
+  .stats-row{grid-template-columns:1fr 1fr}
+  .ic-grid{grid-template-columns:1fr 1fr}
+  .dt{display:block;overflow-x:auto}
+}
+@media(max-width:600px){
+  .container{padding:0 20px}
+  .svc-grid,.pg,.rm-grid,.fn-grid,.ic-grid{grid-template-columns:1fr}
+  .hero-proof{flex-direction:column;gap:14px}
+  .hp{border-right:none;padding-right:0;margin-right:0;border-bottom:1px solid var(--border);padding-bottom:14px}
+  .hp:last-child{border-bottom:none;padding-bottom:0}
+  .nav-links{display:none}
+  .frow{grid-template-columns:1fr}
+}
+
+/* ─── CASE STUDIES ─── */
+.cs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.cs-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:transform .18s var(--spring),border-color .18s;box-shadow:0 2px 10px rgba(15,35,60,.05)}
+.cs-card:hover{transform:translateY(-3px);border-color:var(--border2)}
+.cs-thumb{height:160px;display:flex;align-items:center;justify-content:center;position:relative}
+.cs-thumb-blue{background:linear-gradient(135deg,#e8f4fb,#cce8f5)}
+.cs-thumb-teal{background:linear-gradient(135deg,#e6f5f0,#c2e8dc)}
+.cs-thumb-amber{background:linear-gradient(135deg,#fdf4e3,#f5e0b0)}
+.cs-thumb-inner{font-size:48px}
+.cs-tag{position:absolute;top:12px;left:12px;font-family:'Syne',sans-serif;font-size:9px;font-weight:700;padding:3px 8px;border-radius:4px;letter-spacing:.07em;text-transform:uppercase;background:rgba(255,255,255,.85);color:var(--blue);border:1px solid rgba(0,119,182,.15)}
+.cs-body{padding:22px}
+.cs-industry{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-bottom:7px}
+.cs-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--text);margin-bottom:10px;line-height:1.3}
+.cs-desc{font-size:13px;color:var(--mid);line-height:1.65;margin-bottom:14px}
+.cs-stack{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.cs-pill{font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;background:var(--bg2);border:1px solid var(--border);color:var(--mid);font-family:'Syne',sans-serif}
+.cs-status{font-size:11px;font-weight:700;font-family:'Syne',sans-serif;padding:4px 10px;border-radius:20px;display:inline-block}
+.cs-status-progress{background:var(--amber-bg);color:var(--amber)}
+.cs-status-done{background:var(--teal-bg);color:var(--teal)}
+.cs-card-upload{border-style:dashed}
+.cs-upload-inner{height:100%;min-height:280px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px;text-align:center}
+@media(max-width:960px){.cs-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.cs-grid{grid-template-columns:1fr}}
+
+/* ─── NEWS FEED ─── */
+.news-src-badge{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;background:var(--bg2);border:1px solid var(--border);color:var(--mid)}
+.news-spinner{width:36px;height:36px;border:3px solid var(--bg3);border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+.news-featured-card{display:grid;grid-template-columns:1fr 1fr;background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden;cursor:pointer;transition:border-color .18s,transform .18s var(--spring);box-shadow:0 2px 10px rgba(15,35,60,.06);text-decoration:none;color:inherit;display:grid}
+.news-featured-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.news-featured-img{min-height:240px;background:var(--bg2);overflow:hidden;position:relative}
+.news-featured-img img{width:100%;height:100%;object-fit:cover}
+.news-featured-img-ph{width:100%;height:100%;min-height:240px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--bg2),var(--bg3))}
+.news-featured-body{padding:32px;display:flex;flex-direction:column;justify-content:center}
+.news-src-tag{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:10px;display:block}
+.news-featured-body h2{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--text);margin-bottom:12px;line-height:1.3}
+.news-featured-body p{font-size:14px;color:var(--mid);line-height:1.65;margin-bottom:18px}
+.news-read{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--blue)}
+.news-card{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color .18s,transform .18s var(--spring);box-shadow:0 2px 8px rgba(15,35,60,.05);text-decoration:none;display:block;color:inherit}
+.news-card:hover{border-color:var(--border2);transform:translateY(-3px)}
+.news-card-img{height:160px;overflow:hidden;position:relative;background:var(--bg2)}
+.news-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .3s ease}
+.news-card:hover .news-card-img img{transform:scale(1.04)}
+.news-card-img-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--bg2),var(--bg3))}
+.news-pill{position:absolute;top:10px;left:10px;font-family:'Syne',sans-serif;font-size:9px;font-weight:700;padding:3px 8px;border-radius:4px;letter-spacing:.07em;text-transform:uppercase;background:rgba(255,255,255,.92);color:var(--blue);border:1px solid rgba(0,119,182,.15)}
+.news-card-body{padding:18px}
+.news-card-body h4{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--text);margin-bottom:8px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.news-card-body p{font-size:12px;color:var(--mid);line-height:1.6;margin-bottom:12px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.news-meta{font-size:11px;color:var(--soft);font-family:'Syne',sans-serif}
+@media(max-width:960px){.news-featured-card{grid-template-columns:1fr}}
+
+.quote-btn{margin-bottom:12px;border:1.5px solid var(--blue);color:var(--blue);background:var(--blue-bg);font-weight:700}
+.quote-btn:hover{background:var(--blue);color:#fff}
+/* ─── QUOTE MODAL ─── */
+.qoverlay{position:fixed;inset:0;z-index:1001;background:rgba(15,30,50,.5);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:16px}
+.qoverlay.open{display:flex;animation:ov .22s ease}
+.qmodal{background:#fff;border:1px solid var(--border2);border-radius:20px;width:100%;max-width:500px;overflow:hidden;box-shadow:0 20px 70px rgba(15,30,50,.18);transform:translateY(18px);animation:mi .32s var(--spring) forwards}
+.qmh{background:var(--bg2);padding:22px 26px;border-bottom:1px solid var(--border);position:relative}
+.qmh h3{font-family:'Syne',sans-serif;font-size:19px;color:var(--text);margin-bottom:3px}
+.qmh p{font-size:13px;color:var(--mid)}
+.qm-x{position:absolute;top:18px;right:18px;background:var(--bg3);border:none;border-radius:50%;width:28px;height:28px;color:var(--mid);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.qm-x:hover{background:var(--border2)}
+.qmb{padding:24px 26px}
+.qm-ok{background:var(--teal-bg);border:1px solid rgba(0,122,94,.2);border-radius:8px;padding:12px;text-align:center;font-size:14px;color:var(--teal);display:none;margin-top:10px}
+</style>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <div class="nav-wrap">
+    <div class="logo" onclick="go('home')">
+      <div class="logo-marks"><div class="lsq lsq-b"></div><div class="lsq lsq-t"></div></div>
+      <span class="logo-name">CSM Integrated Solutions</span>
+    </div>
+    <div class="nav-links">
+      <div class="ni">
+        <span class="nl">Services <span class="nv">▾</span></span>
+        <div class="ndrop">
+          <div class="ndi" onclick="go('svc-ai')"><div class="ndi-ico"><i data-lucide="cpu"></i></div>AI Enablement &amp; Training</div>
+          <div class="ndi" onclick="go('svc-assess')"><div class="ndi-ico"><i data-lucide="clipboard-check"></i></div>AI Readiness Assessment</div>
+          <div class="ndi" onclick="go('svc-uc')"><div class="ndi-ico"><i data-lucide="layers"></i></div>AI Use Case Development</div>
+          <div class="ndi" onclick="go('svc-ms')"><div class="ndi-ico"><i data-lucide="activity"></i></div>AI Managed Services</div>
+          <div class="ndi" onclick="go('svc-cio')"><div class="ndi-ico"><i data-lucide="briefcase"></i></div>Fractional CIO</div>
+          <div class="ndi" onclick="go('svc-it')"><div class="ndi-ico"><i data-lucide="trending-down"></i></div>IT Spend Optimization</div>
+        </div>
+      </div>
+      <div class="ni"><span class="nl" onclick="go('why')">Why CSM</span></div>
+      <div class="ni"><span class="nl" onclick="go('technology')">Technology</span></div>
+      <div class="ni"><span class="nl" onclick="go('casestudies')">Case Studies</span></div>
+      <div class="ni"><span class="nl" onclick="go('resources')">News</span></div>
+      <div class="ni"><span class="nl" onclick="go('pricing')">Pricing</span></div>
+      <div class="ni"><span class="nl" onclick="go('about')">About</span></div>
+    </div>
+    <div class="nav-r">
+      <button class="btn-ghost" onclick="go('contact')">Contact</button>
+      <button class="btn-cta" onclick="openModal()">Free AI Assessment</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════ HOME ═══════════ -->
+<div id="home" class="page">
+  <section class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="container">
+      <div class="hero-inner">
+        <div>
+          <div class="hero-badge"><div class="hero-badge-dot"></div><span class="hero-badge-txt">Making AI Work For Your Business</span></div>
+          <h1>Your business runs on people. Let <span>AI</span> run the rest.</h1>
+          <p class="hero-sub">CSM Integrated Solutions helps small and mid-sized businesses implement AI that delivers measurable ROI — without the complexity, guesswork, or Big 4 price tag.</p>
+          <div class="hero-btns">
+            <button class="btn-primary" onclick="openModal()">Take the Free AI Assessment →</button>
+            <button class="btn-outline" onclick="go('contact')">Book a Strategy Call</button>
+          </div>
+          <div class="hero-proof">
+            <div class="hp"><div class="hp-n">20+</div><div class="hp-l">Years enterprise IT</div></div>
+            <div class="hp"><div class="hp-n">300+</div><div class="hp-l">Clients served</div></div>
+            <div class="hp"><div class="hp-n">90 days</div><div class="hp-l">Assessment to live AI</div></div>
+            <div class="hp"><div class="hp-n">One Partner</div><div class="hp-l">Strategy through execution</div></div>
+          </div>
+        </div>
+        <div class="hero-panel">
+          <div class="hp-top"></div>
+          <div class="hp-tabs">
+            <button class="hptab on" onclick="tab('assess',this)">AI Assessment</button>
+            <button class="hptab" onclick="tab('roi',this)">ROI Impact</button>
+          </div>
+          <div class="hp-body" id="hp-assess">
+            <p style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin-bottom:13px">AI Maturity Indicators</p>
+            <div class="pr"><div class="pr-ico ico-b"><i data-lucide="database"></i></div><div><div class="pr-lbl">Data Infrastructure</div><div class="pr-sub">Is your data AI-ready?</div></div><div class="pr-val">4/10</div></div>
+            <div class="pr"><div class="pr-ico ico-t"><i data-lucide="shield"></i></div><div><div class="pr-lbl">AI Governance</div><div class="pr-sub">Policy &amp; controls in place?</div></div><div class="pr-val">2/10</div></div>
+            <div class="pr"><div class="pr-ico ico-a"><i data-lucide="users"></i></div><div><div class="pr-lbl">Workforce Readiness</div><div class="pr-sub">Team AI-aware?</div></div><div class="pr-val">5/10</div></div>
+            <div class="pr" style="margin-bottom:16px"><div class="pr-ico ico-b"><i data-lucide="settings"></i></div><div><div class="pr-lbl">Process Automation</div><div class="pr-sub">Manual workflows mapped?</div></div><div class="pr-val">3/10</div></div>
+            <button class="hp-btn" onclick="openModal()">Get Your Full Score — Free →</button>
+          </div>
+          <div class="hp-body" id="hp-roi" style="display:none">
+            <p style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin-bottom:13px">Typical SMB AI Outcomes</p>
+            <div class="pr"><div class="pr-ico ico-b"><i data-lucide="clock"></i></div><div><div class="pr-lbl">40+ hrs/month saved</div><div class="pr-sub">Admin &amp; reporting workflows</div></div></div>
+            <div class="pr"><div class="pr-ico ico-t"><i data-lucide="trending-down"></i></div><div><div class="pr-lbl">20–35% cost reduction</div><div class="pr-sub">Repetitive process automation</div></div></div>
+            <div class="pr"><div class="pr-ico ico-a"><i data-lucide="zap"></i></div><div><div class="pr-lbl">3× faster responses</div><div class="pr-sub">Customer communications</div></div></div>
+            <div class="pr" style="margin-bottom:16px"><div class="pr-ico ico-b"><i data-lucide="dollar-sign"></i></div><div><div class="pr-lbl">Day-1 positive ROI</div><div class="pr-sub">Structured for early wins</div></div></div>
+            <button class="hp-btn" onclick="go('pricing')">View Pricing →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="trust">
+    <div class="container">
+      <div class="trust-row">
+        <span class="trust-lbl">Expertise in</span>
+        <div class="trust-items">
+          <span class="trust-item">⬡ AI Enablement</span>
+          <span class="trust-item">⬡ Digital Transformation</span>
+          <span class="trust-item">⬡ Fractional CIO / CTO</span>
+          <span class="trust-item">⬡ IT Assessments</span>
+          <span class="trust-item">⬡ Cost Takeout / Optimization</span>
+          <span class="trust-item">⬡ Microsoft 365 / Azure Cloud Platforms</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="sh">
+        <span class="eyebrow">What we do</span>
+        <h2>AI enablement, end-to-end.</h2>
+        <p>From your first assessment to a fully managed AI program — we guide growing businesses through every stage of becoming an AI-enabled organization.</p>
+      </div>
+      <div class="svc-grid">
+        <div class="sc feat" onclick="go('svc-ai')"><div class="sc-num">01</div><div class="sc-ico"><i data-lucide="cpu"></i></div><h4>AI Enablement &amp; Training</h4><p>Hands-on workshops that take your team from AI-curious to AI-capable — including building a real AI agent by end of day.</p><span class="sc-link">Learn more →</span></div>
+        <div class="sc ico-tl" onclick="go('svc-assess')"><div class="sc-num">02</div><div class="sc-ico"><i data-lucide="clipboard-check"></i></div><h4>AI Readiness Assessment</h4><p>A scored evaluation of your data, processes, governance, and team — with a full AI roadmap and ROI projections.</p><span class="sc-link">Learn more →</span></div>
+        <div class="sc ico-am" onclick="go('svc-uc')"><div class="sc-num">03</div><div class="sc-ico"><i data-lucide="layers"></i></div><h4>AI Use Case Development</h4><p>We design, pilot, and deploy AI solutions that automate your most manual, time-consuming business processes.</p><span class="sc-link">Learn more →</span></div>
+        <div class="sc" onclick="go('svc-ms')"><div class="sc-num">04</div><div class="sc-ico"><i data-lucide="activity"></i></div><h4>AI Managed Services</h4><p>Monthly monitoring, optimization, and expansion of your AI program on a predictable subscription model.</p><span class="sc-link">Learn more →</span></div>
+        <div class="sc ico-tl" onclick="go('svc-cio')"><div class="sc-num">05</div><div class="sc-ico"><i data-lucide="briefcase"></i></div><h4>Fractional CIO</h4><p>AI-first IT strategy, vendor management, board-ready reporting, and trusted CEO/CFO advisory on retainer.</p><span class="sc-link">Learn more →</span></div>
+        <div class="sc ico-am" onclick="go('svc-it')"><div class="sc-num">06</div><div class="sc-ico"><i data-lucide="trending-down"></i></div><h4>IT Spend Optimization</h4><p>Identify waste, renegotiate contracts, right-size licenses, and recover 20–40% of your technology budget — without cutting capability.</p><span class="sc-link">Learn more →</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="sh"><span class="eyebrow">Why CSM</span><h2>Strategy and execution.<br>Not one without the other.</h2><p>Most SMBs are stuck between MSPs that don't understand AI and consultants who never implement anything. We're both — and that changes everything.</p></div>
+      <div class="vp-grid">
+        <div class="vpc"><div class="vpc-bar"></div><div class="vpc-ico"><i data-lucide="map"></i></div><h3>Strategy + Execution</h3><p>We build the roadmap and deploy it. Every engagement ends with something working — not a 200-page document collecting dust.</p></div>
+        <div class="vpc t"><div class="vpc-bar"></div><div class="vpc-ico"><i data-lucide="zap"></i></div><h3>AI-Native, Not AI-Opportunistic</h3><p>We're not an MSP that added "AI" to the website. AI strategy and implementation have been our focus — we know what actually works in practice.</p></div>
+        <div class="vpc a"><div class="vpc-bar"></div><div class="vpc-ico"><i data-lucide="sliders"></i></div><h3>SMB-Calibrated Engagements</h3><p>Fortune 500 methodology at SMB scale and price. We scope, price, and execute for the real constraints your business faces.</p></div>
+        <div class="vpc"><div class="vpc-bar"></div><div class="vpc-ico"><i data-lucide="shield-check"></i></div><h3>Vendor-Neutral Advisor</h3><p>We earn no commissions on software we recommend. We choose the right tool for your business — even if it's free. Our only incentive is your outcome.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start">
+        <div>
+          <div class="shl" style="margin-bottom:32px"><span class="eyebrow">How it works</span><h2>From AI-curious to AI-operational in 90 days.</h2><p>Four stages. Clear deliverables at each step. You'll see ROI before the engagement ends.</p></div>
+          <div style="background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:22px">
+            <p style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin-bottom:14px">Typical Timeline</p>
+            <div style="display:flex;flex-direction:column;gap:9px">
+              <div style="display:flex;align-items:center;gap:11px;font-size:13px;color:var(--mid)"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--blue);width:56px;flex-shrink:0">Wk 1–2</span>AI Readiness Assessment completed</div>
+              <div style="display:flex;align-items:center;gap:11px;font-size:13px;color:var(--mid)"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--blue);width:56px;flex-shrink:0">Wk 2–3</span>AI roadmap &amp; use case priorities set</div>
+              <div style="display:flex;align-items:center;gap:11px;font-size:13px;color:var(--mid)"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--teal);width:56px;flex-shrink:0">Wk 3–5</span>Governance framework established</div>
+              <div style="display:flex;align-items:center;gap:11px;font-size:13px;color:var(--mid)"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--teal);width:56px;flex-shrink:0">Wk 5–12</span>First AI use case live in production</div>
+              <div style="display:flex;align-items:center;gap:11px;font-size:13px;color:var(--mid)"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--amber);width:56px;flex-shrink:0">Mo 4+</span>Ongoing AI managed services</div>
+            </div>
+          </div>
+        </div>
+        <div class="proc">
+          <div class="proc-step"><div class="pn">1</div><div class="pc"><h4>Assess</h4><p>Structured evaluation of data, processes, governance, and team. Scored output with prioritized opportunities and gap analysis.</p><div class="ptags"><span class="ptag">2 weeks</span><span class="ptag">Self-serve or consulting</span></div></div></div>
+          <div class="proc-step"><div class="pn">2</div><div class="pc"><h4>Strategize</h4><p>AI roadmap, use case backlog, governance framework, and pilot selection. A plan you can actually execute.</p><div class="ptags"><span class="ptag">1 week</span><span class="ptag">Leadership workshop</span></div></div></div>
+          <div class="proc-step"><div class="pn">3</div><div class="pc"><h4>Deploy</h4><p>Hands-on implementation of your top 1–3 use cases. We manage build, integration, testing, and launch.</p><div class="ptags"><span class="ptag">4–8 weeks</span><span class="ptag">Full implementation</span></div></div></div>
+          <div class="proc-step"><div class="pn">4</div><div class="pc"><h4>Optimize</h4><p>Monthly managed services — monitoring, tuning, cost control, and expansion. Your AI program gets better every month.</p><div class="ptags"><span class="ptag">Ongoing</span><span class="ptag">Subscription</span></div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="stats-row">
+    <div class="sb"><div class="sb-n">40+</div><div class="sb-l">Hours saved per client monthly</div></div>
+    <div class="sb"><div class="sb-n t">Any Size</div><div class="sb-l">We scale with you</div></div>
+    <div class="sb"><div class="sb-n a">$1M–$100M</div><div class="sb-l">Target revenue range</div></div>
+    <div class="sb"><div class="sb-n">90</div><div class="sb-l">Days to first live AI win</div></div>
+  </div>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:44px;flex-wrap:wrap;gap:16px">
+        <div><span class="eyebrow" style="display:block;margin-bottom:10px">AI Insights</span><h2 style="margin-bottom:0">Straight talk on AI for business leaders.</h2></div>
+        <button class="btn-outline" onclick="go('resources')">View All →</button>
+      </div>
+      <div class="ic-grid">
+        <div class="ic"><div class="ic-thumb"><i data-lucide="cpu"></i><span class="ic-tag">AI Strategy</span></div><div class="ic-body"><h4>Why Your SMB Needs an AI Policy Before an AI Tool</h4><p>Shadow AI is already in your organization. Here's how to get ahead of it.</p><div class="ic-meta">5 min · March 2025</div></div></div>
+        <div class="ic"><div class="ic-thumb" style="background:var(--bg3)"><i data-lucide="settings"></i><span class="ic-tag" style="background:var(--teal-bg);color:var(--teal)">Automation</span></div><div class="ic-body"><h4>5 Processes Every SMB Should Automate With AI in 2025</h4><p>The highest-ROI, lowest-effort automations for small business operations.</p><div class="ic-meta">8 min · February 2025</div></div></div>
+        <div class="ic"><div class="ic-thumb" style="background:var(--bg3)"><i data-lucide="briefcase"></i><span class="ic-tag" style="background:var(--amber-bg);color:var(--amber)">Strategy</span></div><div class="ic-body"><h4>The Fractional CIO: Why Growing SMBs Need One Now</h4><p>IT decisions without strategic leadership cost growing companies 20–30% in wasted spend.</p><div class="ic-meta">6 min · January 2025</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-block">
+    <h2>Ready to become an AI-enabled business?</h2>
+    <p>Start with a free 5-minute AI Readiness Assessment. Walk away with a real score, real use cases, and a clear first step.</p>
+    <div class="cta-btns">
+      <button class="btn-primary" onclick="openModal()">Take the Free Assessment →</button>
+      <button class="btn-cta-o" onclick="go('contact')">Book a Strategy Call</button>
+    </div>
+    <p class="cta-note">No commitment required. First consultation is free.</p>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="ft-grid">
+        <div class="ft-brand">
+          <div class="logo" style="cursor:default"><div class="logo-marks"><div class="lsq lsq-b"></div><div class="lsq lsq-t"></div></div><span class="logo-name">CSM Integrated Solutions</span></div>
+          <p>AI enablement, fractional CIO, and IT strategy. Making enterprise-grade AI accessible to every business.</p>
+        </div>
+        <div class="ft-col"><h5>Services</h5><ul>
+          <li><a onclick="go('svc-ai')">AI Enablement</a></li>
+          <li><a onclick="go('svc-assess')">AI Assessment</a></li>
+          <li><a onclick="go('svc-uc')">Use Case Dev</a></li>
+          <li><a onclick="go('svc-ms')">AI Managed Services</a></li>
+          <li><a onclick="go('svc-cio')">Fractional CIO</a></li>
+          <li><a onclick="go('svc-it')">IT Spend Optimization</a></li>
+        </ul></div>
+        <div class="ft-col"><h5>Company</h5><ul>
+          <li><a onclick="go('why')">Why CSM</a></li>
+          <li><a onclick="go('casestudies')">Case Studies</a></li>
+          <li><a onclick="go('technology')">Technology</a></li>
+          <li><a onclick="go('about')">About</a></li>
+          <li><a onclick="go('pricing')">Pricing</a></li>
+          <li><a onclick="go('resources')">News</a></li>
+          <li><a onclick="go('contact')">Contact</a></li>
+        </ul></div>
+        <div class="ft-col"><h5>Get Started</h5><ul>
+          <li><a onclick="openModal()">Free AI Assessment</a></li>
+          <li><a onclick="go('contact')">Book a Call</a></li>
+          <li><a href="/cdn-cgi/l/email-protection#5e393b3138381e3d2d3337302a3b392c3f2a3b3a703d3133"><span class="__cf_email__" data-cfemail="4c2b29232a2a0c2f3f21252238292b3e2d382928622f2321">[email&#160;protected]</span></a></li>
+        </ul></div>
+      </div>
+      <div class="ft-bot"><p>© 2026 CSM Integrated Solutions LLC</p><div class="ft-links"><a>Privacy</a><a>Terms</a></div></div>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════ WHY CSM ═══════════ -->
+<div id="why" class="page">
+  <div class="ph"><div class="container"><div class="ph-inner">
+    <span class="eyebrow">Positioning</span>
+    <h1>Not a generic IT shop. Not a strategy-only firm.</h1>
+    <p>We fill the gap nobody fills well — senior AI strategy combined with hands-on execution, calibrated for SMB budgets and timelines.</p>
+  </div></div></div>
+  <section class="section"><div class="container">
+    <div class="sh"><span class="eyebrow">Differentiators</span><h2>CSM vs. your other options</h2></div>
+    <div style="overflow-x:auto"><table class="dt">
+      <thead><tr>
+        <th style="width:200px">Capability</th><th class="hl">CSM Integrated Solutions</th>
+        <th>Traditional MSP</th><th>Generic AI Consultant</th><th>Big 4 / Enterprise</th>
+      </tr></thead>
+      <tbody>
+        <tr><td class="rl">AI Strategy &amp; Roadmap</td><td class="hl"><span class="ck-y">✓</span> Deep, SMB-calibrated</td><td><span class="ck-n">✗</span> Not a focus</td><td><span class="ck-y">✓</span> Strategy only</td><td><span class="ck-y">✓</span> Enterprise scale, high cost</td></tr>
+        <tr><td class="rl">Hands-On AI Implementation</td><td class="hl"><span class="ck-y">✓</span> We build and deploy</td><td><span class="ck-n">✗</span> Hardware focus</td><td><span class="ck-n">✗</span> Recommends, doesn't build</td><td>Junior staff delivers</td></tr>
+        <tr><td class="rl">AI Training &amp; Workshops</td><td class="hl"><span class="ck-y">✓</span> Hands-on, role-specific</td><td><span class="ck-n">✗</span></td><td><span class="ck-n">✗</span></td><td>Generic, expensive</td></tr>
+        <tr><td class="rl">Managed IT Infrastructure</td><td class="hl"><span class="ck-y">✓</span> Full-stack</td><td><span class="ck-y">✓</span> Core offering</td><td><span class="ck-n">✗</span></td><td><span class="ck-n">✗</span></td></tr>
+        <tr><td class="rl">Fractional CIO</td><td class="hl"><span class="ck-y">✓</span> AI-first strategy</td><td><span class="ck-n">✗</span></td><td><span class="ck-n">✗</span></td><td>Advisory only</td></tr>
+        <tr><td class="rl">SMB-Appropriate Pricing</td><td class="hl"><span class="ck-y">✓</span> Built for $1M–$100M</td><td><span class="ck-y">✓</span> Variable</td><td>Often project-only</td><td><span class="ck-n">✗</span> Six-figure minimums</td></tr>
+        <tr><td class="rl">Ongoing AI Program Mgmt</td><td class="hl"><span class="ck-y">✓</span> Monthly subscription</td><td><span class="ck-n">✗</span></td><td><span class="ck-n">✗</span></td><td><span class="ck-n">✗</span></td></tr>
+        <tr><td class="rl">Vendor-Neutral Advice</td><td class="hl"><span class="ck-y">✓</span> No commissions</td><td><span class="ck-n">✗</span> Vendor-tied</td><td>Varies</td><td>Varies</td></tr>
+      </tbody>
+    </table></div>
+  </div></section>
+  <section class="section section-alt"><div class="container">
+    <div class="sh"><span class="eyebrow">Messaging</span><h2>Our positioning statements</h2></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+      <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:26px;box-shadow:0 2px 10px rgba(15,35,60,.05)"><div class="eyebrow" style="display:block;margin-bottom:10px">Primary</div><p style="font-size:16px;color:var(--text);line-height:1.65;font-style:italic">"We help small and mid-sized businesses become AI-enabled organizations — with measurable ROI, without enterprise complexity."</p></div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:26px;box-shadow:0 2px 10px rgba(15,35,60,.05)"><div class="eyebrow" style="display:block;margin-bottom:10px;color:var(--teal)">vs. MSPs</div><p style="font-size:16px;color:var(--text);line-height:1.65;font-style:italic">"Your MSP keeps your systems running. We make your systems think."</p></div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:26px;box-shadow:0 2px 10px rgba(15,35,60,.05)"><div class="eyebrow" style="display:block;margin-bottom:10px;color:var(--amber)">vs. AI Firms</div><p style="font-size:16px;color:var(--text);line-height:1.65;font-style:italic">"Most AI consultants give you a strategy document. We give you a deployed AI system — and then we manage it."</p></div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:26px;box-shadow:0 2px 10px rgba(15,35,60,.05)"><div class="eyebrow" style="display:block;margin-bottom:10px">For the SMB CEO</div><p style="font-size:16px;color:var(--text);line-height:1.65;font-style:italic">"You don't need a Chief AI Officer. You need a trusted advisor who's done this before — and charges SMB rates."</p></div>
+    </div>
+  </div></section>
+  <div class="cta-block"><h2>See the difference in practice.</h2><p>Book a free 30-minute strategy session — an honest conversation about where AI fits in your business.</p><div class="cta-btns"><button class="btn-primary" onclick="openModal()">Take the Free Assessment →</button><button class="btn-cta-o" onclick="go('contact')">Book a Call</button></div></div>
+</div>
+
+<!-- ═══════════ PRICING ═══════════ -->
+<div id="pricing" class="page">
+  <div class="ph"><div class="container"><div class="ph-inner">
+    <span class="eyebrow">Pricing</span>
+    <h1>Transparent pricing. No surprises.</h1>
+    <p>Standard pricing models below. All engagements are scoped with a written proposal after a free discovery call.</p>
+  </div></div></div>
+  <section class="section"><div class="container">
+    <div class="sh"><span class="eyebrow">Training &amp; Assessments</span><h2>AI Enablement Packages</h2></div>
+    <div class="pg">
+      <div class="pc-card"><div class="pt">Workshop</div><div class="pname">AI Foundations</div><button class="pc-btn pc-btn-o quote-btn" onclick="openQuote('AI Foundations Workshop')">Get a Custom Quote →</button><div class="p-desc">Half-day workshop for up to 15 participants — AI history, tools landscape, and hands-on prompting exercises.</div><div class="pf-list"><div class="pf"><span class="pf-ck">✓</span>Intro to AI + tools overview</div><div class="pf"><span class="pf-ck">✓</span>Prompt engineering for business users</div><div class="pf"><span class="pf-ck">✓</span>5 business-specific use case examples</div><div class="pf"><span class="pf-ck">✓</span>Follow-up resource kit</div></div><button class="pc-btn pc-btn-o" onclick="go('contact')">Book Workshop</button></div>
+      <div class="pc-card feat"><div class="pt">Workshop + Lab</div><div class="pname">AI Builder Day</div><button class="pc-btn pc-btn-o quote-btn" onclick="openQuote('AI Builder Day Workshop')">Get a Custom Quote →</button><div class="p-desc">Full-day workshop where participants build and deploy a real AI agent. Includes the signature Daily Briefing Agent lab.</div><div class="pf-list"><div class="pf"><span class="pf-ck">✓</span>Everything in AI Foundations</div><div class="pf"><span class="pf-ck">✓</span>Hands-on agent-building lab</div><div class="pf"><span class="pf-ck">✓</span>Daily briefing agent (Calendar + Weather)</div><div class="pf"><span class="pf-ck">✓</span>Custom use case for your business</div><div class="pf"><span class="pf-ck">✓</span>30-day follow-up call included</div></div><button class="pc-btn pc-btn-p" onclick="go('contact')">Book Builder Day</button></div>
+      <div class="pc-card"><div class="pt" style="color:var(--teal)">Assessment</div><div class="pname">AI Readiness Report</div><button class="pc-btn pc-btn-o quote-btn" onclick="openQuote('AI Readiness Assessment')">Get a Custom Quote →</button><div class="p-desc">Full consulting engagement — stakeholder interviews, process analysis, and a complete AI roadmap with ROI projections.</div><div class="pf-list"><div class="pf"><span class="pf-ck">✓</span>Stakeholder interviews (up to 8)</div><div class="pf"><span class="pf-ck">✓</span>Business process + data audit</div><div class="pf"><span class="pf-ck">✓</span>12–24 month AI roadmap</div><div class="pf"><span class="pf-ck">✓</span>Use cases: Easy / Medium / Hard</div><div class="pf"><span class="pf-ck">✓</span>Cost estimates + ROI projections</div></div><button class="pc-btn pc-btn-o" onclick="go('contact')">Get Scoped</button></div>
+    </div>
+  </div></section>
+  <section class="section section-alt"><div class="container">
+    <div class="sh"><span class="eyebrow">Implementation &amp; Recurring</span><h2>AI Development &amp; Managed Services</h2></div>
+    <div class="pg">
+      <div class="pc-card"><div class="pt">Use Case</div><div class="pname">Quick Win</div><button class="pc-btn pc-btn-o quote-btn" onclick="openQuote('AI Quick Win Use Case')">Get a Custom Quote →</button><div class="p-desc">One well-scoped AI automation — designed, built, and deployed in 4–6 weeks.</div><div class="pf-list"><div class="pf"><span class="pf-ck">✓</span>1 use case end-to-end</div><div class="pf"><span class="pf-ck">✓</span>Integration with 1–2 tools</div><div class="pf"><span class="pf-ck">✓</span>User training + documentation</div><div class="pf"><span class="pf-ck">✓</span>30-day post-launch support</div></div><button class="pc-btn pc-btn-o" onclick="go('contact')">Start Project</button></div>
+      <div class="pc-card feat"><div class="pt">AI Program</div><div class="pname">AI Pilot Program</div><button class="pc-btn pc-btn-o quote-btn" onclick="openQuote('AI Pilot Program')">Get a Custom Quote →</button><div class="p-desc">3 use cases deployed over 90 days — includes governance, training, and transition to managed services.</div><div class="pf-list"><div class="pf"><span class="pf-ck">✓</span>3 use cases prioritized by ROI</div><div class="pf"><span class="pf-ck">✓</span>AI governance framework</div><div class="pf"><span class="pf-ck">✓</span>Team training (2 sessions)</div><div class="pf"><span class="pf-ck">✓</span>90-day project management</div><div class="pf"><span class="pf-ck">✓</span>Transition to managed services</div></div><button class="pc-btn pc-btn-p" onclick="go('contact')">Start Program</button></div>
+      <div class="pc-card"><div class="pt" style="color:var(--teal)">Recurring</div><div class="pname">AI Managed Services</div><button class="pc-btn pc-btn-o quote-btn" onclick="openQuote('AI Managed Services')">Get a Custom Quote →</button><div class="p-desc">Ongoing management of your AI program — monitoring, optimization, cost control, and 1 new use case per quarter.</div><div class="pf-list"><div class="pf"><span class="pf-ck">✓</span>Monthly performance reviews</div><div class="pf"><span class="pf-ck">✓</span>Cost optimization</div><div class="pf"><span class="pf-ck">✓</span>1 new use case per quarter</div><div class="pf"><span class="pf-ck">✓</span>Priority support</div></div><button class="pc-btn pc-btn-o" onclick="go('contact')">Learn More</button></div>
+    </div>
+  </div></section>
+  <section class="section"><div class="container">
+    <div class="sh"><span class="eyebrow">Fractional CIO</span><h2>Strategic IT Leadership</h2></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;max-width:860px;margin:0 auto">
+      <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:26px;text-align:center;box-shadow:0 2px 10px rgba(15,35,60,.05)"><div class="pt" style="margin-bottom:10px">Block Hours</div><div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--text);margin-bottom:4px">Pricing on Request</div><div style="font-size:12px;color:var(--mid);margin-bottom:18px">Min 10-hr block. Prepaid, use as needed.</div><button class="pc-btn pc-btn-o" onclick="go('contact')">Purchase Block</button></div>
+      <div style="background:rgba(0,119,182,.04);border:1.5px solid var(--blue);border-radius:14px;padding:26px;text-align:center;box-shadow:0 2px 10px rgba(15,35,60,.05);position:relative"><div style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;font-family:'Syne',sans-serif;font-size:9px;font-weight:700;padding:3px 11px;border-radius:20px;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap">Most Common</div><div class="pt" style="margin-bottom:10px">Monthly Retainer</div><div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--text);margin-bottom:4px">Pricing on Request</div><div style="font-size:12px;color:var(--mid);margin-bottom:18px">12-month commitment. 8 hrs/mo + on-call advisory.</div><button class="pc-btn pc-btn-p" onclick="go('contact')">Start Retainer</button></div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:26px;text-align:center;box-shadow:0 2px 10px rgba(15,35,60,.05)"><div class="pt" style="color:var(--teal);margin-bottom:10px">Custom</div><div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--text);margin-bottom:4px">Custom</div><div style="font-size:12px;color:var(--mid);margin-bottom:18px">Larger scope, dedicated availability, team oversight.</div><button class="pc-btn pc-btn-o" onclick="go('contact')">Get Scoped</button></div>
+    </div>
+  </div></section>
+  <div class="cta-block"><h2>Not sure which option fits?</h2><p>A free 30-minute discovery call is all it takes. We'll scope the right engagement for your business and budget.</p><div class="cta-btns"><button class="btn-primary" onclick="go('contact')">Book a Free Discovery Call →</button></div></div>
+</div>
+
+<!-- ═══════════ RESOURCES ═══════════ -->
+<div id="resources" class="page">
+  <div class="ph"><div class="container"><div class="ph-inner">
+    <span class="eyebrow">News &amp; Insights</span>
+    <h1>The latest in AI — curated daily.</h1>
+    <p>Live news from the most trusted sources covering cutting-edge AI technology, research, and business impact. Updated automatically.</p>
+  </div></div></div>
+
+  <section class="section"><div class="container">
+
+    <!-- Source badges -->
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:40px">
+      <span style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin-right:4px">Sources:</span>
+      <span class="news-src-badge" id="src-techcrunch">TechCrunch AI</span>
+      <span class="news-src-badge" id="src-venturebeat">VentureBeat</span>
+      <span class="news-src-badge" id="src-mit">MIT Tech Review</span>
+      <span class="news-src-badge" id="src-verge">The Verge</span>
+      <span style="margin-left:auto;font-size:12px;color:var(--soft);font-family:'Syne',sans-serif" id="news-updated"></span>
+    </div>
+
+    <!-- Loading state -->
+    <div id="news-loading" style="text-align:center;padding:80px 0">
+      <div class="news-spinner"></div>
+      <p style="font-size:14px;color:var(--soft);margin-top:16px;font-family:'Syne',sans-serif">Loading latest AI news...</p>
+    </div>
+
+    <!-- Error state -->
+    <div id="news-error" style="display:none;text-align:center;padding:60px 0;background:var(--bg2);border-radius:16px;border:1px solid var(--border)">
+      <div style="font-size:32px;margin-bottom:12px"><i data-lucide="wifi-off" style="width:40px;height:40px;stroke:var(--soft);stroke-width:1.5"></i></div>
+      <h3 style="font-size:18px;color:var(--text);margin-bottom:8px">Unable to load live news</h3>
+      <p style="font-size:14px;color:var(--mid);margin-bottom:20px">Check your connection or try refreshing the page.</p>
+      <button onclick="loadNews()" style="padding:10px 22px;border:none;border-radius:8px;background:var(--blue);color:#fff;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;cursor:pointer">Try Again</button>
+    </div>
+
+    <!-- News grid -->
+    <div id="news-grid" style="display:none">
+      <!-- Featured article -->
+      <div id="news-featured" style="margin-bottom:28px"></div>
+      <!-- Grid -->
+      <div class="ic-grid" id="news-cards"></div>
+      <!-- Load more -->
+      <div style="text-align:center;margin-top:40px">
+        <button id="news-load-more" onclick="loadMoreNews()" style="display:none;padding:12px 32px;border:1.5px solid var(--border2);border-radius:8px;background:transparent;color:var(--text);font-family:'Syne',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:border-color .18s,color .18s" onmouseover="this.style.borderColor='var(--blue)';this.style.color='var(--blue)'" onmouseout="this.style.borderColor='var(--border2)';this.style.color='var(--text)'">Load More Articles</button>
+      </div>
+    </div>
+
+  </div></section>
+</div>
+
+<!-- ═══════════ ABOUT ═══════════ -->
+<div id="about" class="page">
+  <div class="ph"><div class="container"><div class="ph-inner">
+    <span class="eyebrow">About</span>
+    <h1>Built by someone who's actually done it — at scale.</h1>
+    <p>Global technology consulting expertise, now applied where it matters most — growing businesses that deserve better.</p>
+  </div></div></div>
+  <section class="section"><div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start" class="split-g">
+      <div class="split-vis" style="background:var(--bg2);border:1px solid var(--border2);border-radius:20px;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden">
+        <div style="font-family:'Syne',sans-serif;font-size:72px;font-weight:800;color:rgba(15,35,60,.1)">GP</div>
+        <div style="position:absolute;bottom:22px;left:50%;transform:translateX(-50%);background:var(--blue);border-radius:40px;padding:8px 20px;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:#fff;white-space:nowrap">Founder &amp; Principal Advisor</div>
+      </div>
+      <div>
+        <span class="eyebrow" style="display:block;margin-bottom:12px">Geoffrey Pearlman</span>
+        <h2 style="margin-bottom:18px">20+ years of enterprise IT. Now working for you.</h2>
+        <p style="font-size:15px;color:var(--mid);line-height:1.8;margin-bottom:14px">As a Director at a leading global technology consulting firm, Geoffrey specialized in technology strategy and led complex IT engagements for Fortune 500 clients across private equity, life sciences, financial services, consumer products, manufacturing, and professional services — advising C-suites on digital transformation, AI enablement, IT strategy, and cost optimization.</p>
+        <p style="font-size:15px;color:var(--mid);line-height:1.8;margin-bottom:26px">He founded CSM Integrated Solutions to bring that same caliber of thinking to the companies that need it most — growing mid-market businesses that deserve enterprise-grade strategy without the enterprise overhead, the big-firm politics, or the price tag that comes with it.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:26px">
+          <div style="padding:13px;background:var(--bg2);border:1px solid var(--border);border-radius:9px"><strong style="font-family:'Syne',sans-serif;font-size:13px;color:var(--text);display:block;margin-bottom:3px">Digital Transformation</strong><span style="font-size:12px;color:var(--mid)">Implementing advanced technical solutions to improve workflow and efficiency</span></div>
+          <div style="padding:13px;background:var(--bg2);border:1px solid var(--border);border-radius:9px"><strong style="font-family:'Syne',sans-serif;font-size:13px;color:var(--text);display:block;margin-bottom:3px">AI Enablement</strong><span style="font-size:12px;color:var(--mid)">Translating business processes into practical, deployable AI solutions</span></div>
+          <div style="padding:13px;background:var(--bg2);border:1px solid var(--border);border-radius:9px"><strong style="font-family:'Syne',sans-serif;font-size:13px;color:var(--text);display:block;margin-bottom:3px">M&amp;A IT Integration</strong><span style="font-size:12px;color:var(--mid)">Due diligence, post-close IT integration, and complex infrastructure and application migrations — including full carve-outs</span></div>
+          <div style="padding:13px;background:var(--bg2);border:1px solid var(--border);border-radius:9px"><strong style="font-family:'Syne',sans-serif;font-size:13px;color:var(--text);display:block;margin-bottom:3px">IT Cost Optimization</strong><span style="font-size:12px;color:var(--mid)">Identifying and eliminating technology waste to recover budget without sacrificing capability</span></div>
+        </div>
+        <button class="btn-primary" onclick="go('contact')">Contact Now →</button>
+      </div>
+    </div>
+  </div></section>
+  <div class="cta-block"><h2>Let's talk about your AI opportunity.</h2><p>First consultation is always free. No sales pitch — just an honest conversation about where you are and where AI can take you.</p><div class="cta-btns"><button class="btn-primary" onclick="openModal()">Take the Free Assessment →</button><button class="btn-cta-o" onclick="go('contact')">Book a Call</button></div></div>
+</div>
+
+<!-- ═══════════ SERVICE PAGES ═══════════ -->
+<div id="svc-ai" class="page">
+  <div class="ph"><div class="container"><div class="ph-inner">
+    <div class="bc"><span onclick="go('home')" style="cursor:pointer">Home</span><span>›</span><span style="color:var(--mid)">AI Enablement &amp; Training</span></div>
+    <span class="eyebrow">Service</span><h1>AI Training &amp; Workshops</h1>
+    <p>Hands-on workshops that take your team from AI-skeptical to AI-capable — in a single day. No coding, no jargon, no theory without practice.</p>
+    <div style="display:flex;gap:11px;flex-wrap:wrap"><button class="btn-primary" onclick="go('contact')">Book a Workshop →</button><button class="btn-outline" onclick="go('pricing')">View Pricing</button></div>
+  </div></div></div>
+  <section class="section"><div class="container">
+    <div class="shl" style="margin-bottom:32px"><span class="eyebrow">Workshop Formats</span><h2>Four formats for every need</h2></div>
+    <div class="og">
+      <div class="oc"><h4><i data-lucide="book-open"></i> AI Foundations (Half Day)</h4><p>History of AI, how LLMs work, today's tool landscape, and hands-on prompting exercises specific to your industry. Up to 20 participants. Ideal for leadership and non-technical staff.</p></div>
+      <div class="oc"><h4><i data-lucide="terminal"></i> Prompt Engineering for Business</h4><p>Role-specific training for sales, marketing, ops, HR, and finance. Participants leave with a personalized prompt library they'll use the next day.</p></div>
+      <div class="oc"><h4><i data-lucide="cpu"></i> AI Builder Day (Full Day)</h4><p>The flagship workshop. Participants build a working AI agent by end of day — no coding required. We work with your actual tools and workflows. Our signature lab builds the Daily Briefing Agent.</p></div>
+      <div class="oc"><h4><i data-lucide="target"></i> Executive AI Briefing (90 min)</h4><p>A private session for CEOs and leadership teams — AI landscape, competitive risk, strategic opportunity, and where to start, delivered as a business conversation, not a tech presentation.</p></div>
+    </div>
+    <div style="margin-top:44px;background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:32px">
+      <div class="shl" style="margin-bottom:22px"><span class="eyebrow">Signature Lab</span><h3>Build the Daily Briefing Agent</h3><p>In every Builder Day workshop, participants build a real AI agent that connects to Google Calendar, the OpenWeather API, and their email — sending a personalized daily briefing every morning automatically.</p></div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
+        <div style="background:#fff;border:1px solid var(--border);border-radius:9px;padding:14px;text-align:center"><div style="font-size:22px;margin-bottom:7px"><i data-lucide="calendar" style="width:22px;height:22px;stroke:var(--blue);stroke-width:1.75"></i></div><div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--text);margin-bottom:3px">Google Calendar</div><div style="font-size:11px;color:var(--mid)">Today's schedule</div></div>
+        <div style="background:#fff;border:1px solid var(--border);border-radius:9px;padding:14px;text-align:center"><div style="font-size:22px;margin-bottom:7px"><i data-lucide="cloud-sun" style="width:22px;height:22px;stroke:var(--blue);stroke-width:1.75"></i></div><div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--text);margin-bottom:3px">OpenWeather API</div><div style="font-size:11px;color:var(--mid)">Local forecast</div></div>
+        <div style="background:#fff;border:1px solid var(--border);border-radius:9px;padding:14px;text-align:center"><div style="font-size:22px;margin-bottom:7px"><i data-lucide="cpu" style="width:22px;height:22px;stroke:var(--blue);stroke-width:1.75"></i></div><div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--text);margin-bottom:3px">GPT-4 Agent</div><div style="font-size:11px;color:var(--mid)">Synthesizes + writes</div></div>
+        <div style="background:#fff;border:1px solid var(--border);border-radius:9px;padding:14px;text-align:center"><div style="font-size:22px;margin-bottom:7px"><i data-lucide="mail" style="width:22px;height:22px;stroke:var(--blue);stroke-width:1.75"></i></div><div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--text);margin-bottom:3px">Email / Slack</div><div style="font-size:11px;color:var(--mid)">Sent every morning</div></div>
+      </div>
+    </div>
+  </div></section>
+  <div class="cta-block"><h2>Ready to train your team?</h2><p>Book a workshop, or start with a free call to find the right format for your organization.</p><div class="cta-btns"><button class="btn-primary" onclick="go('contact')">Book a Workshop →</button></div></div>
+</div>
+
+<div id="svc-assess" class="page">
+  <div class="ph"><div class="container"><div class="ph-inner">
+    <div class="bc"><span onclick="go('home')" style="cursor:pointer">Home</span><span>›</span><span style="color:var(--mid)">AI Readiness Assessment</span></div>
+    <span class="eyebrow">Service</span><h1>AI Readiness Assessment</h1>
+    <p>Know exactly where you stand on AI — and exactly what to do next. Available free and self-serve, or as a full consulting engagement with a complete deliverable package.</p>
+    <div style="display:flex;gap:11px;flex-wrap:wrap"><button class="btn-primary" onclick="openModal()">Take the Free Assessment →</button><button class="btn-outline" onclick="go('contact')">Book the Full Engagement</button></div>
+  </div></div></div>
+  <section class="section"><div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:56px">
+      <div style="background:#fff;border:1px solid var(--border);border-radius:16px;padding:28px;box-shadow:0 2px 10px rgba(15,35,60,.05)"><div class="eyebrow" style="display:block;margin-bottom:10px">Self-Service · Free</div><h3 style="margin-bottom:10px">Website Assessment</h3><p style="font-size:14px;color:var(--mid);line-height:1.7;margin-bottom:18px">5 questions, instant AI Maturity Score, 3–8 personalized use cases for your industry — in under 5 minutes.</p><button class="btn-primary" onclick="openModal()">Take It Now →</button></div>
+      <div style="background:rgba(0,119,182,.03);border:1.5px solid var(--blue);border-radius:16px;padding:28px;box-shadow:0 2px 10px rgba(15,35,60,.05)"><div class="eyebrow" style="display:block;margin-bottom:10px;color:var(--teal)">Consulting Engagement</div><h3 style="margin-bottom:10px">Full AI Readiness Report</h3><p style="font-size:14px;color:var(--mid);line-height:1.7;margin-bottom:18px">Stakeholder interviews, process analysis, data and systems review — plus a complete AI roadmap with ROI projections.</p><button class="btn-outline" onclick="go('contact')">Get Scoped →</button></div>
+    </div>
+    <div class="shl" style="margin-bottom:28px"><span class="eyebrow">Paid Assessment Deliverables</span><h2>What you get from the full engagement</h2></div>
+    <div class="dl">
+      <div class="dli"><div class="dli-ico"><i data-lucide="map"></i></div><div><h5>12–24 Month AI Roadmap</h5><p>A sequenced, prioritized plan for AI adoption — aligned to your business objectives and current capabilities.</p></div></div>
+      <div class="dli"><div class="dli-ico"><i data-lucide="list"></i></div><div><h5>Use Case Backlog (Easy / Medium / Hard)</h5><p>Every identified use case categorized by implementation complexity, estimated effort, and technology requirements.</p></div></div>
+      <div class="dli"><div class="dli-ico"><i data-lucide="dollar-sign"></i></div><div><h5>Cost Estimates ($ to $$$$)</h5><p>Realistic implementation cost ranges for each use case, broken down by tooling, integration, and services.</p></div></div>
+      <div class="dli"><div class="dli-ico"><i data-lucide="settings"></i></div><div><h5>Prerequisites Assessment</h5><p>Data requirements, integration dependencies, infrastructure needs, and security considerations per use case.</p></div></div>
+      <div class="dli"><div class="dli-ico"><i data-lucide="trending-up"></i></div><div><h5>ROI Projections</h5><p>Time-to-value estimates, cost savings, productivity gains, and revenue impact — grounded in comparable benchmarks.</p></div></div>
+      <div class="dli"><div class="dli-ico"><i data-lucide="shield"></i></div><div><h5>Security &amp; Compliance Review</h5><p>Risk identification and governance recommendations including data residency, access controls, and acceptable use guidance.</p></div></div>
+    </div>
+  </div></section>
+  <div class="cta-block"><h2>Start with the free version.</h2><p>Take the 5-minute self-service assessment, get your instant score, then decide if the full engagement makes sense.</p><div class="cta-btns"><button class="btn-primary" onclick="openModal()">Take the Free Assessment →</button></div></div>
+</div>
+
+<div id="svc-uc" class="page">
+  <div class="ph"><div class="container"><div class="ph-inner"><div class="bc"><span onclick="go('home')" style="cursor:pointer">Home</span><span>›</span><span style="color:var(--mid)">AI Use Case Development</span></div><span class="eyebrow">Service</span><h1>AI Use Case Development</h1><p>We design, pilot, and deploy AI solutions that automate your most manual, repetitive business processes — from discovery to production in weeks, not months.</p><button class="btn-primary" onclick="go('contact')">Start a Project →</button></div></div></div>
+  <section class="section"><div class="container"><div class="shl" style="margin-bottom:32px"><span class="eyebrow">How it works</span><h2>From idea to live deployment</h2></div>
+    <div class="proc">
+      <div class="proc-step"><div class="pn">1</div><div class="pc"><h4>Discover &amp; Define</h4><p>Map the target process in detail — current state, inputs, outputs, edge cases, success criteria. Clear scope prevents scope creep.</p><div class="ptags"><span class="ptag">1–2 days</span></div></div></div>
+      <div class="proc-step"><div class="pn">2</div><div class="pc"><h4>Design &amp; Prototype</h4><p>Rapid prototype to validate the approach before building the full system. You test and approve before we invest in production.</p><div class="ptags"><span class="ptag">1–2 weeks</span></div></div></div>
+      <div class="proc-step"><div class="pn">3</div><div class="pc"><h4>Build &amp; Integrate</h4><p>Full development and integration with your existing tools — CRM, ERP, calendar, email, or whatever the workflow touches.</p><div class="ptags"><span class="ptag">2–6 weeks</span></div></div></div>
+      <div class="proc-step"><div class="pn">4</div><div class="pc"><h4>Test &amp; Train</h4><p>User acceptance testing, edge case handling, and team training. We don't launch until your team is confident and the system is reliable.</p><div class="ptags"><span class="ptag">1 week</span></div></div></div>
+      <div class="proc-step"><div class="pn">5</div><div class="pc"><h4>Launch &amp; Monitor</h4><p>Go live with monitoring in place — cost tracking, error alerts, and performance dashboards. 30-day post-launch support included.</p><div class="ptags"><span class="ptag">Ongoing</span></div></div></div>
+    </div>
+  </div></section>
+  <div class="cta-block"><h2>What processes are you doing manually?</h2><p>If a human does it the same way every time, AI can probably do it faster and cheaper. Let's find out which ones to automate first.</p><div class="cta-btns"><button class="btn-primary" onclick="openModal()">Take the Free Assessment →</button><button class="btn-cta-o" onclick="go('contact')">Book a Discovery Call</button></div></div>
+</div>
+
+<div id="svc-ms" class="page">
+  <div class="ph"><div class="container"><div class="ph-inner"><div class="bc"><span onclick="go('home')" style="cursor:pointer">Home</span><span>›</span><span style="color:var(--mid)">AI Managed Services</span></div><span class="eyebrow">Service</span><h1>AI Managed Services</h1><p>Your AI program doesn't manage itself. We handle monitoring, optimization, cost control, and continuous expansion — so your AI gets better every month.</p><button class="btn-primary" onclick="go('pricing')">View Pricing →</button></div></div></div>
+  <section class="section"><div class="container"><div class="og">
+    <div class="oc"><h4><i data-lucide="radio"></i> Performance Monitoring</h4><p>Continuous monitoring of all deployed AI workflows — response quality, error rates, latency, and cost per interaction. Alerts before issues become outages.</p></div>
+    <div class="oc"><h4><i data-lucide="dollar-sign"></i> Cost Management</h4><p>Monthly API cost review, token usage optimization, model selection, and caching strategies. Predictable, lean AI costs every month.</p></div>
+    <div class="oc"><h4><i data-lucide="sliders"></i> Continuous Optimization</h4><p>Monthly prompt tuning, workflow updates, and model evaluations. Your AI outputs get better over time — not worse as the world changes.</p></div>
+    <div class="oc"><h4><i data-lucide="plus-circle"></i> Use Case Expansion</h4><p>One new AI use case per quarter as part of your subscription — keeping momentum going beyond the initial pilot.</p></div>
+    <div class="oc"><h4><i data-lucide="shield-check"></i> Security &amp; Compliance</h4><p>Monthly review of your AI governance posture — data handling, vendor updates, policy changes, and compliance maintenance.</p></div>
+    <div class="oc"><h4><i data-lucide="bar-chart-2"></i> Monthly Business Reviews</h4><p>Executive summary of AI program performance — ROI tracking, hours saved, cost reduction, and strategic recommendations.</p></div>
+  </div></div></section>
+  <div class="cta-block"><h2>AI is a program, not a project.</h2><p>Companies that treat AI as a one-time deployment fall behind. Managed services keep you ahead.</p><div class="cta-btns"><button class="btn-primary" onclick="go('contact')">Get Started →</button></div></div>
+</div>
+
+<div id="svc-cio" class="page">
+  <div class="ph"><div class="container"><div class="ph-inner"><div class="bc"><span onclick="go('home')" style="cursor:pointer">Home</span><span>›</span><span style="color:var(--mid)">Fractional CIO</span></div><span class="eyebrow">Service</span><h1>Fractional CIO</h1><p>AI-first IT leadership for companies not ready for a full-time CIO — but who can't afford to make technology decisions without one. Monthly retainer. 12-month minimum. Real outcomes.</p><button class="btn-primary" onclick="go('contact')">Discuss Your Needs →</button></div></div></div>
+  <section class="section"><div class="container"><div class="og">
+    <div class="oc"><h4><i data-lucide="map"></i> AI-First IT Strategy</h4><p>A technology roadmap built around your AI goals — every infrastructure decision made with AI capability in mind.</p></div>
+    <div class="oc"><h4><i data-lucide="activity"></i> Technology Health Assessments</h4><p>Quarterly reviews of your full technology stack — identifying risk, waste, and opportunity before they become emergencies.</p></div>
+    <div class="oc"><h4><i data-lucide="trending-down"></i> IT Cost Optimization</h4><p>Vendor renegotiation, license right-sizing, and cloud cost management. Most clients recover 15–25% of IT budget in year one.</p></div>
+    <div class="oc"><h4><i data-lucide="shopping-cart"></i> Vendor &amp; Tool Selection</h4><p>Vendor-neutral guidance on every technology decision — from AI tools to ERPs. We're on your side, not the vendor's.</p></div>
+    <div class="oc"><h4><i data-lucide="presentation"></i> Board &amp; Executive Reporting</h4><p>Technology briefings for your board and investors — translating complex IT decisions into business language that drives good decisions.</p></div>
+    <div class="oc"><h4><i data-lucide="handshake"></i> Trusted CEO/CFO Advisor</h4><p>On-call access to Geoffrey for technology questions, vendor situations, security incidents — without the $400/hr invoice.</p></div>
+  </div></div></section>
+  <div class="cta-block"><h2>Your business deserves a CIO.</h2><p>Not a $500K/year executive — a trusted advisor with 15 years of enterprise experience, charging SMB rates.</p><div class="cta-btns"><button class="btn-primary" onclick="go('contact')">Book a Discovery Call →</button><button class="btn-cta-o" onclick="go('pricing')">View Pricing</button></div></div>
+</div>
+
+<div id="svc-it" class="page">
+  <div class="ph"><div class="container"><div class="ph-inner">
+    <div class="bc"><span onclick="go('home')" style="cursor:pointer">Home</span><span>›</span><span style="color:var(--mid)">IT Spend Optimization</span></div>
+    <span class="eyebrow">Service</span>
+    <h1>IT Spend Optimization</h1>
+    <p>Most organizations are overpaying for technology by 20–40% without knowing it. We find the waste, renegotiate the contracts, right-size the licenses, and put that budget back to work — without cutting capability or reliability.</p>
+    <div style="display:flex;gap:11px;flex-wrap:wrap">
+      <button class="btn-primary" onclick="go('contact')">Request a Spend Audit →</button>
+      <button class="btn-outline" onclick="go('pricing')">View Pricing</button>
+    </div>
+  </div></div></div>
+
+  <section class="section"><div class="container">
+    <div class="shl" style="margin-bottom:32px"><span class="eyebrow">What we do</span><h2>Where we find the savings</h2><p>A structured IT spend audit typically uncovers significant recoverable budget within the first 30 days.</p></div>
+    <div class="og">
+      <div class="oc"><h4><i data-lucide="search"></i> IT Spend Audit</h4><p>A comprehensive review of all technology contracts, subscriptions, SaaS licenses, and vendor relationships — identifying redundancies, unused seats, and immediate negotiation opportunities.</p></div>
+      <div class="oc"><h4><i data-lucide="git-merge"></i> Vendor Consolidation</h4><p>Rationalize your vendor landscape, eliminate redundant tools, and consolidate contracts to reduce administrative overhead and improve negotiating leverage across your entire technology stack.</p></div>
+      <div class="oc"><h4><i data-lucide="file-text"></i> Contract Renegotiation</h4><p>We benchmark your current contracts against market rates and negotiate on your behalf — typically recovering 15–30% on major software and infrastructure agreements at renewal time.</p></div>
+      <div class="oc"><h4><i data-lucide="cloud"></i> Cloud Cost Optimization</h4><p>Azure and AWS spend analysis, resource right-sizing, reserved instance planning, and waste elimination. Most organizations reduce cloud spend by 20–35% without any loss of performance.</p></div>
+      <div class="oc"><h4><i data-lucide="users"></i> License Right-Sizing</h4><p>Microsoft 365, Salesforce, Adobe, and other SaaS platform audits — ensuring you're not paying for unused seats, duplicate users, or premium tiers your team doesn't actually use.</p></div>
+      <div class="oc"><h4><i data-lucide="refresh-cw"></i> Ongoing Governance</h4><p>Monthly IT spend governance as part of a Fractional CIO engagement — so cost creep doesn't return after the initial optimization and you stay ahead of renewal cycles.</p></div>
+    </div>
+  </div></section>
+
+  <section class="section section-alt"><div class="container">
+    <div class="sh"><span class="eyebrow">Typical Results</span><h2>What clients recover</h2></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+      <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:28px;text-align:center;box-shadow:0 2px 10px rgba(15,35,60,.05)">
+        <div style="font-family:'Syne',sans-serif;font-size:40px;font-weight:800;color:var(--blue);margin-bottom:8px">20–40%</div>
+        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px">IT budget recovered</div>
+        <div style="font-size:13px;color:var(--mid)">Typical range on first-year optimization engagements</div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:28px;text-align:center;box-shadow:0 2px 10px rgba(15,35,60,.05)">
+        <div style="font-family:'Syne',sans-serif;font-size:40px;font-weight:800;color:var(--teal);margin-bottom:8px">30 days</div>
+        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px">To first savings identified</div>
+        <div style="font-size:13px;color:var(--mid)">Average time from engagement start to first actionable findings</div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:28px;text-align:center;box-shadow:0 2px 10px rgba(15,35,60,.05)">
+        <div style="font-family:'Syne',sans-serif;font-size:40px;font-weight:800;color:var(--amber);margin-bottom:8px">Day 1</div>
+        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px">Positive ROI</div>
+        <div style="font-size:13px;color:var(--mid)">Engagements are structured to recover more than they cost in year one</div>
+      </div>
+    </div>
+  </div></section>
+
+  <div class="cta-block">
+    <h2>Find out what you're overpaying for.</h2>
+    <p>A no-obligation IT spend audit typically identifies significant savings within 30 days. Let's talk.</p>
+    <div class="cta-btns">
+      <button class="btn-primary" onclick="go('contact')">Request an IT Spend Audit →</button>
+      <button class="btn-cta-o" onclick="go('pricing')">View Pricing</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ CONTACT ═══════════ -->
+<!-- ═══════════ TECHNOLOGY ═══════════ -->
+<div id="technology" class="page">
+  <div class="ph"><div class="container"><div class="ph-inner">
+    <span class="eyebrow">Technology Stack</span>
+    <h1>The AI Operating System for Your Business.</h1>
+    <p>Not a single tool. Not a one-time project. A layered framework that makes AI a permanent, compounding advantage across every function of your organization.</p>
+  </div></div></div>
+
+  <!-- Intro narrative -->
+  <section class="section section-alt"><div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center">
+      <div>
+        <span class="eyebrow" style="display:block;margin-bottom:12px">The Framework</span>
+        <h2 style="margin-bottom:18px">Four layers. One operating system.</h2>
+        <p style="font-size:15px;color:var(--mid);line-height:1.8;margin-bottom:20px">Most businesses treat AI like software — you buy a tool, it does a thing. That's not how the organizations winning with AI think about it. They build a stack: a connected set of layers that each amplify the others.</p>
+        <p style="font-size:15px;color:var(--mid);line-height:1.8;margin-bottom:28px">CSM helps you architect and deploy this stack for your specific business — starting with the layer that delivers the fastest ROI and building toward a fully integrated AI-native operation.</p>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;align-items:center;gap:12px;padding:13px 16px;background:#fff;border:1px solid var(--border);border-radius:10px;box-shadow:0 1px 6px rgba(15,35,60,.04)"><span style="font-size:18px"><i data-lucide="mic" style="width:18px;height:18px;stroke:var(--blue);stroke-width:1.75"></i></span><div><div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--text)">Interface Layer</div><div style="font-size:12px;color:var(--soft)">How employees interact with AI</div></div></div>
+          <div style="display:flex;align-items:center;gap:12px;padding:13px 16px;background:#fff;border:1px solid var(--border);border-radius:10px;box-shadow:0 1px 6px rgba(15,35,60,.04)"><span style="font-size:18px"><i data-lucide="users" style="width:18px;height:18px;stroke:var(--teal);stroke-width:1.75"></i></span><div><div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--text)">Knowledge Layer</div><div style="font-size:12px;color:var(--soft)">What AI knows about your business</div></div></div>
+          <div style="display:flex;align-items:center;gap:12px;padding:13px 16px;background:#fff;border:1px solid var(--border);border-radius:10px;box-shadow:0 1px 6px rgba(15,35,60,.04)"><span style="font-size:18px"><i data-lucide="settings" style="width:18px;height:18px;stroke:var(--amber);stroke-width:1.75"></i></span><div><div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--text)">Automation Layer</div><div style="font-size:12px;color:var(--soft)">What AI does for your business</div></div></div>
+          <div style="display:flex;align-items:center;gap:12px;padding:13px 16px;background:#fff;border:1px solid var(--border);border-radius:10px;box-shadow:0 1px 6px rgba(15,35,60,.04)"><span style="font-size:18px"><i data-lucide="database" style="width:18px;height:18px;stroke:var(--teal);stroke-width:1.75"></i></span><div><div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--text)">Data Layer</div><div style="font-size:12px;color:var(--soft)">What AI learns and decides from</div></div></div>
+        </div>
+      </div>
+      <div style="background:var(--text);border-radius:20px;padding:36px;position:relative;overflow:hidden">
+        <div style="position:absolute;top:-40px;right:-40px;width:180px;height:180px;border-radius:50%;background:rgba(0,119,182,.15)"></div>
+        <div style="position:relative;z-index:1">
+          <div style="font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:20px">The Result</div>
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <div style="display:flex;align-items:flex-start;gap:10px"><span style="color:var(--teal);font-size:16px;flex-shrink:0;margin-top:1px">✓</span><div><div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:3px">Lower costs</div><div style="font-size:13px;color:rgba(255,255,255,.5)">Automation replaces 20–40% of manual admin work</div></div></div>
+            <div style="display:flex;align-items:flex-start;gap:10px"><span style="color:var(--teal);font-size:16px;flex-shrink:0;margin-top:1px">✓</span><div><div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:3px">Faster execution</div><div style="font-size:13px;color:rgba(255,255,255,.5)">Decisions and workflows that used to take days happen in minutes</div></div></div>
+            <div style="display:flex;align-items:flex-start;gap:10px"><span style="color:var(--teal);font-size:16px;flex-shrink:0;margin-top:1px">✓</span><div><div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:3px">Better decisions</div><div style="font-size:13px;color:rgba(255,255,255,.5)">AI surfaces insights from your data that would otherwise stay buried</div></div></div>
+            <div style="display:flex;align-items:flex-start;gap:10px"><span style="color:var(--teal);font-size:16px;flex-shrink:0;margin-top:1px">✓</span><div><div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:3px">Compounding advantage</div><div style="font-size:13px;color:rgba(255,255,255,.5)">Each layer makes the others smarter — value builds over time</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- The 6 Layers -->
+  <section class="section"><div class="container">
+    <div class="sh"><span class="eyebrow">The Stack</span><h2>Six layers. Fully integrated.</h2><p>Each layer solves a distinct problem. Together they form a complete AI operating environment for your business.</p></div>
+
+    <div style="display:flex;flex-direction:column;gap:24px">
+
+      <!-- Layer 1 -->
+      <div class="tech-layer" style="background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 2px 10px rgba(15,35,60,.05)">
+        <div class="tech-layer-header" style="display:grid;grid-template-columns:60px 1fr;gap:0;align-items:stretch">
+          <div style="background:var(--blue-bg);display:flex;align-items:center;justify-content:center;font-size:24px;padding:24px"><i data-lucide="mic" style="width:26px;height:26px;stroke:var(--blue);stroke-width:1.5"></i></div>
+          <div style="padding:20px 24px;border-bottom:1px solid var(--border)">
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+              <div><span style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)">Layer 1</span><h3 style="font-size:20px;color:var(--text);margin-top:2px">Conversational AI — Interface Layer</h3></div>
+              <div style="margin-left:auto;background:var(--blue-bg);border:1px solid rgba(0,119,182,.15);border-radius:8px;padding:5px 12px;font-size:12px;font-weight:600;color:var(--blue);font-family:'Syne',sans-serif;white-space:nowrap">How humans interact with AI</div>
+            </div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border-top:1px solid var(--border)">
+          <div style="padding:22px 24px;border-right:1px solid var(--border)">
+            <div style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-bottom:12px">Recommended Stack</div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);font-weight:500"><span style="width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0"></span>ChatGPT Enterprise</div>
+              <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);font-weight:500"><span style="width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0"></span>ElevenLabs (Voice)</div>
+              <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);font-weight:500"><span style="width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0"></span>Wispr Flow (Voice workflows)</div>
+            </div>
+          </div>
+          <div style="padding:22px 24px;border-right:1px solid var(--border)">
+            <div style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-bottom:12px">Use Cases</div>
+            <div style="display:flex;flex-direction:column;gap:7px;font-size:13px;color:var(--mid)">
+              <div>Executive AI copilots &amp; daily briefings</div>
+              <div>Voice-based CRM updates for sales teams</div>
+              <div>AI meeting assistants &amp; summaries</div>
+              <div>Customer-facing voice bots</div>
+            </div>
+          </div>
+          <div style="padding:22px 24px;background:rgba(0,119,182,.02)">
+            <div style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-bottom:12px">CSM Recommendation</div>
+            <p style="font-size:13px;color:var(--mid);line-height:1.65">Standardize on <strong style="color:var(--text)">ChatGPT Enterprise</strong> as the primary AI front door for your organization. Add voice capabilities where they create real leverage — not novelty.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Layer 2 -->
+      <div class="tech-layer" style="background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 2px 10px rgba(15,35,60,.05)">
+        <div style="display:grid;grid-template-columns:60px 1fr;gap:0;align-items:stretch">
+          <div style="background:var(--teal-bg);display:flex;align-items:center;justify-content:center;font-size:24px;padding:24px"><i data-lucide="users" style="width:26px;height:26px;stroke:var(--teal);stroke-width:1.5"></i></div>
+          <div style="padding:20px 24px;border-bottom:1px solid var(--border)">
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+              <div><span style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal)">Layer 2</span><h3 style="font-size:20px;color:var(--text);margin-top:2px">AI-Powered Knowledge &amp; Collaboration Layer</h3></div>
+              <div style="margin-left:auto;background:var(--teal-bg);border:1px solid rgba(0,122,94,.15);border-radius:8px;padding:5px 12px;font-size:12px;font-weight:600;color:var(--teal);font-family:'Syne',sans-serif;white-space:nowrap">What AI knows about your business</div>
+            </div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border-top:1px solid var(--border)">
+          <div style="padding:22px 24px;border-right:1px solid var(--border)">
+            <div style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-bottom:12px">Recommended Stack</div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);font-weight:500"><span style="width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0"></span>Notion AI</div>
+              <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);font-weight:500"><span style="width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0"></span>Claude (Deep reasoning)</div>
+              <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);font-weight:500"><span style="width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0"></span>Circleback (Meeting capture)</div>
+              <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);font-weight:500"><span style="width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0"></span>Attio (Relationship intelligence)</div>
+              <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);font-weight:500"><span style="width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0"></span>Clay (Go-to-market data)</div>
+            </div>
+          </div>
+          <div style="padding:22px 24px;border-right:1px solid var(--border)">
+            <div style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-bottom:12px">Use Cases</div>
+            <div style="display:flex;flex-direction:column;gap:7px;font-size:13px;color:var(--mid)">
+              <div>AI-powered company wiki (SOPs, playbooks)</div>
+              <div>Automatic meeting → action item pipelines</div>
+              <div>Deal intelligence &amp; CRM enrichment</div>
+              <div>Knowledge retrieval across all company docs</div>
+            </div>
+          </div>
+          <div style="padding:22px 24px;background:rgba(0,122,94,.02)">
+            <div style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-bottom:12px">CSM Recommendation</div>
+            <p style="font-size:13px;color:var(--mid);line-height:1.65">Replace SharePoint/Teams sprawl with an <strong style="color:var(--text)">AI-indexed knowledge layer</strong>. This eliminates wasted employee time and is typically the highest-ROI early win for knowledge-worker businesses.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Layer 3 -->
+      <div class="tech-layer" style="background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 2px 10px rgba(15,35,60,.05)">
+        <div style="display:grid;grid-template-columns:60px 1fr;gap:0;align-items:stretch">
+          <div style="background:var(--amber-bg);display:flex;align-items:center;justify-content:center;font-size:24px;padding:24px"><i data-lucide="settings" style="width:26px;height:26px;stroke:var(--amber);stroke-width:1.5"></i></div>
+          <div style="padding:20px 24px;border-bottom:1px solid var(--border)">
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+              <div><span style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--amber)">Layer 3</span><h3 style="font-size:20px;color:var(--text);margin-top:2px">Automation &amp; Agent Orchestration Layer</h3></div>
+              <div style="margin-left:auto;background:var(--amber-bg);border:1px solid rgba(155,104,0,.15);border-radius:8px;padding:5px 12px;font-size:12px;font-weight:600;color:var(--amber);font-family:'Syne',sans-serif;white-space:nowrap">What AI does for your business</div>
+            </div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border-top:1px solid var(--border)">
+          <div style="padding:22px 24px;border-right:1px solid var(--border)">
+            <div style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-bottom:12px">Recommended Stack</div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);font-weight:500"><span style="width:6px;height:6px;border-radius:50%;background:var(--amber);flex-shrink:0"></span>Zapier (Easy automation)</div>
+              <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);font-weight:500"><span style="width:6px;height:6px;border-radius:50%;background:var(--amber);flex-shrink:0"></span>Make (Advanced workflows)</div>
+              <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);font-weight:500"><span style="width:6px;height:6px;border-radius:50%;background:var(--amber);flex-shrink:0"></span>n8n (Flexible / developer)</div>
+              <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);font-weight:500"><span style="width:6px;height:6px;border-radius:50%;background:var(--amber);flex-shrink:0"></span>Relay.app (Human-in-the-loop)</div>
+              <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);font-weight:500"><span style="width:6px;height:6px;border-radius:50%;background:var(--amber);flex-shrink:0"></span>Gumloop (AI-native automations)</div>
+            </div>
+          </div>
+          <div style="padding:22px 24px;border-right:1px solid var(--border)">
+            <div style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-bottom:12px">Use Cases</div>
+            <div style="display:flex;flex-direction:column;gap:7px;font-size:13px;color:var(--mid)">
+              <div>Lead intake → qualification → CRM (fully automated)</div>
+              <div>AI agents that monitor inboxes &amp; respond</div>
+              <div>Invoice processing &amp; AP automation</div>
+              <div>Calendar &amp; meeting prep agents</div>
+            </div>
+          </div>
+          <div style="padding:22px 24px;background:rgba(155,104,0,.02)">
+            <div style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-bottom:12px">CSM Recommendation</div>
+            <p style="font-size:13px;color:var(--mid);line-height:1.65">Start with <strong style="color:var(--text)">Zapier or Make</strong> for quick wins, then evolve toward agent-based workflows as your processes mature. AI typically replaces 20–40% of repetitive admin work at this layer.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Layer 4 -->
+      <div class="tech-layer" style="background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 2px 10px rgba(15,35,60,.05)">
+        <div style="display:grid;grid-template-columns:60px 1fr;gap:0;align-items:stretch">
+          <div style="background:var(--blue-bg);display:flex;align-items:center;justify-content:center;font-size:24px;padding:24px"><i data-lucide="flask-conical" style="width:26px;height:26px;stroke:var(--blue);stroke-width:1.5"></i></div>
+          <div style="padding:20px 24px;border-bottom:1px solid var(--border)">
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+              <div><span style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)">Layer 4</span><h3 style="font-size:20px;color:var(--text);margin-top:2px">AI Development &amp; Prompt Engineering Layer</h3></div>
+              <div style="margin-left:auto;background:var(--blue-bg);border:1px solid rgba(0,119,182,.15);border-radius:8px;padding:5px 12px;font-size:12px;font-weight:600;color:var(--blue);font-family:'Syne',sans-serif;white-space:nowrap">Custom AI capabilities</div>
+            </div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border-top:1px solid var(--border)">
+          <div style="padding:22px 24px;border-right:1px solid var(--border)">
+            <div style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-bottom:12px">Recommended Stack</div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);font-weight:500"><span style="width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0"></span>Google AI Studio</div>
+              <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);font-weight:500"><span style="width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0"></span>Anthropic Console</div>
+              <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);font-weight:500"><span style="width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0"></span>Cassidy AI</div>
+            </div>
+          </div>
+          <div style="padding:22px 24px;border-right:1px solid var(--border)">
+            <div style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-bottom:12px">Use Cases</div>
+            <div style="display:flex;flex-direction:column;gap:7px;font-size:13px;color:var(--mid)">
+              <div>Custom AI agents by department (HR, Finance, Ops)</div>
+              <div>Prompt libraries for repeatable workflows</div>
+              <div>Internal AI tools &amp; copilots</div>
+              <div>AI-powered report generation</div>
+            </div>
+          </div>
+          <div style="padding:22px 24px;background:rgba(0,119,182,.02)">
+            <div style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-bottom:12px">CSM Recommendation</div>
+            <p style="font-size:13px;color:var(--mid);line-height:1.65">This is where we build your <strong style="color:var(--text)">proprietary AI advantage</strong> — custom agents trained on your business, your workflows, and your data. Our highest-impact service engagement.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Layer 5 -->
+      <div class="tech-layer" style="background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 2px 10px rgba(15,35,60,.05)">
+        <div style="display:grid;grid-template-columns:60px 1fr;gap:0;align-items:stretch">
+          <div style="background:var(--teal-bg);display:flex;align-items:center;justify-content:center;font-size:24px;padding:24px"><i data-lucide="database" style="width:26px;height:26px;stroke:var(--teal);stroke-width:1.5"></i></div>
+          <div style="padding:20px 24px;border-bottom:1px solid var(--border)">
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+              <div><span style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal)">Layer 5</span><h3 style="font-size:20px;color:var(--text);margin-top:2px">Data, Retrieval &amp; Intelligence Layer</h3></div>
+              <div style="margin-left:auto;background:var(--teal-bg);border:1px solid rgba(0,122,94,.15);border-radius:8px;padding:5px 12px;font-size:12px;font-weight:600;color:var(--teal);font-family:'Syne',sans-serif;white-space:nowrap">What AI learns from</div>
+            </div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border-top:1px solid var(--border)">
+          <div style="padding:22px 24px;border-right:1px solid var(--border)">
+            <div style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-bottom:12px">Recommended Stack</div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);font-weight:500"><span style="width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0"></span>Relevance AI</div>
+              <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);font-weight:500"><span style="width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0"></span>Airtable</div>
+            </div>
+          </div>
+          <div style="padding:22px 24px;border-right:1px solid var(--border)">
+            <div style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-bottom:12px">Use Cases</div>
+            <div style="display:flex;flex-direction:column;gap:7px;font-size:13px;color:var(--mid)">
+              <div>AI trained on internal company data</div>
+              <div>Semantic search across all documents</div>
+              <div>KPI dashboards powered by AI</div>
+              <div>Customer segmentation &amp; insights</div>
+            </div>
+          </div>
+          <div style="padding:22px 24px;background:rgba(0,122,94,.02)">
+            <div style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-bottom:12px">CSM Recommendation</div>
+            <p style="font-size:13px;color:var(--mid);line-height:1.65">This is where AI becomes <strong style="color:var(--text)">mission-critical</strong> rather than a novelty. When AI is connected to your real business data, it drives revenue, operations, and decisions — not just convenience.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Layer 6 -->
+      <div class="tech-layer" style="background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 2px 10px rgba(15,35,60,.05)">
+        <div style="display:grid;grid-template-columns:60px 1fr;gap:0;align-items:stretch">
+          <div style="background:var(--amber-bg);display:flex;align-items:center;justify-content:center;font-size:24px;padding:24px"><i data-lucide="globe" style="width:26px;height:26px;stroke:var(--amber);stroke-width:1.5"></i></div>
+          <div style="padding:20px 24px;border-bottom:1px solid var(--border)">
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+              <div><span style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--amber)">Layer 6</span><h3 style="font-size:20px;color:var(--text);margin-top:2px">Data Extraction &amp; Web Intelligence Layer</h3></div>
+              <div style="margin-left:auto;background:var(--amber-bg);border:1px solid rgba(155,104,0,.15);border-radius:8px;padding:5px 12px;font-size:12px;font-weight:600;color:var(--amber);font-family:'Syne',sans-serif;white-space:nowrap">Feeding AI with external data</div>
+            </div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border-top:1px solid var(--border)">
+          <div style="padding:22px 24px;border-right:1px solid var(--border)">
+            <div style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-bottom:12px">Recommended Stack</div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);font-weight:500"><span style="width:6px;height:6px;border-radius:50%;background:var(--amber);flex-shrink:0"></span>Firecrawl</div>
+              <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);font-weight:500"><span style="width:6px;height:6px;border-radius:50%;background:var(--amber);flex-shrink:0"></span>Zite</div>
+            </div>
+          </div>
+          <div style="padding:22px 24px;border-right:1px solid var(--border)">
+            <div style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-bottom:12px">Use Cases</div>
+            <div style="display:flex;flex-direction:column;gap:7px;font-size:13px;color:var(--mid)">
+              <div>Competitor monitoring &amp; alerts</div>
+              <div>Market research automation</div>
+              <div>Lead scraping &amp; enrichment</div>
+              <div>Pricing intelligence</div>
+            </div>
+          </div>
+          <div style="padding:22px 24px;background:rgba(155,104,0,.02)">
+            <div style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-bottom:12px">CSM Recommendation</div>
+            <p style="font-size:13px;color:var(--mid);line-height:1.65">External data feeds supercharge your internal AI. When your systems can automatically monitor markets, competitors, and leads, your team makes better decisions faster — without manual research.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div></section>
+
+  <!-- Specialized Agents -->
+  <section class="section section-alt"><div class="container">
+    <div class="sh"><span class="eyebrow">Beyond the Stack</span><h2>Specialized AI Agents &amp; Vertical Tools</h2><p>Plug-and-play AI for specific business functions — deployed on top of your core stack for immediate impact in targeted areas.</p></div>
+    <div class="og">
+      <div class="oc"><h4><i data-lucide="cpu"></i> Gemini</h4><p>Google's multimodal AI — strong for document-heavy workflows, Google Workspace integration, and large-context reasoning tasks across your business.</p></div>
+      <div class="oc"><h4><i data-lucide="bot"></i> Lindy</h4><p>AI employee platform — build AI agents for specific roles like executive assistant, sales coordinator, or customer success manager without writing code.</p></div>
+      <div class="oc"><h4><i data-lucide="monitor"></i> Airtop</h4><p>AI-powered browser automation — agents that interact with websites, extract data, and complete web-based tasks autonomously at scale.</p></div>
+      <div class="oc"><h4><i data-lucide="table"></i> Airtable AI</h4><p>AI embedded directly in your operational database — summarize records, generate content, classify data, and trigger workflows from a single platform.</p></div>
+    </div>
+    <div style="margin-top:32px;background:var(--text);border-radius:16px;padding:32px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center">
+      <div>
+        <div style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:12px">C-Suite Summary</div>
+        <h3 style="color:#fff;font-size:22px;margin-bottom:14px">The AI Stack Narrative</h3>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="font-size:14px;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:9px"><span style="color:var(--blue);font-weight:700;font-family:'Syne',sans-serif;font-size:12px;flex-shrink:0">Interface →</span>How employees use AI every day</div>
+          <div style="font-size:14px;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:9px"><span style="color:var(--teal);font-weight:700;font-family:'Syne',sans-serif;font-size:12px;flex-shrink:0">Knowledge →</span>What AI knows about your business</div>
+          <div style="font-size:14px;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:9px"><span style="color:var(--amber);font-weight:700;font-family:'Syne',sans-serif;font-size:12px;flex-shrink:0">Automation →</span>What AI does without being asked</div>
+          <div style="font-size:14px;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:9px"><span style="color:var(--teal);font-weight:700;font-family:'Syne',sans-serif;font-size:12px;flex-shrink:0">Data →</span>What AI learns and improves from</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;align-items:flex-start;gap:9px"><span style="color:var(--teal);font-size:15px;flex-shrink:0;margin-top:1px">✓</span><div style="font-size:14px;color:rgba(255,255,255,.7)"><strong style="color:#fff">Lower costs</strong> — automation handles 20–40% of admin work</div></div>
+        <div style="display:flex;align-items:flex-start;gap:9px"><span style="color:var(--teal);font-size:15px;flex-shrink:0;margin-top:1px">✓</span><div style="font-size:14px;color:rgba(255,255,255,.7)"><strong style="color:#fff">Faster execution</strong> — workflows that took days happen in minutes</div></div>
+        <div style="display:flex;align-items:flex-start;gap:9px"><span style="color:var(--teal);font-size:15px;flex-shrink:0;margin-top:1px">✓</span><div style="font-size:14px;color:rgba(255,255,255,.7)"><strong style="color:#fff">Better decisions</strong> — AI surfaces insights that would otherwise stay buried</div></div>
+        <div style="display:flex;align-items:flex-start;gap:9px"><span style="color:var(--teal);font-size:15px;flex-shrink:0;margin-top:1px">✓</span><div style="font-size:14px;color:rgba(255,255,255,.7)"><strong style="color:#fff">Compounding advantage</strong> — each layer makes the others smarter over time</div></div>
+      </div>
+    </div>
+  </div></section>
+
+  <div class="cta-block">
+    <h2>Ready to build your AI stack?</h2>
+    <p>Start with a free AI Readiness Assessment to see which layers deliver the fastest ROI for your specific business.</p>
+    <div class="cta-btns">
+      <button class="btn-primary" onclick="openModal()">Take the Free Assessment →</button>
+      <button class="btn-cta-o" onclick="go('contact')">Book a Strategy Call</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ CASE STUDIES ═══════════ -->
+<div id="casestudies" class="page">
+  <div class="ph"><div class="container"><div class="ph-inner">
+    <span class="eyebrow">Case Studies</span>
+    <h1>Real projects. Real results.</h1>
+    <p>A snapshot of the work we've built — from AI-powered platforms to enterprise IT transformations. Screenshots and details added as projects are cleared for publication.</p>
+  </div></div></div>
+
+  <section class="section"><div class="container">
+
+    <!-- Coming Soon placeholder cards -->
+    <div class="sh" style="margin-bottom:48px">
+      <span class="eyebrow">Featured Work</span>
+      <h2>Recent Projects Delivered</h2>
+      <p>We're constantly updating and preparing case study details for publication. Check back — or <a onclick="go('contact')" style="color:var(--blue);font-weight:600;cursor:pointer">reach out directly</a> to discuss our work.</p>
+    </div>
+
+    <!-- Project cards grid -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:64px" class="cs-grid">
+
+      <!-- Youth Soccer Analytics -->
+      <div class="cs-card">
+        <div class="cs-thumb cs-thumb-blue">
+          <div class="cs-thumb-inner"><i data-lucide="circle" style="width:52px;height:52px;stroke:var(--blue);stroke-width:1.25;opacity:.5"></i></div>
+          <span class="cs-tag">AI · Computer Vision</span>
+        </div>
+        <div class="cs-body">
+          <div class="cs-industry">Sports Technology</div>
+          <h3 class="cs-title">Youth Soccer Video Analytics Platform</h3>
+          <p class="cs-desc">AI-powered platform that processes game footage to surface player stats, heat maps, and performance insights — delivered to coaches and parents via web dashboard and mobile app.</p>
+          <div class="cs-stack">
+            <span class="cs-pill">YOLO / ByteTrack</span>
+            <span class="cs-pill">Next.js</span>
+            <span class="cs-pill">Supabase</span>
+            <span class="cs-pill">React Native</span>
+          </div>
+          <div class="cs-status cs-status-done">✓ Delivered</div>
+        </div>
+      </div>
+
+      <!-- ValueForge -->
+      <div class="cs-card">
+        <div class="cs-thumb cs-thumb-teal">
+          <div class="cs-thumb-inner"><i data-lucide="building-2" style="width:52px;height:52px;stroke:var(--teal);stroke-width:1.25;opacity:.5"></i></div>
+          <span class="cs-tag">SaaS · Private Equity</span>
+        </div>
+        <div class="cs-body">
+          <div class="cs-industry">Private Equity</div>
+          <h3 class="cs-title">ValueForge — PE Value Creation Platform</h3>
+          <p class="cs-desc">Full-stack platform for PE firms to manage portfolio companies — featuring 100-day integration plans, synergy tracking, EBITDA bridge visualization, and role-based dashboards.</p>
+          <div class="cs-stack">
+            <span class="cs-pill">Next.js 15</span>
+            <span class="cs-pill">Supabase</span>
+            <span class="cs-pill">Clerk Auth</span>
+            <span class="cs-pill">Prisma</span>
+          </div>
+          <div class="cs-status cs-status-done">✓ Delivered</div>
+        </div>
+      </div>
+
+      <!-- AI Strategy Roadmap -->
+      <div class="cs-card">
+        <div class="cs-thumb cs-thumb-amber">
+          <div class="cs-thumb-inner"><i data-lucide="map" style="width:52px;height:52px;stroke:var(--amber);stroke-width:1.25;opacity:.5"></i></div>
+          <span class="cs-tag">AI Strategy · Advisory</span>
+        </div>
+        <div class="cs-body">
+          <div class="cs-industry">Freight Forwarding</div>
+          <h3 class="cs-title">Enterprise AI Strategy Roadmap</h3>
+          <p class="cs-desc">Executive-ready AI strategy deliverable for a mid-market freight forwarding firm — including AI maturity scoring, 12-month use case roadmap, governance framework, and ROI projections.</p>
+          <div class="cs-stack">
+            <span class="cs-pill">AI Readiness Assessment</span>
+            <span class="cs-pill">Use Case Library</span>
+            <span class="cs-pill">ROI Modeling</span>
+          </div>
+          <div class="cs-status cs-status-done">✓ Delivered</div>
+        </div>
+      </div>
+
+      <!-- M365 Modernization -->
+      <div class="cs-card">
+        <div class="cs-thumb cs-thumb-blue">
+          <div class="cs-thumb-inner"><i data-lucide="briefcase" style="width:52px;height:52px;stroke:var(--blue);stroke-width:1.25;opacity:.5"></i></div>
+          <span class="cs-tag">Microsoft 365 · M&amp;A</span>
+        </div>
+        <div class="cs-body">
+          <div class="cs-industry">Engineering</div>
+          <h3 class="cs-title">M365 Modernization &amp; Acquisition Integration</h3>
+          <p class="cs-desc">Full Microsoft 365 modernization proposal and acquisition integration plan for a 250-user engineering firm — including executive briefs, implementation roadmap, and Gantt-based project plan.</p>
+          <div class="cs-stack">
+            <span class="cs-pill">Microsoft 365</span>
+            <span class="cs-pill">Azure</span>
+            <span class="cs-pill">Intune</span>
+            <span class="cs-pill">Entra ID</span>
+          </div>
+          <div class="cs-status cs-status-done">✓ Delivered</div>
+        </div>
+      </div>
+
+      <!-- Screenshot placeholder 1 -->
+      <div class="cs-card cs-card-upload">
+        <div class="cs-upload-inner">
+          <div style="font-size:32px;margin-bottom:12px"><i data-lucide="image" style="width:32px;height:32px;stroke:var(--soft);stroke-width:1.5"></i></div>
+          <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--mid);margin-bottom:6px">Screenshot Coming Soon</div>
+          <div style="font-size:12px;color:var(--soft);line-height:1.5">Project details and screenshots will be added here</div>
+        </div>
+      </div>
+
+      <!-- Screenshot placeholder 2 -->
+      <div class="cs-card cs-card-upload">
+        <div class="cs-upload-inner">
+          <div style="font-size:32px;margin-bottom:12px"><i data-lucide="image" style="width:32px;height:32px;stroke:var(--soft);stroke-width:1.5"></i></div>
+          <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--mid);margin-bottom:6px">Screenshot Coming Soon</div>
+          <div style="font-size:12px;color:var(--soft);line-height:1.5">Project details and screenshots will be added here</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Work with us CTA -->
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:40px;text-align:center">
+      <span class="eyebrow" style="display:block;margin-bottom:12px">Start a Project</span>
+      <h2 style="margin-bottom:14px;font-size:28px">Want to see your project here?</h2>
+      <p style="font-size:15px;color:var(--mid);max-width:480px;margin:0 auto 28px;line-height:1.7">Whether it's an AI strategy roadmap, a custom platform, or a technology transformation — let's build something worth showcasing.</p>
+      <button class="btn-primary" onclick="go('contact')">Start a Conversation →</button>
+    </div>
+
+  </div></section>
+
+  <div class="cta-block">
+    <h2>Ready to become a case study?</h2>
+    <p>Start with a free AI Readiness Assessment and see exactly where your biggest opportunities are.</p>
+    <div class="cta-btns">
+      <button class="btn-primary" onclick="openModal()">Take the Free Assessment →</button>
+      <button class="btn-cta-o" onclick="go('contact')">Book a Strategy Call</button>
+    </div>
+  </div>
+</div>
+
+<div id="contact" class="page">
+  <div class="ph"><div class="container"><div class="ph-inner">
+    <span class="eyebrow">Get in Touch</span>
+    <h1>Let's talk about your AI opportunity.</h1>
+    <p>First consultation is always free. No pitch, no pressure — just an honest conversation about where you are and where AI can take you.</p>
+  </div></div></div>
+  <section class="section"><div class="container"><div class="cg">
+    <div>
+      <h3 style="font-size:20px;margin-bottom:14px">Reach us directly</h3>
+      <p style="font-size:14px;color:var(--mid);line-height:1.7;margin-bottom:24px">We respond to every inquiry within one business day. Prefer to skip the form? Book on Calendly.</p>
+      <div class="cm"><div class="cm-ico"><i data-lucide="mail"></i></div><div><div class="cm-t">Email</div><div class="cm-v"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="90f7f5fff6f6d0f3e3fdf9fee4f5f7e2f1e4f5f4bef3fffd">[email&#160;protected]</a></div></div></div>
+      <div class="cm"><div class="cm-ico"><i data-lucide="calendar"></i></div><div><div class="cm-t">Book a Call</div><div class="cm-v">Calendly — 30 min, free</div></div></div>
+      <div class="cm"><div class="cm-ico"><i data-lucide="map-pin"></i></div><div><div class="cm-t">Location</div><div class="cm-v">Long Island, NY · NYC Metro · National</div></div></div>
+      <div style="margin-top:22px"><button style="width:100%;padding:11px;border:1.5px solid var(--blue);border-radius:8px;background:var(--blue-bg);color:var(--blue);font-family:'Syne',sans-serif;font-size:13px;font-weight:700;cursor:pointer" onclick="window.open('https://calendly.com/YOUR_LINK','_blank')">📅 Book a Free 30-Minute Call →</button></div>
+      <div style="margin-top:14px;background:var(--text);border-radius:12px;padding:20px">
+        <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:600;color:#fff;margin-bottom:5px">Not sure where to start?</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.55);line-height:1.6;margin-bottom:13px">Take the free AI Assessment first — 5 minutes, instant score, no contact info required.</div>
+        <button style="width:100%;padding:10px;border:none;border-radius:8px;background:var(--blue);color:#fff;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;cursor:pointer" onclick="openModal()">Take the Free Assessment →</button>
+      </div>
+    </div>
+    <div class="fcard">
+      <h3>Send a message</h3>
+      <p class="fcard-sub">Geoffrey responds personally within one business day.</p>
+      <div class="frow">
+        <div class="fg"><label class="fl">First Name</label><input class="fi" id="cf-fn" type="text" placeholder="Alex"></div>
+        <div class="fg"><label class="fl">Last Name</label><input class="fi" id="cf-ln" type="text" placeholder="Smith"></div>
+      </div>
+      <div class="fg"><label class="fl">Work Email</label><input class="fi" id="cf-em" type="email" placeholder="alex@company.com"></div>
+      <div class="fg"><label class="fl">Company</label><input class="fi" id="cf-co" type="text" placeholder="Acme Inc."></div>
+      <div class="fg"><label class="fl">How can we help?</label>
+        <select class="fsel" id="cf-svc">
+          <option value="">Select a service area...</option>
+          <option>AI Training &amp; Workshops</option><option>AI Readiness Assessment</option>
+          <option>AI Use Case Development</option><option>AI Managed Services</option>
+          <option>Fractional CIO</option><option>Managed IT Services</option><option>General Inquiry</option>
+        </select>
+      </div>
+      <div class="fg"><label class="fl">Tell us more</label><textarea class="fta" id="cf-msg" placeholder="What are you trying to accomplish? What's your biggest technology challenge?"></textarea></div>
+      <button class="fsub" onclick="submitContact()">Send Message →</button>
+      <div class="f-ok" id="cf-ok">✓ Message sent! Geoffrey will respond within one business day.</div>
+      <p style="font-size:11px;color:var(--soft);margin-top:9px">🔒 Your info is never shared or sold.</p>
+    </div>
+  </div></div></section>
+</div>
+
+<!-- ═══════════ ASSESSMENT MODAL ═══════════ -->
+<div class="overlay" id="overlay" onclick="overlayClick(event)">
+  <div class="modal">
+    <div class="mh">
+      <h3>Free AI Readiness Assessment</h3>
+      <p id="m-sub">5 questions · instant score · personalized use cases</p>
+      <button class="m-x" onclick="closeModal()">✕</button>
+    </div>
+    <div class="mprog"><div class="mpf" id="mpf" style="width:0%"></div></div>
+    <div class="mb">
+      <div class="ms on" id="ms1">
+        <p class="mq">What best describes your business?</p>
+        <p class="mhint">We'll tailor your results to your specific context.</p>
+        <div class="mopts">
+          <div class="mopt" onclick="pick(this,'ind','Professional Services')"><div class="mrad"></div>Professional Services (consulting, legal, staffing, AEC)</div>
+          <div class="mopt" onclick="pick(this,'ind','Financial Services')"><div class="mrad"></div>Financial Services (accounting, insurance, RIA, lending)</div>
+          <div class="mopt" onclick="pick(this,'ind','Healthcare')"><div class="mrad"></div>Healthcare (practice, clinic, health plan, wellness)</div>
+          <div class="mopt" onclick="pick(this,'ind','Retail / Consumer')"><div class="mrad"></div>Retail / Consumer (product, DTC, food &amp; beverage)</div>
+          <div class="mopt" onclick="pick(this,'ind','Manufacturing / Distribution')"><div class="mrad"></div>Manufacturing / Distribution</div>
+          <div class="mopt" onclick="pick(this,'ind','Other')"><div class="mrad"></div>Other SMB</div>
+        </div>
+      </div>
+      <div class="ms" id="ms2">
+        <p class="mq">How is your business data currently organized?</p>
+        <p class="mhint">This determines what AI can realistically do for you right now.</p>
+        <div class="mopts">
+          <div class="mopt" onclick="pick(this,'data',1)"><div class="mrad"></div>Mostly spreadsheets, email, or paper</div>
+          <div class="mopt" onclick="pick(this,'data',2)"><div class="mrad"></div>Some systems, but not well connected</div>
+          <div class="mopt" onclick="pick(this,'data',3)"><div class="mrad"></div>Core data in 1–2 platforms, mostly reliable</div>
+          <div class="mopt" onclick="pick(this,'data',4)"><div class="mrad"></div>Well-organized, integrated, API-accessible</div>
+        </div>
+      </div>
+      <div class="ms" id="ms3">
+        <p class="mq">Does your company have any AI policy or governance?</p>
+        <p class="mhint">Even informal guidelines count.</p>
+        <div class="mopts">
+          <div class="mopt" onclick="pick(this,'gov',1)"><div class="mrad"></div>No — employees use AI tools however they want</div>
+          <div class="mopt" onclick="pick(this,'gov',2)"><div class="mrad"></div>Informal — we've talked about it, nothing written</div>
+          <div class="mopt" onclick="pick(this,'gov',3)"><div class="mrad"></div>In progress — working on a policy now</div>
+          <div class="mopt" onclick="pick(this,'gov',4)"><div class="mrad"></div>Formal — written policy, approved tools list, training done</div>
+        </div>
+      </div>
+      <div class="ms" id="ms4">
+        <p class="mq">How AI-aware is your team today?</p>
+        <div class="mopts" style="margin-bottom:20px">
+          <div class="mopt" onclick="pick(this,'team',1)"><div class="mrad"></div>Most haven't used AI tools in their work</div>
+          <div class="mopt" onclick="pick(this,'team',2)"><div class="mrad"></div>Curious personally, not using at work</div>
+          <div class="mopt" onclick="pick(this,'team',3)"><div class="mrad"></div>Some using AI tools, results inconsistent</div>
+          <div class="mopt" onclick="pick(this,'team',4)"><div class="mrad"></div>AI embedded in regular workflows with results</div>
+        </div>
+        <p class="mq">What's your timeline for serious AI investment?</p>
+        <div class="mopts">
+          <div class="mopt" onclick="pick(this,'tl',1)"><div class="mrad"></div>Just exploring, no commitment yet</div>
+          <div class="mopt" onclick="pick(this,'tl',2)"><div class="mrad"></div>Actively evaluating (6–12 months)</div>
+          <div class="mopt" onclick="pick(this,'tl',3)"><div class="mrad"></div>Ready to invest now</div>
+        </div>
+      </div>
+      <div class="ms" id="ms5">
+        <p class="mq">Last step — unlock your full results</p>
+        <p class="mhint">Enter your contact info to get your score, tier rating, and personalized use cases.</p>
+        <label class="mfl">Full Name</label><input class="mfi" id="m-name" type="text" placeholder="Alex Smith" oninput="checkGate()">
+        <label class="mfl">Company</label><input class="mfi" id="m-co" type="text" placeholder="Acme Inc." oninput="checkGate()">
+        <label class="mfl">Work Email</label><input class="mfi" id="m-email" type="email" placeholder="alex@company.com" oninput="checkGate()">
+        <p style="font-size:11px;color:var(--soft);line-height:1.5">🔒 No spam. We'll send your report and may follow up with relevant insights.</p>
+      </div>
+      <div class="ms" id="ms6">
+        <div class="res-top">
+          <div class="res-n" id="res-n">0</div>
+          <div class="res-tier" id="res-tier">—</div>
+          <div class="res-scale">
+            <div class="rs-pip p-black" id="pip-black"><div class="rs-pip-dot"></div>0–15 Not Started</div>
+            <div class="rs-pip p-red" id="pip-red"><div class="rs-pip-dot"></div>16–39 Early Stage</div>
+            <div class="rs-pip p-yellow" id="pip-yellow"><div class="rs-pip-dot"></div>40–75 Developing</div>
+            <div class="rs-pip p-green" id="pip-green"><div class="rs-pip-dot"></div>76–100 AI-Ready</div>
+          </div>
+          <div class="res-desc" id="res-desc"></div>
+        </div>
+        <div class="ri-list" id="ri-list"></div>
+        <div class="res-cta-box">
+          <strong>Want a deeper analysis?</strong>
+          <p>Geoffrey offers a free 30-minute AI Strategy session — no pitch, just clarity on your best first move.</p>
+          <button style="padding:10px 20px;border:none;border-radius:7px;background:var(--blue);color:#fff;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;cursor:pointer" onclick="window.open('https://calendly.com/YOUR_LINK','_blank')">Book a Free Strategy Call →</button>
+        </div>
+      </div>
+    </div>
+    <div class="mfoot" id="mfoot">
+      <button class="m-back" id="m-back" onclick="mBack()" style="display:none">← Back</button>
+      <button class="m-next" id="m-next" onclick="mNext()" disabled>Select an option to continue</button>
+    </div>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ── ROUTER ──
+function go(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const t=document.getElementById(id);
+  (t||document.getElementById('home')).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(id==='resources' && allArticles.length===0) loadNews();
+}
+
+// ── HERO TABS ──
+function tab(id,btn){
+  document.querySelectorAll('.hptab').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('hp-assess').style.display='none';
+  document.getElementById('hp-roi').style.display='none';
+  document.getElementById('hp-'+id).style.display='block';
+}
+
+// ── MODAL ──
+const S={step:1,ind:'',data:0,gov:0,team:0,tl:0};
+function openModal(){document.getElementById('overlay').classList.add('open');document.body.style.overflow='hidden';}
+function closeModal(){document.getElementById('overlay').classList.remove('open');document.body.style.overflow='';}
+function overlayClick(e){if(e.target===document.getElementById('overlay'))closeModal();}
+
+function pick(el,key,val){
+  el.closest('.mopts').querySelectorAll('.mopt').forEach(o=>o.classList.remove('on'));
+  el.classList.add('on');S[key]=val;
+  const n=document.getElementById('m-next');
+  n.disabled=false;n.textContent='Continue →';
+  if(S.step===4)chk4();
+}
+function chk4(){const ok=S.team&&S.tl;const n=document.getElementById('m-next');n.disabled=!ok;n.textContent=ok?'Continue →':'Answer both questions';}
+function checkGate(){
+  const ok=document.getElementById('m-name').value.trim()&&document.getElementById('m-co').value.trim()&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById('m-email').value.trim());
+  const n=document.getElementById('m-next');n.disabled=!ok;n.textContent=ok?'Get My Results →':'Fill in all fields';
+}
+
+function mNext(){if(S.step===5){showResults();return;}S.step++;renderM();}
+function mBack(){if(S.step>1){S.step--;renderM();}}
+
+function renderM(){
+  document.querySelectorAll('.ms').forEach(s=>s.classList.remove('on'));
+  document.getElementById('ms'+S.step).classList.add('on');
+  document.getElementById('mpf').style.width=((S.step-1)/5*100)+'%';
+  const bk=document.getElementById('m-back'),nx=document.getElementById('m-next');
+  bk.style.display=S.step>1&&S.step<6?'block':'none';
+  if(S.step===5){nx.disabled=true;nx.textContent='Fill in all fields';}
+  else if(S.step===6){document.getElementById('mfoot').innerHTML='<button onclick="resetM()" style="padding:11px 13px;border:1px solid var(--border);border-radius:8px;background:transparent;color:var(--mid);font-family:\'Syne\',sans-serif;font-size:13px;cursor:pointer">↺ Retake</button><button onclick="window.open(\'https://calendly.com/YOUR_LINK\',\'_blank\')" style="flex:1;padding:11px;border:none;border-radius:8px;background:var(--blue);color:#fff;font-family:\'Syne\',sans-serif;font-size:14px;font-weight:700;cursor:pointer">Book a Free Strategy Call →</button>';}
+  else{nx.disabled=true;nx.textContent='Select an option to continue';if(S.step===4)chk4();}
+}
+
+const TIERS=[
+  {max:15, t:'Not Started',  cls:'sc-black', pip:'pip-black', d:'Your organization hasn\'t yet begun the AI journey. The opportunity is significant — companies that start building their AI foundation now will have a meaningful head start over competitors who wait.'},
+  {max:39, t:'Early Stage',  cls:'sc-red',   pip:'pip-red',   d:'You\'re in the early stages of AI readiness. Key gaps exist in data infrastructure, governance, or workforce awareness. With focused effort in the next 60–90 days, you can move to Developing.'},
+  {max:75, t:'Developing',   cls:'sc-yellow', pip:'pip-yellow', d:'You have the building blocks in place. With focused effort on governance and your first AI deployment, you can have live AI running and delivering ROI within 90 days.'},
+  {max:100,t:'AI-Ready',     cls:'sc-green',  pip:'pip-green',  d:'Strong foundation. You\'re positioned to deploy meaningful AI this quarter and start generating measurable ROI. Prioritize your highest-impact use cases and move fast.'}
+];
+const RECS={
+  'Professional Services':['Document automation — draft proposals and reports from templates instantly','Client communication AI — personalized outreach and follow-up at scale','Knowledge management — searchable AI layer over past work','Billing intelligence — time entry analysis and write-off prediction'],
+  'Financial Services':['Document extraction — pull data from financials and contracts automatically','Compliance monitoring — real-time transaction and communication review','Client onboarding AI — KYC/AML screening automation','Report generation — automated client reporting from structured data'],
+  'Healthcare':['Clinical documentation — AI notes from patient encounters','Scheduling optimization — reduce no-shows, fill cancellations','Revenue cycle AI — automated coding review and denial prediction','Patient communication — automated reminders and follow-up outreach'],
+  'Retail / Consumer':['Demand forecasting — replace manual spreadsheet models with AI','Customer feedback intelligence — review and sentiment analysis at scale','Product content automation — descriptions and copy at scale','Personalization — AI recommendations across site and email'],
+  'Manufacturing / Distribution':['Predictive maintenance — equipment failure prediction from sensor data','Inventory intelligence — demand-driven stock optimization','Quality control AI — automated defect detection','Supplier risk monitoring — real-time supply chain visibility'],
+  'Other':['Process automation — map and automate your most repetitive workflows','Customer service AI — intelligent routing and response','Reporting automation — dashboards that update themselves','Sales AI — lead scoring, personalization, follow-up automation']
+};
+
+function showResults(){
+  const sc=Math.min(100,Math.round(((S.data-1)*8)+((S.gov-1)*8)+((S.team-1)*8)+((S.tl-1)*12)));
+  const tier=TIERS.find(t=>sc<=t.max)||TIERS[3];
+  const recs=RECS[S.ind]||RECS['Other'];
+  S.step=6;
+  document.querySelectorAll('.ms').forEach(s=>s.classList.remove('on'));
+  document.getElementById('ms6').classList.add('on');
+  document.getElementById('mpf').style.width='100%';
+  document.getElementById('m-sub').textContent='Your AI Readiness Results';
+  const el=document.getElementById('res-n');let c=0;
+  const iv=setInterval(()=>{c=Math.min(sc,c+2);el.textContent=c;if(c>=sc)clearInterval(iv);},20);
+  // Apply color class to score number and tier badge
+  el.className='res-n '+tier.cls;
+  const tierEl=document.getElementById('res-tier');
+  tierEl.textContent=tier.t;
+  tierEl.className='res-tier '+tier.cls;
+  // Highlight active pip on grading scale
+  ['pip-black','pip-red','pip-yellow','pip-green'].forEach(id=>{
+    document.getElementById(id).classList.remove('active');
+  });
+  document.getElementById(tier.pip).classList.add('active');
+  document.getElementById('res-desc').textContent=tier.d;
+  document.getElementById('ri-list').innerHTML=recs.slice(0,4).map(r=>`<div class="ri"><div class="ri-ico">→</div><div><strong>${r.split(' — ')[0]}</strong>${r.split(' — ')[1]||''}</div></div>`).join('');
+  renderM();
+  // HubSpot submission
+  const PID='245793065',FID='8aac78ee-44a2-4755-84a7-e7b3b3e21aee';
+  fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${PID}/${FID}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({fields:[{name:'firstname',value:document.getElementById('m-name').value},{name:'company',value:document.getElementById('m-co').value},{name:'email',value:document.getElementById('m-email').value},{name:'ai_score',value:String(sc)},{name:'ai_tier',value:tier.t},{name:'industry',value:S.ind}],context:{pageUri:location.href}})}).catch(()=>{});
+}
+
+function resetM(){
+  Object.assign(S,{step:1,ind:'',data:0,gov:0,team:0,tl:0});
+  document.querySelectorAll('.mopt').forEach(o=>o.classList.remove('on'));
+  ['m-name','m-co','m-email'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('m-sub').textContent='5 questions · instant score · personalized use cases';
+  document.getElementById('mfoot').innerHTML='<button class="m-back" id="m-back" onclick="mBack()" style="display:none">← Back</button><button class="m-next" id="m-next" onclick="mNext()" disabled>Select an option to continue</button>';
+  renderM();
+}
+
+// ── CONTACT FORM ──
+function submitContact(){
+  const fn=document.getElementById('cf-fn').value.trim(),em=document.getElementById('cf-em').value.trim(),co=document.getElementById('cf-co').value.trim();
+  if(!fn||!em||!co){alert('Please fill in your name, company, and email.');return;}
+  fetch('https://api.hsforms.com/submissions/v3/integration/submit/245793065/YOUR_HUBSPOT_CONTACT_FORM_ID',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({fields:[{name:'firstname',value:fn},{name:'lastname',value:document.getElementById('cf-ln').value},{name:'email',value:em},{name:'company',value:co},{name:'message',value:document.getElementById('cf-msg').value}],context:{pageUri:location.href}})}).catch(()=>{});
+  document.getElementById('cf-ok').style.display='block';
+  ['cf-fn','cf-ln','cf-em','cf-co','cf-msg'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('cf-svc').value='';
+}
+
+
+// ── QUOTE MODAL ──
+function openQuote(service){
+  document.getElementById('q-service').value = service || '';
+  document.getElementById('q-overlay').classList.add('open');
+  document.getElementById('q-ok').style.display='none';
+  document.body.style.overflow='hidden';
+}
+function closeQuote(){
+  document.getElementById('q-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+function submitQuote(){
+  const name=document.getElementById('q-name').value.trim();
+  const email=document.getElementById('q-email').value.trim();
+  const co=document.getElementById('q-co').value.trim();
+  if(!name||!email||!co){alert('Please fill in your name, company, and email.');return;}
+  fetch('https://api.hsforms.com/submissions/v3/integration/submit/245793065/YOUR_HUBSPOT_CONTACT_FORM_ID',{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({fields:[
+      {name:'firstname',value:name},
+      {name:'email',value:email},
+      {name:'company',value:co},
+      {name:'message',value:'Custom Quote Request: '+document.getElementById('q-service').value+'. Notes: '+document.getElementById('q-notes').value}
+    ],context:{pageUri:location.href}})
+  }).catch(()=>{});
+  document.getElementById('q-ok').style.display='block';
+  ['q-name','q-email','q-co','q-notes'].forEach(id=>document.getElementById(id).value='');
+}
+
+// ── NEWS FEED ──
+const NEWS_SOURCES = [
+  { name:'MIT Tech Review', url:'https://www.technologyreview.com/feed/', label:'MIT Tech Review' },
+  { name:'VentureBeat AI', url:'https://venturebeat.com/category/ai/feed/', label:'VentureBeat' },
+  { name:'TechCrunch AI', url:'https://techcrunch.com/category/artificial-intelligence/feed/', label:'TechCrunch' },
+  { name:'The Verge AI', url:'https://www.theverge.com/rss/ai-artificial-intelligence/index.xml', label:'The Verge' },
+  { name:'Ars Technica AI', url:'https://feeds.arstechnica.com/arstechnica/technology-lab', label:'Ars Technica' }
+];
+const RSS2JSON = 'https://api.rss2json.com/v1/api.json?rss_url=';
+let allArticles = [], displayedCount = 0;
+const PAGE_SIZE = 6;
+
+function formatDate(dateStr) {
+  if(!dateStr) return '';
+  const d = new Date(dateStr);
+  return d.toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
+}
+
+function stripHtml(html) {
+  const tmp = document.createElement('div');
+  tmp.innerHTML = html;
+  return tmp.textContent || tmp.innerText || '';
+}
+
+function getImg(item) {
+  if(item.thumbnail && item.thumbnail.startsWith('http')) return item.thumbnail;
+  if(item.enclosure && item.enclosure.link) return item.enclosure.link;
+  const match = item.content && item.content.match(/<img[^>]+src="([^">]+)"/);
+  return match ? match[1] : null;
+}
+
+function renderFeatured(article) {
+  const img = getImg(article);
+  const desc = stripHtml(article.description || '').substring(0, 200) + '...';
+  document.getElementById('news-featured').innerHTML = `
+    <a href="${article.link}" target="_blank" rel="noopener" class="news-featured-card" style="display:grid;grid-template-columns:1fr 1fr">
+      <div class="news-featured-img">
+        ${img ? `<img src="${img}" alt="" onerror="this.parentElement.innerHTML='<div class=news-featured-img-ph><i data-lucide=\\'newspaper\\' style=\\'width:48px;height:48px;stroke:var(--soft);stroke-width:1.25\\'></i></div>';lucide.createIcons()">` : '<div class="news-featured-img-ph"><i data-lucide="newspaper" style="width:48px;height:48px;stroke:var(--soft);stroke-width:1.25"></i></div>'}
+      </div>
+      <div class="news-featured-body">
+        <span class="news-src-tag">${article.source} · Featured</span>
+        <h2>${article.title}</h2>
+        <p>${desc}</p>
+        <span class="news-read">Read article → ${formatDate(article.pubDate)}</span>
+      </div>
+    </a>`;
+  lucide.createIcons();
+}
+
+function renderCards(articles) {
+  const grid = document.getElementById('news-cards');
+  articles.forEach(a => {
+    const img = getImg(a);
+    const desc = stripHtml(a.description || '').substring(0, 140) + '...';
+    const card = document.createElement('a');
+    card.href = a.link;
+    card.target = '_blank';
+    card.rel = 'noopener';
+    card.className = 'news-card';
+    card.innerHTML = `
+      <div class="news-card-img">
+        ${img ? `<img src="${img}" alt="" onerror="this.parentElement.innerHTML='<div class=news-card-img-ph><i data-lucide=\\'file-text\\' style=\\'width:36px;height:36px;stroke:var(--soft);stroke-width:1.5\\'></i></div>';lucide.createIcons()">` : '<div class="news-card-img-ph"><i data-lucide="file-text" style="width:36px;height:36px;stroke:var(--soft);stroke-width:1.5"></i></div>'}
+        <span class="news-pill">${a.source}</span>
+      </div>
+      <div class="news-card-body">
+        <h4>${a.title}</h4>
+        <p>${desc}</p>
+        <div class="news-meta">${formatDate(a.pubDate)}</div>
+      </div>`;
+    grid.appendChild(card);
+  });
+  lucide.createIcons();
+}
+
+function loadMoreNews() {
+  const next = allArticles.slice(displayedCount, displayedCount + PAGE_SIZE);
+  renderCards(next);
+  displayedCount += next.length;
+  if(displayedCount >= allArticles.length) {
+    document.getElementById('news-load-more').style.display = 'none';
+  }
+}
+
+async function fetchFeed(source) {
+  try {
+    const res = await fetch(`${RSS2JSON}${encodeURIComponent(source.url)}&count=15`);
+    const data = await res.json();
+    if(data.status === 'ok' && data.items) {
+      return data.items.map(item => ({ ...item, source: source.label }));
+    }
+  } catch(e) {}
+  return [];
+}
+
+async function loadNews() {
+  document.getElementById('news-loading').style.display = 'block';
+  document.getElementById('news-error').style.display = 'none';
+  document.getElementById('news-grid').style.display = 'none';
+  document.getElementById('news-cards').innerHTML = '';
+  document.getElementById('news-featured').innerHTML = '';
+
+  try {
+    const results = await Promise.allSettled(NEWS_SOURCES.map(fetchFeed));
+    const combined = [];
+    results.forEach(r => { if(r.status === 'fulfilled') combined.push(...r.value); });
+
+    if(combined.length === 0) throw new Error('No articles');
+
+    // Sort by date
+    combined.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+    // Deduplicate by title
+    const seen = new Set();
+    allArticles = combined.filter(a => {
+      const key = a.title.toLowerCase().substring(0, 40);
+      if(seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+
+    document.getElementById('news-loading').style.display = 'none';
+    document.getElementById('news-grid').style.display = 'block';
+    document.getElementById('news-updated').textContent = 'Updated ' + new Date().toLocaleTimeString('en-US', {hour:'numeric',minute:'2-digit'});
+
+    // Render featured + first page
+    renderFeatured(allArticles[0]);
+    const firstBatch = allArticles.slice(1, PAGE_SIZE + 1);
+    renderCards(firstBatch);
+    displayedCount = PAGE_SIZE + 1;
+
+    if(allArticles.length > displayedCount) {
+      document.getElementById('news-load-more').style.display = 'inline-block';
+    }
+  } catch(e) {
+    document.getElementById('news-loading').style.display = 'none';
+    document.getElementById('news-error').style.display = 'block';
+    lucide.createIcons();
+  }
+}
+
+// ── INIT ──
+window.addEventListener('load', () => { go('home'); lucide.createIcons(); });
+</script>
+
+<!-- ═══ QUOTE MODAL ═══ -->
+<div class="qoverlay" id="q-overlay" onclick="if(event.target===this)closeQuote()">
+  <div class="qmodal">
+    <div class="qmh">
+      <h3>Request a Custom Quote</h3>
+      <p id="q-service-label">We'll put together a proposal tailored to your business.</p>
+      <button class="qm-x" onclick="closeQuote()">✕</button>
+    </div>
+    <div class="qmb">
+      <input type="hidden" id="q-service">
+      <div class="fg"><label class="fl">Full Name</label><input class="fi" id="q-name" type="text" placeholder="Alex Smith"></div>
+      <div class="fg"><label class="fl">Work Email</label><input class="fi" id="q-email" type="email" placeholder="alex@company.com"></div>
+      <div class="fg"><label class="fl">Company</label><input class="fi" id="q-co" type="text" placeholder="Acme Inc."></div>
+      <div class="fg"><label class="fl">Anything else we should know? (optional)</label><textarea class="fta" id="q-notes" placeholder="Team size, timeline, specific goals..." style="min-height:70px"></textarea></div>
+      <button class="fsub" onclick="submitQuote()">Send Quote Request →</button>
+      <div class="qm-ok" id="q-ok">✓ Request received! We'll send a custom proposal within one business day.</div>
+      <p style="font-size:11px;color:var(--soft);margin-top:9px">🔒 No commitment required. We'll follow up within one business day.</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>
