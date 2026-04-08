@@ -665,7 +665,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 0 2
 
   <section class="section section-alt">
     <div class="container">
-      <div class="sh"><span class="eyebrow">Why CSM</span><h2>Strategy and execution.<br>Not one without the other.</h2><p>We fill the gap — enterprise-grade AI strategy, actually implemented.</p></div>
+      <div class="sh"><span class="eyebrow">Why CSM</span><h2>Strategy and execution.<br>Not one without the other.</h2><p>Most SMBs are stuck between MSPs that don't understand AI and consultants who never implement anything. We fill the gap — enterprise-grade AI strategy, actually implemented.</p></div>
       <div class="vp-grid">
         <div class="vpc"><div class="vpc-bar"></div><div class="vpc-ico"><i data-lucide="map"></i></div><h3>Strategy + Execution</h3><p>We build the roadmap and deploy it. Every engagement ends with something working — not a 200-page document collecting dust.</p></div>
         <div class="vpc t"><div class="vpc-bar"></div><div class="vpc-ico"><i data-lucide="zap"></i></div><h3>AI-Native, Not AI-Opportunistic</h3><p>We're not an MSP that added "AI" to the website. AI strategy and implementation have been our focus — we know what actually works in practice.</p></div>
@@ -1952,5 +1952,480 @@ window.addEventListener('load', () => { go('home'); lucide.createIcons(); });
     </div>
   </div>
 </div>
+<!-- ═══════════ CSM AI CHATBOT WIDGET ═══════════ -->
+<style>
+  /* Floating button */
+  #csm-chat-btn {
+    position: fixed; bottom: 28px; right: 28px; z-index: 9999;
+    display: flex; align-items: center; gap: 0;
+    background: transparent;
+    cursor: pointer; border: none; padding: 0;
+    transition: transform .2s;
+  }
+  #csm-chat-btn:hover { transform: translateY(-3px); }
+  #csm-chat-btn:hover .chat-btn-label { opacity: 1; transform: translateX(0); }
+
+  /* "Can I help?" label */
+  .chat-btn-label {
+    background: #00153D; color: #fff;
+    font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 800;
+    padding: 10px 18px 10px 20px;
+    border-radius: 50px 0 0 50px;
+    white-space: nowrap;
+    opacity: 0; transform: translateX(10px);
+    transition: opacity .25s, transform .25s;
+    box-shadow: -3px 3px 16px rgba(0,21,61,.25);
+  }
+
+  /* Robot avatar circle */
+  .chat-btn-robot {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: #009CDE;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(0,156,222,.45);
+    flex-shrink: 0; position: relative;
+    animation: robot-bounce 3s ease-in-out infinite;
+  }
+  .chat-btn-robot svg { width: 38px; height: 38px; }
+
+  /* Question mark badge */
+  .chat-btn-qmark {
+    position: absolute; top: -4px; right: -4px;
+    width: 22px; height: 22px; border-radius: 50%;
+    background: #fff; border: 2px solid #009CDE;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 900;
+    color: #009CDE; line-height: 1;
+  }
+
+  /* Online dot */
+  .chat-btn-online {
+    position: absolute; bottom: 2px; right: 2px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: #3F9C35; border: 2px solid #fff;
+    animation: dot-pulse 1.5s ease-in-out infinite;
+  }
+
+  @keyframes robot-bounce {
+    0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)}
+  }
+  @keyframes dot-pulse { 0%,100%{opacity:1} 50%{opacity:.5} }
+
+  /* Chat window */
+  #csm-chat-window {
+    position: fixed; bottom: 90px; right: 28px; z-index: 9999;
+    width: 380px; max-height: 560px;
+    background: #fff; border-radius: 18px;
+    box-shadow: 0 8px 48px rgba(15,35,60,.18);
+    display: flex; flex-direction: column;
+    overflow: hidden; border: 1px solid rgba(0,156,222,.2);
+    display: none; opacity: 0;
+    transition: opacity .25s, transform .25s;
+    transform: translateY(10px);
+    font-family: 'DM Sans', 'Inter', sans-serif;
+  }
+  #csm-chat-window.open { display: flex; opacity: 1; transform: translateY(0); }
+
+  /* Header */
+  .chat-header {
+    background: linear-gradient(135deg, #00153D 0%, #009CDE 100%);
+    padding: 16px 20px; display: flex; align-items: center; gap: 12px;
+  }
+  .chat-header-avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: rgba(255,255,255,.15);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 800; color: #fff;
+    flex-shrink: 0;
+  }
+  .chat-header-info { flex: 1; }
+  .chat-header-name { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 800; color: #fff; }
+  .chat-header-status { font-size: 11px; color: rgba(255,255,255,.7); display: flex; align-items: center; gap: 5px; margin-top: 2px; }
+  .chat-header-status-dot { width: 6px; height: 6px; background: #3F9C35; border-radius: 50%; }
+  .chat-close { background: none; border: none; color: rgba(255,255,255,.7); cursor: pointer; font-size: 20px; padding: 0; line-height: 1; }
+  .chat-close:hover { color: #fff; }
+
+  /* Messages */
+  .chat-messages {
+    flex: 1; overflow-y: auto; padding: 16px;
+    display: flex; flex-direction: column; gap: 12px;
+    background: #f7f9fc;
+    max-height: 360px;
+  }
+  .chat-messages::-webkit-scrollbar { width: 4px; }
+  .chat-messages::-webkit-scrollbar-track { background: transparent; }
+  .chat-messages::-webkit-scrollbar-thumb { background: rgba(0,0,0,.15); border-radius: 4px; }
+
+  .msg { display: flex; gap: 8px; align-items: flex-end; max-width: 88%; }
+  .msg.user { align-self: flex-end; flex-direction: row-reverse; }
+  .msg-bubble {
+    padding: 10px 14px; border-radius: 14px;
+    font-size: 13px; line-height: 1.6; color: #1a2332;
+    background: #fff; border: 1px solid #e8edf3;
+    box-shadow: 0 1px 4px rgba(15,35,60,.06);
+  }
+  .msg.user .msg-bubble { background: #009CDE; color: #fff; border-color: #009CDE; }
+  .msg-avatar {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: #00153D; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-size: 9px; font-weight: 800; color: #fff;
+  }
+
+  /* Typing indicator */
+  .typing-indicator { display: flex; gap: 4px; padding: 12px 14px; }
+  .typing-indicator span {
+    width: 7px; height: 7px; background: #009CDE; border-radius: 50%;
+    animation: typing-bounce .8s ease-in-out infinite;
+  }
+  .typing-indicator span:nth-child(2) { animation-delay: .15s; }
+  .typing-indicator span:nth-child(3) { animation-delay: .3s; }
+  @keyframes typing-bounce { 0%,80%,100%{transform:translateY(0)} 40%{transform:translateY(-6px)} }
+
+  /* Quick replies */
+  .chat-quick-replies {
+    padding: 8px 16px; display: flex; gap: 8px; flex-wrap: wrap;
+    background: #f7f9fc; border-top: 1px solid #e8edf3;
+  }
+  .quick-reply {
+    padding: 6px 12px; border-radius: 20px; border: 1.5px solid #009CDE;
+    background: transparent; color: #009CDE;
+    font-size: 12px; font-weight: 600; cursor: pointer;
+    font-family: 'Syne', sans-serif; transition: all .15s;
+    white-space: nowrap;
+  }
+  .quick-reply:hover { background: #009CDE; color: #fff; }
+
+  /* Lead capture form */
+  .chat-lead-form {
+    padding: 14px 16px; background: #fff; border-top: 1px solid #e8edf3;
+    display: none; flex-direction: column; gap: 8px;
+  }
+  .chat-lead-form.show { display: flex; }
+  .chat-lead-form p { font-size: 12px; color: #63666A; margin: 0; }
+  .chat-lead-form input {
+    padding: 9px 12px; border: 1.5px solid #e8edf3; border-radius: 8px;
+    font-size: 13px; outline: none; transition: border-color .15s;
+    font-family: inherit;
+  }
+  .chat-lead-form input:focus { border-color: #009CDE; }
+  .chat-lead-submit {
+    padding: 10px; background: #009CDE; color: #fff; border: none;
+    border-radius: 8px; font-family: 'Syne', sans-serif; font-size: 13px;
+    font-weight: 700; cursor: pointer; transition: background .15s;
+  }
+  .chat-lead-submit:hover { background: #00688A; }
+
+  /* Escalation options */
+  .chat-escalation {
+    padding: 12px 16px; background: #EAF4E7; border-top: 1px solid #c8e6c0;
+    display: none; flex-direction: column; gap: 8px;
+  }
+  .chat-escalation.show { display: flex; }
+  .chat-escalation p { font-size: 12px; color: #2D7026; font-weight: 600; margin: 0; }
+  .escalation-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+  .esc-btn {
+    padding: 7px 12px; border-radius: 8px; border: 1.5px solid #3F9C35;
+    background: #fff; color: #2D7026; font-size: 12px; font-weight: 600;
+    cursor: pointer; font-family: 'Syne', sans-serif; transition: all .15s;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .esc-btn:hover { background: #3F9C35; color: #fff; }
+  .esc-btn.disabled { opacity: .5; cursor: not-allowed; }
+  .esc-btn.disabled:hover { background: #fff; color: #2D7026; }
+
+  /* Input area */
+  .chat-input-area {
+    padding: 12px 16px; background: #fff; border-top: 1px solid #e8edf3;
+    display: flex; gap: 8px; align-items: center;
+  }
+  #csm-chat-input {
+    flex: 1; padding: 10px 14px; border: 1.5px solid #e8edf3;
+    border-radius: 24px; font-size: 13px; outline: none;
+    font-family: inherit; resize: none; transition: border-color .15s;
+    background: #f7f9fc;
+  }
+  #csm-chat-input:focus { border-color: #009CDE; background: #fff; }
+  #csm-chat-send {
+    width: 38px; height: 38px; border-radius: 50%; border: none;
+    background: #009CDE; color: #fff; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; transition: background .15s;
+  }
+  #csm-chat-send:hover { background: #00688A; }
+  #csm-chat-send svg { width: 16px; height: 16px; }
+
+  @media(max-width:480px) {
+    #csm-chat-window { width: calc(100vw - 32px); left: 16px; right: 16px; bottom: 80px; }
+    #csm-chat-btn { right: 16px; bottom: 20px; }
+  }
+</style>
+
+<!-- Floating Button -->
+<button id="csm-chat-btn" onclick="csmToggleChat()">
+  <span class="chat-btn-label">Can I help?</span>
+  <div class="chat-btn-robot">
+    <!-- Robot face SVG -->
+    <svg viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Antenna -->
+      <line x1="19" y1="4" x2="19" y2="9" stroke="white" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="19" cy="3" r="2" fill="white"/>
+      <!-- Head -->
+      <rect x="8" y="9" width="22" height="16" rx="5" fill="white"/>
+      <!-- Eyes -->
+      <circle cx="14" cy="17" r="3" fill="#009CDE"/>
+      <circle cx="24" cy="17" r="3" fill="#009CDE"/>
+      <circle cx="14" cy="17" r="1.2" fill="white"/>
+      <circle cx="24" cy="17" r="1.2" fill="white"/>
+      <!-- Smile -->
+      <path d="M14 22 Q19 26 24 22" stroke="#009CDE" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+      <!-- Body/shoulders -->
+      <rect x="12" y="26" width="14" height="8" rx="4" fill="white" opacity="0.85"/>
+      <!-- Arms hint -->
+      <path d="M12 30 Q8 29 8 33" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+      <path d="M26 30 Q30 29 30 33" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+    </svg>
+    <div class="chat-btn-qmark">?</div>
+    <div class="chat-btn-online"></div>
+  </div>
+</button>
+
+<!-- Chat Window -->
+<div id="csm-chat-window">
+  <div class="chat-header">
+    <div class="chat-header-avatar">CSM</div>
+    <div class="chat-header-info">
+      <div class="chat-header-name">CSM Assistant</div>
+      <div class="chat-header-status"><div class="chat-header-status-dot"></div>Online · Powered by Claude AI</div>
+    </div>
+    <button class="chat-close" onclick="csmToggleChat()">×</button>
+  </div>
+
+  <div class="chat-messages" id="csm-messages"></div>
+
+  <div class="chat-quick-replies" id="csm-quick-replies">
+    <button class="quick-reply" onclick="csmSendQuick('What services do you offer?')">Our Services</button>
+    <button class="quick-reply" onclick="csmSendQuick('How does the AI Assessment work?')">AI Assessment</button>
+    <button class="quick-reply" onclick="csmSendQuick('What does it cost?')">Pricing</button>
+  </div>
+
+  <div class="chat-lead-form" id="csm-lead-form">
+    <p>📋 I'd love to follow up — what's the best way to reach you?</p>
+    <input type="text" id="csm-lead-name" placeholder="Your name" />
+    <input type="email" id="csm-lead-email" placeholder="Work email" />
+    <input type="text" id="csm-lead-company" placeholder="Company name" />
+    <button class="chat-lead-submit" onclick="csmSubmitLead()">Send my info →</button>
+  </div>
+
+  <div class="chat-escalation" id="csm-escalation">
+    <p>Want to connect with a real person?</p>
+    <div class="escalation-btns">
+      <button class="esc-btn" onclick="csmEscalate('call')">📞 Request a Call</button>
+      <button class="esc-btn" onclick="csmEscalate('email')">✉️ Send an Email</button>
+      <button class="esc-btn esc-btn-live disabled" title="Coming soon">💬 Live Chat</button>
+    </div>
+  </div>
+
+  <div class="chat-input-area">
+    <input type="text" id="csm-chat-input" placeholder="Ask me anything about CSM…" onkeydown="if(event.key==='Enter')csmSendMessage()" />
+    <button id="csm-chat-send" onclick="csmSendMessage()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script>
+(function() {
+  const SYSTEM_PROMPT = `You are the CSM Assistant, an intelligent AI assistant for CSM Integrated Solutions LLC — an AI enablement, fractional CIO, and IT strategy consulting firm based on Long Island, NY, founded by Geoffrey Pearlman.
+
+CSM helps growing small and mid-sized businesses ($1M–$100M revenue) across Long Island, NYC, and Westchester implement AI that delivers measurable ROI — without enterprise complexity or Big 4 price tags.
+
+SERVICES:
+1. AI Enablement & Training — Hands-on workshops, team AI adoption, building real AI agents
+2. AI Readiness Assessment — 5-question free self-serve version; full paid engagement with stakeholder interviews, 12–24 month roadmap, ROI projections
+3. AI Use Case Development — Design, pilot, and deploy AI solutions for business processes
+4. AI Managed Services — Monthly monitoring, optimization, subscription model
+5. Fractional CIO — AI-first IT strategy, vendor management, board reporting, CEO/CFO advisory
+6. IT Spend Optimization — Recover 20–40% of tech budget through contract renegotiation and rightsizing
+
+KEY DIFFERENTIATORS:
+- Strategy + Execution: We build the roadmap AND deploy it
+- AI-Native (not AI-opportunistic): Not an MSP that added "AI" to the website
+- SMB-Calibrated: Fortune 500 methodology at SMB scale and price
+- Vendor-Neutral: No software commissions — we recommend what's right for the client
+- 20+ years enterprise IT experience, 300+ clients served
+- RSM US LLP background (Big 4-equivalent consulting pedigree)
+
+PROCESS (4 stages, 90 days to first live AI win):
+1. Assess (2 weeks) — AI Readiness Assessment
+2. Strategize (1 week) — Roadmap, use case backlog, governance framework
+3. Deploy (4–8 weeks) — Hands-on implementation of top 1–3 use cases
+4. Optimize (ongoing) — Monthly managed services
+
+CONTACT: csmintegrated.com | Long Island, NY
+
+YOUR BEHAVIOR:
+- Be warm, confident, and knowledgeable — like a trusted senior advisor
+- Keep responses concise (2–4 sentences max unless the user asks for detail)
+- Always steer toward the free AI Assessment or booking a call as next steps
+- After 5 messages, naturally ask for the user's name and email to follow up
+- Never make up pricing — say "pricing is custom based on scope, we can discuss on a call"
+- If asked about competitors, be respectful but highlight CSM's differentiators
+- Current date: April 2026`;
+
+  let messages = [];
+  let msgCount = 0;
+  let leadCaptured = false;
+  let chatOpen = false;
+
+  // Initial greeting
+  const GREETING = "Hi there! 👋 I'm the CSM Assistant. I can tell you about our AI consulting services, how the free AI Readiness Assessment works, or help you figure out if CSM is the right fit for your business. What's on your mind?";
+
+  window.csmToggleChat = function() {
+    const win = document.getElementById('csm-chat-window');
+    chatOpen = !chatOpen;
+    if (chatOpen) {
+      win.style.display = 'flex';
+      setTimeout(() => win.classList.add('open'), 10);
+      if (messages.length === 0) csmAddBotMessage(GREETING);
+      document.getElementById('csm-chat-input').focus();
+    } else {
+      win.classList.remove('open');
+      setTimeout(() => win.style.display = 'none', 250);
+    }
+  };
+
+  window.csmSendQuick = function(text) {
+    document.getElementById('csm-chat-input').value = text;
+    csmSendMessage();
+    document.getElementById('csm-quick-replies').style.display = 'none';
+  };
+
+  window.csmSendMessage = async function() {
+    const input = document.getElementById('csm-chat-input');
+    const text = input.value.trim();
+    if (!text) return;
+    input.value = '';
+    document.getElementById('csm-quick-replies').style.display = 'none';
+
+    csmAddUserMessage(text);
+    messages.push({ role: 'user', content: text });
+    msgCount++;
+
+    // Show typing
+    const typingId = csmAddTyping();
+
+    try {
+      const res = await fetch('/.netlify/functions/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages, systemPrompt: SYSTEM_PROMPT })
+      });
+      const data = await res.json();
+      csmRemoveTyping(typingId);
+      const reply = data.content?.[0]?.text || "I'm having a moment — please try again!";
+      csmAddBotMessage(reply);
+      messages.push({ role: 'assistant', content: reply });
+    } catch(e) {
+      csmRemoveTyping(typingId);
+      csmAddBotMessage("Sorry, I ran into a connection issue. Please try again in a moment!");
+    }
+
+    // After 5 messages, show lead capture
+    if (msgCount >= 5 && !leadCaptured) {
+      setTimeout(() => {
+        csmAddBotMessage("I've really enjoyed our conversation! To make sure I can follow up with you personally, would you mind sharing your contact details below?");
+        document.getElementById('csm-lead-form').classList.add('show');
+        document.getElementById('csm-escalation').classList.add('show');
+      }, 800);
+    }
+  };
+
+  window.csmSubmitLead = async function() {
+    const name = document.getElementById('csm-lead-name').value.trim();
+    const email = document.getElementById('csm-lead-email').value.trim();
+    const company = document.getElementById('csm-lead-company').value.trim();
+    if (!name || !email) { alert('Please enter your name and email.'); return; }
+
+    leadCaptured = true;
+    document.getElementById('csm-lead-form').classList.remove('show');
+
+    // Push to HubSpot
+    try {
+      await fetch('https://api.hsforms.com/submissions/v3/integration/submit/245793065/CHATBOT_FORM_ID', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fields: [
+            { name: 'firstname', value: name },
+            { name: 'email', value: email },
+            { name: 'company', value: company },
+            { name: 'message', value: 'Lead captured via AI chatbot — ' + new Date().toLocaleDateString('en-US', {month:'long',day:'numeric',year:'numeric'}) }
+          ],
+          context: { pageUri: location.href }
+        })
+      });
+    } catch(e) { /* silent fail, don't disrupt UX */ }
+
+    csmAddBotMessage(`Thanks ${name}! 🎉 I've passed your info to the CSM team and someone will reach out shortly. In the meantime, feel free to keep chatting or take our free AI Readiness Assessment to get an instant score for your business.`);
+  };
+
+  window.csmEscalate = function(type) {
+    if (type === 'call') {
+      csmAddBotMessage("Great — I'll flag your request for a callback. If you've shared your contact info above, the team will be in touch within one business day. Or book directly at csmintegrated.com/contact.");
+    } else if (type === 'email') {
+      window.location.href = 'mailto:info@csmintegrated.com?subject=Chat Inquiry — CSM Website';
+    }
+  };
+
+  function csmAddUserMessage(text) {
+    const el = document.createElement('div');
+    el.className = 'msg user';
+    el.innerHTML = `<div class="msg-bubble">${escHtml(text)}</div>`;
+    document.getElementById('csm-messages').appendChild(el);
+    csmScroll();
+  }
+
+  function csmAddBotMessage(text) {
+    const el = document.createElement('div');
+    el.className = 'msg bot';
+    el.innerHTML = `<div class="msg-avatar">CSM</div><div class="msg-bubble">${text}</div>`;
+    document.getElementById('csm-messages').appendChild(el);
+    csmScroll();
+    return el;
+  }
+
+  function csmAddTyping() {
+    const id = 'typing-' + Date.now();
+    const el = document.createElement('div');
+    el.className = 'msg bot'; el.id = id;
+    el.innerHTML = `<div class="msg-avatar">CSM</div><div class="msg-bubble"><div class="typing-indicator"><span></span><span></span><span></span></div></div>`;
+    document.getElementById('csm-messages').appendChild(el);
+    csmScroll();
+    return id;
+  }
+
+  function csmRemoveTyping(id) {
+    const el = document.getElementById(id);
+    if (el) el.remove();
+  }
+
+  function csmScroll() {
+    const msgs = document.getElementById('csm-messages');
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function escHtml(t) {
+    return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  // Auto-open after 45 seconds if not yet opened
+  setTimeout(() => { if (!chatOpen) csmToggleChat(); }, 45000);
+})();
+</script>
+<!-- ═══════════ END CHATBOT ═══════════ -->
+
 </body>
 </html>
