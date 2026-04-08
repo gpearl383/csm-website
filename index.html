@@ -264,7 +264,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 0 2
 .ft-links{display:flex;gap:18px}
 
 /* ─── PAGE HERO ─── */
-.ph{padding:136px 0 72px;background:var(--bg2);position:relative;overflow:hidden}
+.ph{padding:136px 0 32px;background:var(--bg2);position:relative;overflow:hidden}
 .ph::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 60% at 70% 50%,rgba(0,119,182,.05) 0%,transparent 70%)}
 .ph-inner{position:relative;z-index:1;max-width:680px}
 .ph .eyebrow{display:block;margin-bottom:12px}
@@ -1050,18 +1050,65 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 0 2
 <!-- ═══════════ CONTACT ═══════════ -->
 <!-- ═══════════ TECHNOLOGY ═══════════ -->
 <div id="technology" class="page">
-  <div class="ph"><div class="container"><div class="ph-inner">
-    <span class="eyebrow">Technology Stack</span>
-    <h1>The AI Operating System for Your Business.</h1>
-    <p>Not a single tool. Not a one-time project. A layered framework that makes AI a permanent, compounding advantage across every function of your organization.</p>
-  </div></div></div>
+  <div class="ph" style="padding-bottom:48px"><div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1.1fr;gap:48px;align-items:center">
+      <div class="ph-inner" style="padding:0">
+        <span class="eyebrow">Technology Stack</span>
+        <h1>The AI Operating System for Your Business.</h1>
+        <p>Not a single tool. Not a one-time project. A layered framework that makes AI a permanent, compounding advantage across every function of your organization — built in four connected layers that each amplify the others.</p>
+      </div>
+      <div style="background:var(--text);border-radius:16px;padding:24px 28px;position:relative;overflow:visible">
+        <div style="position:absolute;top:-30px;right:-30px;width:140px;height:140px;border-radius:50%;background:rgba(0,119,182,.12);z-index:0"></div>
+        <div style="position:relative;z-index:1">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+            <div style="font-family:'Syne',sans-serif;font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.4)">C-Suite Quick View</div>
+            <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:#fff">The AI Stack</div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:rgba(255,255,255,.08);border-radius:10px;overflow:hidden">
+            <!-- Row 1: Layers -->
+            <div style="background:rgba(255,255,255,.04);padding:16px 14px;border-bottom:1px solid rgba(255,255,255,.08);border-right:1px solid rgba(255,255,255,.08)">
+              <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:800;color:#009CDE;margin-bottom:6px">Interface</div>
+              <div style="font-size:11px;color:rgba(255,255,255,.55);line-height:1.6">How employees use AI every day</div>
+            </div>
+            <div style="background:rgba(255,255,255,.04);padding:16px 14px;border-bottom:1px solid rgba(255,255,255,.08);border-right:1px solid rgba(255,255,255,.08)">
+              <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:800;color:#3F9C35;margin-bottom:6px">Knowledge</div>
+              <div style="font-size:11px;color:rgba(255,255,255,.55);line-height:1.6">What AI knows about your business</div>
+            </div>
+            <div style="background:rgba(255,255,255,.04);padding:16px 14px;border-bottom:1px solid rgba(255,255,255,.08);border-right:1px solid rgba(255,255,255,.08)">
+              <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:800;color:#F5A623;margin-bottom:6px">Automation</div>
+              <div style="font-size:11px;color:rgba(255,255,255,.55);line-height:1.6">What AI does without being asked</div>
+            </div>
+            <div style="background:rgba(255,255,255,.04);padding:16px 14px;border-bottom:1px solid rgba(255,255,255,.08)">
+              <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:800;color:#66C3EB;margin-bottom:6px">Data</div>
+              <div style="font-size:11px;color:rgba(255,255,255,.55);line-height:1.6">What AI learns and improves from</div>
+            </div>
+            <!-- Row 2: Outcomes -->
+            <div style="background:rgba(0,156,222,.07);padding:16px 14px;border-right:1px solid rgba(255,255,255,.08)">
+              <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px"><span style="color:#3F9C35;font-size:11px;flex-shrink:0">✓</span><div style="font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:#fff">Lower costs</div></div>
+              <div style="font-size:10px;color:rgba(255,255,255,.45);line-height:1.6">20–40% of admin work automated</div>
+            </div>
+            <div style="background:rgba(63,156,53,.07);padding:16px 14px;border-right:1px solid rgba(255,255,255,.08)">
+              <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px"><span style="color:#3F9C35;font-size:11px;flex-shrink:0">✓</span><div style="font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:#fff">Better decisions</div></div>
+              <div style="font-size:10px;color:rgba(255,255,255,.45);line-height:1.6">Insights surfaced from your own data</div>
+            </div>
+            <div style="background:rgba(245,166,35,.07);padding:16px 14px;border-right:1px solid rgba(255,255,255,.08)">
+              <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px"><span style="color:#3F9C35;font-size:11px;flex-shrink:0">✓</span><div style="font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:#fff">Faster execution</div></div>
+              <div style="font-size:10px;color:rgba(255,255,255,.45);line-height:1.6">Days-long workflows done in minutes</div>
+            </div>
+            <div style="background:rgba(102,195,235,.07);padding:16px 14px">
+              <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px"><span style="color:#3F9C35;font-size:11px;flex-shrink:0">✓</span><div style="font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:#fff">Compounding value</div></div>
+              <div style="font-size:10px;color:rgba(255,255,255,.45);line-height:1.6">Each layer makes the others smarter</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></div>
 
   <!-- Intro narrative -->
-  <section class="section section-alt"><div class="container">
+  <section class="section section-alt" style="padding-top:40px"><div class="container">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center">
       <div>
-        <span class="eyebrow" style="display:block;margin-bottom:12px">The Framework</span>
-        <h2 style="margin-bottom:18px">Four layers. One operating system.</h2>
         <p style="font-size:15px;color:var(--mid);line-height:1.8;margin-bottom:20px">Most businesses treat AI like software — you buy a tool, it does a thing. That's not how the organizations winning with AI think about it. They build a stack: a connected set of layers that each amplify the others.</p>
         <p style="font-size:15px;color:var(--mid);line-height:1.8;margin-bottom:28px">CSM helps you architect and deploy this stack for your specific business — starting with the layer that delivers the fastest ROI and building toward a fully integrated AI-native operation.</p>
         <div style="display:flex;flex-direction:column;gap:12px">
@@ -1321,24 +1368,6 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 0 2
       <div class="oc"><h4><i data-lucide="bot"></i> Lindy</h4><p>AI employee platform — build AI agents for specific roles like executive assistant, sales coordinator, or customer success manager without writing code.</p></div>
       <div class="oc"><h4><i data-lucide="monitor"></i> Airtop</h4><p>AI-powered browser automation — agents that interact with websites, extract data, and complete web-based tasks autonomously at scale.</p></div>
       <div class="oc"><h4><i data-lucide="table"></i> Airtable AI</h4><p>AI embedded directly in your operational database — summarize records, generate content, classify data, and trigger workflows from a single platform.</p></div>
-    </div>
-    <div style="margin-top:32px;background:var(--text);border-radius:16px;padding:32px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center">
-      <div>
-        <div style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:12px">C-Suite Summary</div>
-        <h3 style="color:#fff;font-size:22px;margin-bottom:14px">The AI Stack Narrative</h3>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div style="font-size:14px;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:9px"><span style="color:var(--blue);font-weight:700;font-family:'Syne',sans-serif;font-size:12px;flex-shrink:0">Interface →</span>How employees use AI every day</div>
-          <div style="font-size:14px;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:9px"><span style="color:var(--teal);font-weight:700;font-family:'Syne',sans-serif;font-size:12px;flex-shrink:0">Knowledge →</span>What AI knows about your business</div>
-          <div style="font-size:14px;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:9px"><span style="color:var(--amber);font-weight:700;font-family:'Syne',sans-serif;font-size:12px;flex-shrink:0">Automation →</span>What AI does without being asked</div>
-          <div style="font-size:14px;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:9px"><span style="color:var(--teal);font-weight:700;font-family:'Syne',sans-serif;font-size:12px;flex-shrink:0">Data →</span>What AI learns and improves from</div>
-        </div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:12px">
-        <div style="display:flex;align-items:flex-start;gap:9px"><span style="color:var(--teal);font-size:15px;flex-shrink:0;margin-top:1px">✓</span><div style="font-size:14px;color:rgba(255,255,255,.7)"><strong style="color:#fff">Lower costs</strong> — automation handles 20–40% of admin work</div></div>
-        <div style="display:flex;align-items:flex-start;gap:9px"><span style="color:var(--teal);font-size:15px;flex-shrink:0;margin-top:1px">✓</span><div style="font-size:14px;color:rgba(255,255,255,.7)"><strong style="color:#fff">Faster execution</strong> — workflows that took days happen in minutes</div></div>
-        <div style="display:flex;align-items:flex-start;gap:9px"><span style="color:var(--teal);font-size:15px;flex-shrink:0;margin-top:1px">✓</span><div style="font-size:14px;color:rgba(255,255,255,.7)"><strong style="color:#fff">Better decisions</strong> — AI surfaces insights that would otherwise stay buried</div></div>
-        <div style="display:flex;align-items:flex-start;gap:9px"><span style="color:var(--teal);font-size:15px;flex-shrink:0;margin-top:1px">✓</span><div style="font-size:14px;color:rgba(255,255,255,.7)"><strong style="color:#fff">Compounding advantage</strong> — each layer makes the others smarter over time</div></div>
-      </div>
     </div>
   </div></section>
 
