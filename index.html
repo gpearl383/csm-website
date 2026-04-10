@@ -2343,8 +2343,89 @@ window.addEventListener('load', () => { go('home'); lucide.createIcons(); });
   #csm-chat-send:hover { background: #00688A; }
   #csm-chat-send svg { width: 16px; height: 16px; }
 
-  @media(max-width:480px) {
-    #csm-chat-window { width: calc(100vw - 32px); left: 16px; right: 16px; bottom: 80px; }
+  @media(max-width:768px) {
+    .chat-swipe-handle { display: block !important; }
+    /* Full-screen chat on mobile */
+    #csm-chat-window {
+      position: fixed !important;
+      top: 0 !important; left: 0 !important;
+      right: 0 !important; bottom: 0 !important;
+      width: 100% !important; max-height: 100% !important;
+      border-radius: 0 !important;
+      border: none !important;
+      transform: translateY(100%) !important;
+      transition: transform .35s cubic-bezier(0.25,0.46,0.45,0.94) !important;
+      opacity: 1 !important;
+      z-index: 99999 !important;
+    }
+    #csm-chat-window.open {
+      transform: translateY(0) !important;
+      display: flex !important;
+    }
+
+    /* Taller header with safe area support */
+    .chat-header {
+      padding: 20px 20px 16px;
+      padding-top: calc(20px + env(safe-area-inset-top));
+    }
+
+    /* Avatar bigger on mobile */
+    .chat-header-avatar { width: 44px; height: 44px; font-size: 15px; }
+    .chat-header-name { font-size: 16px; }
+    .chat-header-status { font-size: 12px; }
+
+    /* Messages fill available space */
+    .chat-messages {
+      flex: 1;
+      max-height: none !important;
+      padding: 20px 16px;
+    }
+
+    /* Bigger message bubbles */
+    .msg-bubble { font-size: 15px; padding: 12px 16px; border-radius: 18px; }
+    .msg-avatar { width: 30px; height: 30px; font-size: 10px; }
+
+    /* Quick replies scroll horizontally */
+    .chat-quick-replies {
+      padding: 10px 16px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      gap: 8px;
+    }
+    .quick-reply {
+      flex-shrink: 0;
+      font-size: 13px;
+      padding: 8px 16px;
+    }
+
+    /* Input area with safe area padding */
+    .chat-input-area {
+      padding: 12px 16px;
+      padding-bottom: calc(12px + env(safe-area-inset-bottom));
+      gap: 10px;
+    }
+    #csm-chat-input {
+      font-size: 16px !important; /* prevents iOS auto-zoom */
+      padding: 12px 16px;
+    }
+    #csm-chat-send {
+      width: 44px; height: 44px;
+    }
+
+    /* Lead form bigger on mobile */
+    .chat-lead-form { padding: 16px; }
+    .chat-lead-form input {
+      padding: 13px 14px;
+      font-size: 16px !important;
+    }
+    .chat-lead-submit { padding: 14px; font-size: 15px; }
+
+    /* Escalation buttons stack */
+    .escalation-btns { flex-direction: column; }
+    .esc-btn { width: 100%; justify-content: center; padding: 13px; font-size: 14px; }
+
+    /* Robot button position */
     #csm-chat-btn { right: 16px; bottom: 20px; }
   }
 </style>
@@ -2381,12 +2462,16 @@ window.addEventListener('load', () => { go('home'); lucide.createIcons(); });
 <!-- Chat Window -->
 <div id="csm-chat-window">
   <div class="chat-header">
+    <!-- Swipe handle (mobile only) -->
+    <div style="display:none;width:100%;text-align:center;position:absolute;top:8px;left:0;" class="chat-swipe-handle">
+      <div style="width:36px;height:4px;background:rgba(255,255,255,.3);border-radius:2px;display:inline-block;"></div>
+    </div>
     <div class="chat-header-avatar">CSM</div>
     <div class="chat-header-info">
       <div class="chat-header-name">CSM Assistant</div>
       <div class="chat-header-status"><div class="chat-header-status-dot"></div>Online · Powered by Claude AI</div>
     </div>
-    <button class="chat-close" onclick="csmToggleChat()">×</button>
+    <button class="chat-close" onclick="csmToggleChat()" style="font-size:24px;padding:8px;min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center;">×</button>
   </div>
 
   <div class="chat-messages" id="csm-messages"></div>
@@ -2473,15 +2558,23 @@ YOUR BEHAVIOR:
 
   window.csmToggleChat = function() {
     const win = document.getElementById('csm-chat-window');
+    const isMobile = window.innerWidth <= 768;
     chatOpen = !chatOpen;
     if (chatOpen) {
       win.style.display = 'flex';
+      // Small delay so display:flex is applied before transition kicks in
       setTimeout(() => win.classList.add('open'), 10);
       if (messages.length === 0) csmAddBotMessage(GREETING);
-      document.getElementById('csm-chat-input').focus();
+      if (isMobile) document.body.style.overflow = 'hidden';
+      setTimeout(() => document.getElementById('csm-chat-input').focus(), 400);
     } else {
       win.classList.remove('open');
-      setTimeout(() => win.style.display = 'none', 250);
+      document.body.style.overflow = '';
+      if (isMobile) {
+        setTimeout(() => win.style.display = 'none', 350);
+      } else {
+        setTimeout(() => win.style.display = 'none', 250);
+      }
     }
   };
 
