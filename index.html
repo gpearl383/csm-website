@@ -621,6 +621,112 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 0 2
   .diff-desktop{display:none}
 }
 
+
+/* ─── ITEM 7: TOUCH TARGETS & FORM INPUTS ─── */
+@media(max-width:768px) {
+  /* Minimum 44px tap targets on all interactive elements */
+  button, .btn-primary, .btn-outline, .btn-cta, .btn-ghost, .btn-cta-o,
+  .mobile-nav-item, .mobile-nav-sub, .quick-reply, .hptab, .sc, .vpc {
+    min-height: 44px;
+  }
+  /* Active press states (replaces hover on touch) */
+  .btn-primary:active { transform: scale(0.97); background: var(--blue-l); }
+  .btn-outline:active { background: var(--blue-bg); border-color: var(--blue); }
+  .sc:active { transform: scale(0.98); box-shadow: 0 1px 8px rgba(15,35,60,.08); }
+  .vpc:active { transform: scale(0.98); }
+  /* Prevent 300ms tap delay */
+  * { touch-action: manipulation; }
+  /* Form inputs — 16px prevents iOS auto-zoom */
+  input, select, textarea {
+    font-size: 16px !important;
+    min-height: 48px;
+    border-radius: 10px;
+  }
+  /* Contact form inputs */
+  .cf-input, #cf-fn, #cf-ln, #cf-email, #cf-co, #cf-msg, #cf-svc,
+  #m-name, #m-co, #m-email {
+    font-size: 16px !important;
+    padding: 14px 16px !important;
+    min-height: 50px;
+  }
+  /* Modal assessment inputs */
+  .modal input, .modal select, .modal textarea {
+    font-size: 16px !important;
+  }
+  /* Larger ptag badges */
+  .ptag { padding: 5px 12px; font-size: 12px; }
+  /* Proc steps easier to read */
+  .proc-step { padding: 22px 0; }
+  .pn { width: 44px; height: 44px; font-size: 16px; }
+}
+
+/* ─── ITEM 8: C-SUITE GRID RESPONSIVE ─── */
+@media(max-width:960px) {
+  .csuite-outer-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+}
+@media(max-width:768px) {
+  .csuite-outer-grid { grid-template-columns: 1fr !important; }
+  .csuite-inner-grid { grid-template-columns: repeat(2,1fr) !important; }
+}
+@media(max-width:480px) {
+  .csuite-inner-grid { grid-template-columns: 1fr 1fr !important; }
+  .csuite-inner-grid > div { padding: 12px 10px !important; }
+  .csuite-inner-grid .c-layer-name { font-size: 10px !important; }
+  .csuite-inner-grid .c-desc { font-size: 10px !important; }
+}
+
+/* ─── ITEM 9: STICKY MOBILE CTA BAR ─── */
+.mobile-sticky-cta {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 8000;
+  background: #fff;
+  border-top: 1px solid rgba(0,156,222,.2);
+  padding: 12px 16px;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom));
+  box-shadow: 0 -4px 20px rgba(15,35,60,.1);
+  gap: 10px;
+  transition: transform .3s ease;
+}
+.mobile-sticky-cta.hidden { transform: translateY(100%); }
+.mobile-sticky-cta .msc-assess {
+  flex: 1;
+  background: #009CDE; color: #fff;
+  border: none; border-radius: 8px;
+  font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700;
+  padding: 13px 16px; cursor: pointer;
+  white-space: nowrap;
+}
+.mobile-sticky-cta .msc-call {
+  flex-shrink: 0;
+  background: transparent; color: var(--text);
+  border: 1.5px solid var(--border2); border-radius: 8px;
+  font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 600;
+  padding: 13px 14px; cursor: pointer;
+  white-space: nowrap;
+}
+@media(max-width:768px) {
+  .mobile-sticky-cta { display: flex; }
+  /* Add bottom padding to pages so content isn't hidden behind sticky bar */
+  .page { padding-bottom: 80px; }
+  footer { padding-bottom: 80px; }
+}
+
+/* ─── ITEM 10: PERFORMANCE ─── */
+/* Reduce paint on scroll */
+.hero, .stats-row, nav { will-change: transform; }
+/* Smooth image rendering */
+img { image-rendering: -webkit-optimize-contrast; }
+/* Reduce motion for accessibility */
+@media(prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
 </style>
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js">
 function toggleAcc(hd) {
@@ -1239,7 +1345,7 @@ function toggleAcc(hd) {
 <!-- ═══════════ TECHNOLOGY ═══════════ -->
 <div id="technology" class="page">
   <div class="ph" style="padding-bottom:48px"><div class="container">
-    <div style="display:grid;grid-template-columns:1fr 1.1fr;gap:48px;align-items:center">
+    <div style="display:grid;grid-template-columns:1fr 1.1fr;gap:48px;align-items:center" class="csuite-outer-grid">
       <div class="ph-inner" style="padding:0">
         <span class="eyebrow">Technology Stack</span>
         <h1>The AI Operating System for Your Business.</h1>
@@ -1252,7 +1358,7 @@ function toggleAcc(hd) {
             <div style="font-family:'Syne',sans-serif;font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.4)">C-Suite Quick View</div>
             <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:#fff">The AI Stack</div>
           </div>
-          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:rgba(255,255,255,.08);border-radius:10px;overflow:hidden">
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:rgba(255,255,255,.08);border-radius:10px;overflow:hidden" class="csuite-inner-grid">
             <!-- Row 1: Layers -->
             <div style="background:rgba(255,255,255,.04);padding:16px 14px;border-bottom:1px solid rgba(255,255,255,.08);border-right:1px solid rgba(255,255,255,.08)">
               <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:800;color:#009CDE;margin-bottom:6px">Interface</div>
@@ -2708,5 +2814,64 @@ YOUR BEHAVIOR:
 </script>
 <!-- ═══════════ END CHATBOT ═══════════ -->
 
+
+<!-- ─── ITEM 9: STICKY MOBILE CTA BAR ─── -->
+<div class="mobile-sticky-cta" id="mobile-sticky-cta">
+  <button class="msc-assess" onclick="openModal()">Free AI Assessment →</button>
+  <button class="msc-call" onclick="go('contact')">Book a Call</button>
+</div>
+
+<script>
+// ─── ITEM 10: PERFORMANCE ───
+(function() {
+  // 1. Scroll-reveal: fade in sections as they enter viewport
+  var revealCSS = document.createElement('style');
+  revealCSS.textContent = '.reveal{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease}.reveal.visible{opacity:1;transform:none}';
+  document.head.appendChild(revealCSS);
+
+  function initReveal() {
+    document.querySelectorAll('.section > .container, .cta-block, .stats-row').forEach(function(el) {
+      el.classList.add('reveal');
+    });
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initReveal);
+  } else { initReveal(); }
+
+  // 2. Hide sticky mobile CTA when chatbot is open or user is near footer
+  var stickyBar = document.getElementById('mobile-sticky-cta');
+  var lastScroll = 0;
+  window.addEventListener('scroll', function() {
+    if (!stickyBar) return;
+    var scrollY = window.scrollY;
+    var docH = document.body.scrollHeight;
+    var winH = window.innerHeight;
+    // Hide near footer (last 200px)
+    if (scrollY + winH > docH - 200) {
+      stickyBar.classList.add('hidden');
+    } else {
+      stickyBar.classList.remove('hidden');
+    }
+    lastScroll = scrollY;
+  }, { passive: true });
+
+  // 3. Hide sticky bar when chatbot opens
+  var origToggle = window.csmToggleChat;
+  window.csmToggleChat = function() {
+    origToggle && origToggle();
+    if (stickyBar) {
+      setTimeout(function() {
+        stickyBar.style.display = window.innerWidth <= 768 && !document.getElementById('csm-chat-window').classList.contains('open') ? 'flex' : 'none';
+      }, 50);
+    }
+  };
+})();
+</script>
 </body>
 </html>
