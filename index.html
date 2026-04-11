@@ -1927,7 +1927,7 @@ function toggleAcc(hd) {
       <div class="cm"><div class="cm-ico"><i data-lucide="mail"></i></div><div><div class="cm-t">Email</div><div class="cm-v"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="90f7f5fff6f6d0f3e3fdf9fee4f5f7e2f1e4f5f4bef3fffd">[email&#160;protected]</a></div></div></div>
       <div class="cm"><div class="cm-ico"><i data-lucide="calendar"></i></div><div><div class="cm-t">Book a Call</div><div class="cm-v">Calendly — 30 min, free</div></div></div>
       <div class="cm"><div class="cm-ico"><i data-lucide="map-pin"></i></div><div><div class="cm-t">Location</div><div class="cm-v">Long Island, NY · NYC Metro · National</div></div></div>
-      <div style="margin-top:22px"><button style="width:100%;padding:11px;border:1.5px solid var(--blue);border-radius:8px;background:var(--blue-bg);color:var(--blue);font-family:'Syne',sans-serif;font-size:13px;font-weight:700;cursor:pointer" onclick="window.open('https://calendly.com/YOUR_LINK','_blank')">📅 Book a Free 30-Minute Call →</button></div>
+      <div style="margin-top:22px"><button style="width:100%;padding:11px;border:1.5px solid var(--blue);border-radius:8px;background:var(--blue-bg);color:var(--blue);font-family:'Syne',sans-serif;font-size:13px;font-weight:700;cursor:pointer" onclick="window.open('https://calendly.com/gpearl383/free-ai-strategy-discovery-call','_blank')">📅 Book a Free 30-Minute Call →</button></div>
       <div style="margin-top:14px;background:var(--text);border-radius:12px;padding:20px">
         <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:600;color:#fff;margin-bottom:5px">Not sure where to start?</div>
         <div style="font-size:12px;color:rgba(255,255,255,.55);line-height:1.6;margin-bottom:13px">Take the free AI Assessment first — 5 minutes, instant score, no contact info required.</div>
@@ -2040,7 +2040,7 @@ function toggleAcc(hd) {
         <div class="res-cta-box">
           <strong>Want a deeper analysis?</strong>
           <p>We offer a free 30-minute AI Strategy session — no pitch, just clarity on your best first move.</p>
-          <button style="padding:10px 20px;border:none;border-radius:7px;background:var(--blue);color:#fff;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;cursor:pointer" onclick="window.open('https://calendly.com/YOUR_LINK','_blank')">Book a Free Strategy Call →</button>
+          <button style="padding:10px 20px;border:none;border-radius:7px;background:var(--blue);color:#fff;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;cursor:pointer" onclick="window.open('https://calendly.com/gpearl383/free-ai-strategy-discovery-call','_blank')">Book a Free Strategy Call →</button>
         </div>
       </div>
     </div>
@@ -2123,7 +2123,7 @@ function renderM(){
   const bk=document.getElementById('m-back'),nx=document.getElementById('m-next');
   bk.style.display=S.step>1&&S.step<6?'block':'none';
   if(S.step===5){nx.disabled=true;nx.textContent='Fill in all fields';}
-  else if(S.step===6){document.getElementById('mfoot').innerHTML='<button onclick="resetM()" style="padding:11px 13px;border:1px solid var(--border);border-radius:8px;background:transparent;color:var(--mid);font-family:\'Syne\',sans-serif;font-size:13px;cursor:pointer">↺ Retake</button><button onclick="window.open(\'https://calendly.com/YOUR_LINK\',\'_blank\')" style="flex:1;padding:11px;border:none;border-radius:8px;background:var(--blue);color:#fff;font-family:\'Syne\',sans-serif;font-size:14px;font-weight:700;cursor:pointer">Book a Free Strategy Call →</button>';}
+  else if(S.step===6){document.getElementById('mfoot').innerHTML='<button onclick="resetM()" style="padding:11px 13px;border:1px solid var(--border);border-radius:8px;background:transparent;color:var(--mid);font-family:\'Syne\',sans-serif;font-size:13px;cursor:pointer">↺ Retake</button><button onclick="window.open(\'https://calendly.com/gpearl383/free-ai-strategy-discovery-call\',\'_blank\')" style="flex:1;padding:11px;border:none;border-radius:8px;background:var(--blue);color:#fff;font-family:\'Syne\',sans-serif;font-size:14px;font-weight:700;cursor:pointer">Book a Free Strategy Call →</button>';}
   else{nx.disabled=true;nx.textContent='Select an option to continue';if(S.step===4)chk4();}
 }
 
@@ -2184,7 +2184,7 @@ function resetM(){
 function submitContact(){
   const fn=document.getElementById('cf-fn').value.trim(),em=document.getElementById('cf-em').value.trim(),co=document.getElementById('cf-co').value.trim();
   if(!fn||!em||!co){alert('Please fill in your name, company, and email.');return;}
-  fetch('https://api.hsforms.com/submissions/v3/integration/submit/245793065/YOUR_HUBSPOT_CONTACT_FORM_ID',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({fields:[{name:'firstname',value:fn},{name:'lastname',value:document.getElementById('cf-ln').value},{name:'email',value:em},{name:'company',value:co},{name:'message',value:document.getElementById('cf-msg').value}],context:{pageUri:location.href}})}).catch(()=>{});
+  fetch('https://api.hsforms.com/submissions/v3/integration/submit/245793065/8aac78ee-44a2-4755-84a7-e7b3b3e21aee',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({fields:[{name:'firstname',value:fn},{name:'lastname',value:document.getElementById('cf-ln').value},{name:'email',value:em},{name:'company',value:co},{name:'message',value:document.getElementById('cf-msg').value}],context:{pageUri:location.href}})}).catch(()=>{});
   document.getElementById('cf-ok').style.display='block';
   ['cf-fn','cf-ln','cf-em','cf-co','cf-msg'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('cf-svc').value='';
@@ -2207,7 +2207,7 @@ function submitQuote(){
   const email=document.getElementById('q-email').value.trim();
   const co=document.getElementById('q-co').value.trim();
   if(!name||!email||!co){alert('Please fill in your name, company, and email.');return;}
-  fetch('https://api.hsforms.com/submissions/v3/integration/submit/245793065/YOUR_HUBSPOT_CONTACT_FORM_ID',{
+  fetch('https://api.hsforms.com/submissions/v3/integration/submit/245793065/8aac78ee-44a2-4755-84a7-e7b3b3e21aee',{
     method:'POST',headers:{'Content-Type':'application/json'},
     body:JSON.stringify({fields:[
       {name:'firstname',value:name},
