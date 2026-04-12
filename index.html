@@ -766,7 +766,7 @@ function toggleAcc(hd) {
       <div class="ni"><span class="nl" onclick="go('technology')">Technology</span></div>
       <div class="ni"><span class="nl" onclick="go('casestudies')">Case Studies</span></div>
       <div class="ni"><span class="nl" onclick="go('resources')">News</span></div>
-      <div class="ni"><span class="nl" onclick="go('pricing')">Pricing</span></div>
+      <div class="ni"><span class="nl" onclick="go('offerings')">Offerings</span></div>
       <div class="ni"><span class="nl" onclick="go('about')">About</span></div>
     </div>
     <div class="nav-r">
@@ -806,7 +806,7 @@ function toggleAcc(hd) {
   <div class="mobile-nav-item" onclick="mobileGo('technology')">Technology <span class="mobile-nav-arrow">›</span></div>
   <div class="mobile-nav-item" onclick="mobileGo('casestudies')">Case Studies <span class="mobile-nav-arrow">›</span></div>
   <div class="mobile-nav-item" onclick="mobileGo('resources')">News <span class="mobile-nav-arrow">›</span></div>
-  <div class="mobile-nav-item" onclick="mobileGo('pricing')">Pricing <span class="mobile-nav-arrow">›</span></div>
+  <div class="mobile-nav-item" onclick="mobileGo('offerings')">Offerings <span class="mobile-nav-arrow">›</span></div>
   <div class="mobile-nav-item" onclick="mobileGo('about')">About <span class="mobile-nav-arrow">›</span></div>
 
   <div class="mobile-nav-cta">
@@ -851,7 +851,7 @@ function toggleAcc(hd) {
             <div class="pr"><div class="pr-ico ico-t"><i data-lucide="trending-down"></i></div><div><div class="pr-lbl">20–35% cost reduction</div><div class="pr-sub">Repetitive process automation</div></div></div>
             <div class="pr"><div class="pr-ico ico-a"><i data-lucide="zap"></i></div><div><div class="pr-lbl">3× faster responses</div><div class="pr-sub">Customer communications</div></div></div>
             <div class="pr" style="margin-bottom:16px"><div class="pr-ico ico-b"><i data-lucide="dollar-sign"></i></div><div><div class="pr-lbl">Day-1 positive ROI</div><div class="pr-sub">Structured for early wins</div></div></div>
-            <button class="hp-btn" onclick="go('pricing')">View Pricing →</button>
+            <button class="hp-btn" onclick="go('offerings')">View Offerings →</button>
           </div>
         </div>
       </div>
@@ -930,7 +930,7 @@ function toggleAcc(hd) {
           <li><a onclick="go('casestudies')">Case Studies</a></li>
           <li><a onclick="go('technology')">Technology</a></li>
           <li><a onclick="go('about')">About</a></li>
-          <li><a onclick="go('pricing')">Pricing</a></li>
+          <li><a onclick="go('offerings')">Offerings</a></li>
           <li><a onclick="go('resources')">News</a></li>
           <li><a onclick="go('contact')">Contact</a></li>
         </ul></div>
@@ -1080,34 +1080,29 @@ function toggleAcc(hd) {
 </div>
 
 <!-- ═══════════ PRICING ═══════════ -->
-<div id="pricing" class="page">
-  <div class="ph"><div class="container"><div class="ph-inner">
-    <span class="eyebrow">Pricing</span>
-    <h1>Transparent pricing. No surprises.</h1>
-    <p>Standard pricing models below. All engagements are scoped with a written proposal after a free discovery call.</p>
-  </div></div></div>
+<div id="offerings" class="page">
   <section class="section"><div class="container">
     <div class="sh"><span class="eyebrow">Training &amp; Assessments</span><h2>AI Enablement Packages</h2></div>
     <div class="pg">
-      <div class="pc-card"><div class="pt">Workshop</div><div class="pname">AI Foundations</div><button class="pc-btn pc-btn-o quote-btn" onclick="openQuote('AI Foundations Workshop')">Get a Custom Quote →</button><div class="p-desc">Half-day workshop for up to 15 participants — AI history, tools landscape, and hands-on prompting exercises.</div><div class="pf-list"><div class="pf"><span class="pf-ck">✓</span>Intro to AI + tools overview</div><div class="pf"><span class="pf-ck">✓</span>Prompt engineering for business users</div><div class="pf"><span class="pf-ck">✓</span>5 business-specific use case examples</div><div class="pf"><span class="pf-ck">✓</span>Follow-up resource kit</div></div><button class="pc-btn pc-btn-o" onclick="go('contact')">Book Workshop</button></div>
-      <div class="pc-card feat"><div class="pt">Workshop + Lab</div><div class="pname">AI Builder Day</div><button class="pc-btn pc-btn-o quote-btn" onclick="openQuote('AI Builder Day Workshop')">Get a Custom Quote →</button><div class="p-desc">Full-day workshop where participants build and deploy a real AI agent. Includes the signature Daily Briefing Agent lab.</div><div class="pf-list"><div class="pf"><span class="pf-ck">✓</span>Everything in AI Foundations</div><div class="pf"><span class="pf-ck">✓</span>Hands-on agent-building lab</div><div class="pf"><span class="pf-ck">✓</span>Daily briefing agent (Calendar + Weather)</div><div class="pf"><span class="pf-ck">✓</span>Custom use case for your business</div><div class="pf"><span class="pf-ck">✓</span>30-day follow-up call included</div></div><button class="pc-btn pc-btn-p" onclick="go('contact')">Book Builder Day</button></div>
-      <div class="pc-card"><div class="pt" style="color:var(--teal)">Assessment</div><div class="pname">AI Readiness Report</div><button class="pc-btn pc-btn-o quote-btn" onclick="openQuote('AI Readiness Assessment')">Get a Custom Quote →</button><div class="p-desc">Full consulting engagement — stakeholder interviews, process analysis, and a complete AI roadmap with ROI projections.</div><div class="pf-list"><div class="pf"><span class="pf-ck">✓</span>Stakeholder interviews (up to 8)</div><div class="pf"><span class="pf-ck">✓</span>Business process + data audit</div><div class="pf"><span class="pf-ck">✓</span>12–24 month AI roadmap</div><div class="pf"><span class="pf-ck">✓</span>Use cases: Easy / Medium / Hard</div><div class="pf"><span class="pf-ck">✓</span>Cost estimates + ROI projections</div></div><button class="pc-btn pc-btn-o" onclick="go('contact')">Get Scoped</button></div>
+      <div class="pc-card"><div class="pt">Workshop</div><div class="pname">AI Foundations</div><div class="p-desc">Half-day workshop for up to 15 participants — AI history, tools landscape, and hands-on prompting exercises.</div><div class="pf-list"><div class="pf"><span class="pf-ck">✓</span>Intro to AI + tools overview</div><div class="pf"><span class="pf-ck">✓</span>Prompt engineering for business users</div><div class="pf"><span class="pf-ck">✓</span>5 business-specific use case examples</div><div class="pf"><span class="pf-ck">✓</span>Follow-up resource kit</div></div></div>
+      <div class="pc-card feat"><div class="pt">Workshop + Lab</div><div class="pname">AI Builder Day</div><div class="p-desc">Full-day workshop where participants build and deploy a real AI agent. Includes the signature Daily Briefing Agent lab.</div><div class="pf-list"><div class="pf"><span class="pf-ck">✓</span>Everything in AI Foundations</div><div class="pf"><span class="pf-ck">✓</span>Hands-on agent-building lab</div><div class="pf"><span class="pf-ck">✓</span>Daily briefing agent (Calendar + Weather)</div><div class="pf"><span class="pf-ck">✓</span>Custom use case for your business</div><div class="pf"><span class="pf-ck">✓</span>30-day follow-up call included</div></div></div>
+      <div class="pc-card"><div class="pt" style="color:var(--teal)">Assessment</div><div class="pname">AI Readiness Report</div><div class="p-desc">Full consulting engagement — stakeholder interviews, process analysis, and a complete AI roadmap with ROI projections.</div><div class="pf-list"><div class="pf"><span class="pf-ck">✓</span>Stakeholder interviews (up to 8)</div><div class="pf"><span class="pf-ck">✓</span>Business process + data audit</div><div class="pf"><span class="pf-ck">✓</span>12–24 month AI roadmap</div><div class="pf"><span class="pf-ck">✓</span>Use cases: Easy / Medium / Hard</div><div class="pf"><span class="pf-ck">✓</span>Cost estimates + ROI projections</div></div></div>
     </div>
   </div></section>
   <section class="section section-alt"><div class="container">
     <div class="sh"><span class="eyebrow">Implementation &amp; Recurring</span><h2>AI Development &amp; Managed Services</h2></div>
     <div class="pg">
-      <div class="pc-card"><div class="pt">Use Case</div><div class="pname">Quick Win</div><button class="pc-btn pc-btn-o quote-btn" onclick="openQuote('AI Quick Win Use Case')">Get a Custom Quote →</button><div class="p-desc">One well-scoped AI automation — designed, built, and deployed in 4–6 weeks.</div><div class="pf-list"><div class="pf"><span class="pf-ck">✓</span>1 use case end-to-end</div><div class="pf"><span class="pf-ck">✓</span>Integration with 1–2 tools</div><div class="pf"><span class="pf-ck">✓</span>User training + documentation</div><div class="pf"><span class="pf-ck">✓</span>30-day post-launch support</div></div><button class="pc-btn pc-btn-o" onclick="go('contact')">Start Project</button></div>
-      <div class="pc-card feat"><div class="pt">AI Program</div><div class="pname">AI Pilot Program</div><button class="pc-btn pc-btn-o quote-btn" onclick="openQuote('AI Pilot Program')">Get a Custom Quote →</button><div class="p-desc">3 use cases deployed over 90 days — includes governance, training, and transition to managed services.</div><div class="pf-list"><div class="pf"><span class="pf-ck">✓</span>3 use cases prioritized by ROI</div><div class="pf"><span class="pf-ck">✓</span>AI governance framework</div><div class="pf"><span class="pf-ck">✓</span>Team training (2 sessions)</div><div class="pf"><span class="pf-ck">✓</span>90-day project management</div><div class="pf"><span class="pf-ck">✓</span>Transition to managed services</div></div><button class="pc-btn pc-btn-p" onclick="go('contact')">Start Program</button></div>
-      <div class="pc-card"><div class="pt" style="color:var(--teal)">Recurring</div><div class="pname">AI Managed Services</div><button class="pc-btn pc-btn-o quote-btn" onclick="openQuote('AI Managed Services')">Get a Custom Quote →</button><div class="p-desc">Ongoing management of your AI program — monitoring, optimization, cost control, and 1 new use case per quarter.</div><div class="pf-list"><div class="pf"><span class="pf-ck">✓</span>Monthly performance reviews</div><div class="pf"><span class="pf-ck">✓</span>Cost optimization</div><div class="pf"><span class="pf-ck">✓</span>1 new use case per quarter</div><div class="pf"><span class="pf-ck">✓</span>Priority support</div></div><button class="pc-btn pc-btn-o" onclick="go('contact')">Learn More</button></div>
+      <div class="pc-card"><div class="pt">Use Case</div><div class="pname">Quick Win</div><div class="p-desc">One well-scoped AI automation — designed, built, and deployed in 4–6 weeks.</div><div class="pf-list"><div class="pf"><span class="pf-ck">✓</span>1 use case end-to-end</div><div class="pf"><span class="pf-ck">✓</span>Integration with 1–2 tools</div><div class="pf"><span class="pf-ck">✓</span>User training + documentation</div><div class="pf"><span class="pf-ck">✓</span>30-day post-launch support</div></div></div>
+      <div class="pc-card feat"><div class="pt">AI Program</div><div class="pname">AI Pilot Program</div><div class="p-desc">3 use cases deployed over 90 days — includes governance, training, and transition to managed services.</div><div class="pf-list"><div class="pf"><span class="pf-ck">✓</span>3 use cases prioritized by ROI</div><div class="pf"><span class="pf-ck">✓</span>AI governance framework</div><div class="pf"><span class="pf-ck">✓</span>Team training (2 sessions)</div><div class="pf"><span class="pf-ck">✓</span>90-day project management</div><div class="pf"><span class="pf-ck">✓</span>Transition to managed services</div></div></div>
+      <div class="pc-card"><div class="pt" style="color:var(--teal)">Recurring</div><div class="pname">AI Managed Services</div><div class="p-desc">Ongoing management of your AI program — monitoring, optimization, cost control, and 1 new use case per quarter.</div><div class="pf-list"><div class="pf"><span class="pf-ck">✓</span>Monthly performance reviews</div><div class="pf"><span class="pf-ck">✓</span>Cost optimization</div><div class="pf"><span class="pf-ck">✓</span>1 new use case per quarter</div><div class="pf"><span class="pf-ck">✓</span>Priority support</div></div></div>
     </div>
   </div></section>
   <section class="section"><div class="container">
     <div class="sh"><span class="eyebrow">Fractional CIO</span><h2>Strategic IT Leadership</h2></div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;max-width:860px;margin:0 auto">
-      <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:26px;text-align:center;box-shadow:0 2px 10px rgba(15,35,60,.05)"><div class="pt" style="margin-bottom:10px">Block Hours</div><div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--text);margin-bottom:4px">Pricing on Request</div><div style="font-size:12px;color:var(--mid);margin-bottom:18px">Min 10-hr block. Prepaid, use as needed.</div><button class="pc-btn pc-btn-o" onclick="go('contact')">Purchase Block</button></div>
-      <div style="background:rgba(0,119,182,.04);border:1.5px solid var(--blue);border-radius:14px;padding:26px;text-align:center;box-shadow:0 2px 10px rgba(15,35,60,.05);position:relative"><div style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;font-family:'Syne',sans-serif;font-size:9px;font-weight:700;padding:3px 11px;border-radius:20px;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap">Most Common</div><div class="pt" style="margin-bottom:10px">Monthly Retainer</div><div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--text);margin-bottom:4px">Pricing on Request</div><div style="font-size:12px;color:var(--mid);margin-bottom:18px">12-month commitment. 8 hrs/mo + on-call advisory.</div><button class="pc-btn pc-btn-p" onclick="go('contact')">Start Retainer</button></div>
-      <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:26px;text-align:center;box-shadow:0 2px 10px rgba(15,35,60,.05)"><div class="pt" style="color:var(--teal);margin-bottom:10px">Custom</div><div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--text);margin-bottom:4px">Custom</div><div style="font-size:12px;color:var(--mid);margin-bottom:18px">Larger scope, dedicated availability, team oversight.</div><button class="pc-btn pc-btn-o" onclick="go('contact')">Get Scoped</button></div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:26px;text-align:center;box-shadow:0 2px 10px rgba(15,35,60,.05)"><div class="pt" style="margin-bottom:10px">Block Hours</div><div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--text);margin-bottom:4px">Pricing on Request</div><div style="font-size:12px;color:var(--mid);margin-bottom:18px">Min 10-hr block. Prepaid, use as needed.</div></div>
+      <div style="background:rgba(0,119,182,.04);border:1.5px solid var(--blue);border-radius:14px;padding:26px;text-align:center;box-shadow:0 2px 10px rgba(15,35,60,.05);position:relative"><div style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;font-family:'Syne',sans-serif;font-size:9px;font-weight:700;padding:3px 11px;border-radius:20px;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap">Most Common</div><div class="pt" style="margin-bottom:10px">Monthly Retainer</div><div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--text);margin-bottom:4px">Pricing on Request</div><div style="font-size:12px;color:var(--mid);margin-bottom:18px">12-month commitment. 8 hrs/mo + on-call advisory.</div></div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:26px;text-align:center;box-shadow:0 2px 10px rgba(15,35,60,.05)"><div class="pt" style="color:var(--teal);margin-bottom:10px">Custom</div><div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--text);margin-bottom:4px">Custom</div><div style="font-size:12px;color:var(--mid);margin-bottom:18px">Larger scope, dedicated availability, team oversight.</div></div>
     </div>
   </div></section>
   <div class="cta-block"><h2>Not sure which option fits?</h2><p>A free 30-minute discovery call is all it takes. We'll scope the right engagement for your business and budget.</p><div class="cta-btns"><button class="btn-primary" onclick="window.open('https://calendly.com/gpearl383/free-ai-strategy-discovery-call','_blank')">Book a Free Discovery Call →</button></div></div>
@@ -1200,7 +1195,7 @@ function toggleAcc(hd) {
     <div class="bc"><span onclick="go('home')" style="cursor:pointer">Home</span><span>›</span><span style="color:var(--mid)">AI Enablement &amp; Training</span></div>
     <span class="eyebrow">Service</span><h1>AI Training &amp; Workshops</h1>
     <p>Hands-on workshops that take your team from AI-skeptical to AI-capable — in a single day. No coding, no jargon, no theory without practice.</p>
-    <div style="display:flex;gap:11px;flex-wrap:wrap"><button class="btn-primary" onclick="window.open('https://calendly.com/gpearl383/free-ai-strategy-discovery-call','_blank')">Book a Workshop →</button><button class="btn-outline" onclick="go('pricing')">View Pricing</button></div>
+    <div style="display:flex;gap:11px;flex-wrap:wrap"><button class="btn-primary" onclick="window.open('https://calendly.com/gpearl383/free-ai-strategy-discovery-call','_blank')">Book a Workshop →</button><button class="btn-outline" onclick="go('offerings')">View Offerings</button></div>
   </div></div></div>
   <section class="section"><div class="container">
     <div class="shl" style="margin-bottom:32px"><span class="eyebrow">Workshop Formats</span><h2>Four formats for every need</h2></div>
@@ -1263,7 +1258,7 @@ function toggleAcc(hd) {
 </div>
 
 <div id="svc-ms" class="page">
-  <div class="ph"><div class="container"><div class="ph-inner"><div class="bc"><span onclick="go('home')" style="cursor:pointer">Home</span><span>›</span><span style="color:var(--mid)">AI Managed Services</span></div><span class="eyebrow">Service</span><h1>AI Managed Services</h1><p>Your AI program doesn't manage itself. We handle monitoring, optimization, cost control, and continuous expansion — so your AI gets better every month.</p><button class="btn-primary" onclick="go('pricing')">View Pricing →</button></div></div></div>
+  <div class="ph"><div class="container"><div class="ph-inner"><div class="bc"><span onclick="go('home')" style="cursor:pointer">Home</span><span>›</span><span style="color:var(--mid)">AI Managed Services</span></div><span class="eyebrow">Service</span><h1>AI Managed Services</h1><p>Your AI program doesn't manage itself. We handle monitoring, optimization, cost control, and continuous expansion — so your AI gets better every month.</p><button class="btn-primary" onclick="go('offerings')">View Offerings →</button></div></div></div>
   <section class="section"><div class="container"><div class="og">
     <div class="oc"><h4><i data-lucide="radio"></i> Performance Monitoring</h4><p>Continuous monitoring of all deployed AI workflows — response quality, error rates, latency, and cost per interaction. Alerts before issues become outages.</p></div>
     <div class="oc"><h4><i data-lucide="dollar-sign"></i> Cost Management</h4><p>Monthly API cost review, token usage optimization, model selection, and caching strategies. Predictable, lean AI costs every month.</p></div>
@@ -1285,7 +1280,7 @@ function toggleAcc(hd) {
     <div class="oc"><h4><i data-lucide="presentation"></i> Board &amp; Executive Reporting</h4><p>Technology briefings for your board and investors — translating complex IT decisions into business language that drives good decisions.</p></div>
     <div class="oc"><h4><i data-lucide="handshake"></i> Trusted CEO/CFO Advisor</h4><p>On-call access to your advisor for technology questions, vendor situations, security incidents — without the $400/hr invoice.</p></div>
   </div></div></section>
-  <div class="cta-block"><h2>Your business deserves a CIO.</h2><p>Not a $500K/year executive — a trusted advisor with 15 years of enterprise experience, charging SMB rates.</p><div class="cta-btns"><button class="btn-primary" onclick="window.open('https://calendly.com/gpearl383/free-ai-strategy-discovery-call','_blank')">Book a Discovery Call →</button><button class="btn-cta-o" onclick="go('pricing')">View Pricing</button></div></div>
+  <div class="cta-block"><h2>Your business deserves a CIO.</h2><p>Not a $500K/year executive — a trusted advisor with 15 years of enterprise experience, charging SMB rates.</p><div class="cta-btns"><button class="btn-primary" onclick="window.open('https://calendly.com/gpearl383/free-ai-strategy-discovery-call','_blank')">Book a Discovery Call →</button><button class="btn-cta-o" onclick="go('offerings')">View Offerings</button></div></div>
 </div>
 
 <div id="svc-it" class="page">
@@ -1296,7 +1291,7 @@ function toggleAcc(hd) {
     <p>Most organizations are overpaying for technology by 20–40% without knowing it. We find the waste, renegotiate the contracts, right-size the licenses, and put that budget back to work — without cutting capability or reliability.</p>
     <div style="display:flex;gap:11px;flex-wrap:wrap">
       <button class="btn-primary" onclick="go('contact')">Request a Spend Audit →</button>
-      <button class="btn-outline" onclick="go('pricing')">View Pricing</button>
+      <button class="btn-outline" onclick="go('offerings')">View Offerings</button>
     </div>
   </div></div></div>
 
@@ -1338,7 +1333,7 @@ function toggleAcc(hd) {
     <p>A no-obligation IT spend audit typically identifies significant savings within 30 days. Let's talk.</p>
     <div class="cta-btns">
       <button class="btn-primary" onclick="go('contact')">Request an IT Spend Audit →</button>
-      <button class="btn-cta-o" onclick="go('pricing')">View Pricing</button>
+      <button class="btn-cta-o" onclick="go('offerings')">View Offerings</button>
     </div>
   </div>
 </div>
@@ -1924,7 +1919,7 @@ function toggleAcc(hd) {
     <div>
       <h3 style="font-size:20px;margin-bottom:14px">Reach us directly</h3>
       <p style="font-size:14px;color:var(--mid);line-height:1.7;margin-bottom:24px">We respond to every inquiry within one business day. Prefer to skip the form? Book on Calendly.</p>
-      <div class="cm"><div class="cm-ico"><i data-lucide="mail"></i></div><div><div class="cm-t">Email</div><div class="cm-v"><a href="mailto:info@csmintegrated.com">info@csmintegrated.com</a></div></div></div>
+      <div class="cm"><div class="cm-ico"><i data-lucide="mail"></i></div><div><div class="cm-t">Email</div><div class="cm-v"><a href="/cdn-cgi/l/email-protection#a3cacdc5cce3c0d0cecacdd7c6c4d1c2d7c6c78dc0ccce"><span class="__cf_email__" data-cfemail="9af3f4fcf5daf9e9f7f3f4eefffde8fbeefffeb4f9f5f7">[email&#160;protected]</span></a></div></div></div>
       <div class="cm"><div class="cm-ico"><i data-lucide="calendar"></i></div><div><div class="cm-t">Book a Call</div><div class="cm-v">Calendly — 30 min, free</div></div></div>
       <div class="cm"><div class="cm-ico"><i data-lucide="map-pin"></i></div><div><div class="cm-t">Location</div><div class="cm-v">NYC Metro Area · National</div></div></div>
       <div style="margin-top:22px"><button style="width:100%;padding:11px;border:1.5px solid var(--blue);border-radius:8px;background:var(--blue-bg);color:var(--blue);font-family:'Syne',sans-serif;font-size:13px;font-weight:700;cursor:pointer" onclick="window.open('https://calendly.com/gpearl383/free-ai-strategy-discovery-call','_blank')">📅 Book a Free 30-Minute Call →</button></div>
@@ -2051,7 +2046,7 @@ function toggleAcc(hd) {
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ── MOBILE NAV ──
 function toggleMobileNav(){
   const nav=document.getElementById('mobile-nav');
@@ -2717,6 +2712,10 @@ window.addEventListener('load', () => { go('home'); lucide.createIcons(); });
 
 <script>
 (function() {
+  // HubSpot chatbot leads — create a dedicated form (see instructions in repo / your notes), then paste its GUID:
+  const HUBSPOT_PORTAL_ID = '245793065';
+  const HUBSPOT_CHATBOT_FORM_ID = 'REPLACE_WITH_YOUR_FORM_GUID';
+
   const SYSTEM_PROMPT = `You are the CSM Assistant, an intelligent AI assistant for CSM Integrated Solutions LLC — an AI enablement, fractional CIO, and IT strategy consulting firm based on Long Island, NY, founded by Geoffrey Pearlman.
 
 CSM helps growing small and mid-sized businesses ($1M–$100M revenue) across Long Island, NYC, and Westchester implement AI that delivers measurable ROI — without enterprise complexity or Big 4 price tags.
@@ -2841,7 +2840,7 @@ YOUR BEHAVIOR:
 
     // Push to HubSpot
     try {
-      await fetch('https://api.hsforms.com/submissions/v3/integration/submit/245793065/CHATBOT_FORM_ID', {
+      await fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_CHATBOT_FORM_ID}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -2965,13 +2964,4 @@ YOUR BEHAVIOR:
   var origToggle = window.csmToggleChat;
   window.csmToggleChat = function() {
     origToggle && origToggle();
-    if (stickyBar) {
-      setTimeout(function() {
-        stickyBar.style.display = window.innerWidth <= 768 && !document.getElementById('csm-chat-window').classList.contains('open') ? 'flex' : 'none';
-      }, 50);
-    }
-  };
-})();
-</script>
-</body>
-</html>
+    if (st
